@@ -1,0 +1,327 @@
+---
+title: "Data Collection"
+author: "Amber Thomas"
+date: "10/29/2018"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: true
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This is an exploration into the following question:
+
+**How do public high schools police bodies differently?**
+
+As such, I have been surveying public high schools with available dress codes (and no uniform policy) across the US and collecting information from them in this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSdtoXVKL9oFfDVigRmfKUYPJBguZSdUlcgplu9F8XrCa9nJ_w/viewform?usp=sf_link). The attire items listed are a combination of those collected by Jaymie Arns in their [Master's Thesis](https://csus-dspace.calstate.edu/bitstream/handle/10211.3/198629/Jaymie%20Arns%20-%20Masters%20Thesis.pdf?sequence=1). 
+
+## Loading Packages
+
+To start, I'll only need a few packages, mostly to connect me with the Google Sheets where the data from my form is being collected. 
+
+```{r warning = FALSE, message = FALSE}
+library(tidyverse)
+library(here)
+```
+
+## Downloading Data from Google Sheets
+
+```{r message = FALSE}
+sheetID <- googledrive::as_id("https://docs.google.com/spreadsheets/d/1TgmALnY8qc8Aahy1QdV0CvX_SNl4sL6ErPpWwYcdfOk/edit#gid=602462357")
+
+googledrive::drive_download(sheetID, path = here("raw_data", "dress_codes.csv"), overwrite = TRUE)
+
+dressCodes <- read.csv(here::here("raw_data", "dress_codes.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " ", "none"))
+```
+
+## Organizing the Data
+
+Because of the way that Google Sheets works, we end up with very *wide* data. That is, each clothing item is listed as a column instead of having several rows per school. Therefore, my data needs to go from wide to long.
+
+```{r}
+sub <- dressCodes[, 0:20]
+
+col <- as.data.frame(colnames(sub)) %>% 
+  filter(grepl("accessories", colnames(sub)))
+
+subLong <- sub %>% 
+  gather(key = item, value = prohibited, colnames(select(sub, contains("accessories")))) %>% 
+  filter(!is.na(prohibited)) %>% 
+  mutate(item = gsub("(.*\\.{3})", "", item),
+         item = gsub("\\.", " ", item),
+         item = trimws(item)) %>% 
+  mutate(type = "accessories")
+
+test <- colnames(select(sub, contains("accessories")))
+
+test2 <- colnames(select(dressCodes, matches("\\baccessories\\b.*?\\bgender\\b")))
+```
+
+Now to turn this into a function to map across multiple sections
+
+```{r warning = FALSE}
+elongateCode <- function(type){
+  regex <- paste0("\\b", type, "\\b.*?\\gender\\b")
+  bonusColumn <- colnames(select(dressCodes, matches(regex)))
+  
+  new <- dressCodes %>%
+    # First sort out any additional items that we added to our bonus column
+    separate_rows_(bonusColumn, sep = ",") %>%
+    separate(bonusColumn, into = c("item", "prohibited"), sep = "-") %>%
+    mutate(type = type) %>% 
+    select(c(1:6), c(item, prohibited, type)) %>% 
+    filter(!is.na(prohibited))
+  
+  new2 <- dressCodes %>%
+    select(-contains("item.gender")) %>% 
+    gather(key = item, value = prohibited, colnames(select(., contains(!!type)))) %>%
+    filter(!is.na(prohibited)) %>%
+    mutate(item = gsub("(.*\\.{3})", "", item),
+         item = gsub("\\.", " ", item),
+         item = trimws(item)) %>%
+    mutate(type = type) %>%
+    select(c(1:6), c(item:type))
+  
+  combined <- rbind(new, new2)
+}
+
+clothingTypes <- c("accessories", "belt", "shirt", "dress.items", "skirt", "pants", "shorts", "undergarment", "clothing", "footwear", "headwear", "body")
+
+longDressCode <- map_dfr(clothingTypes, elongateCode)
+
+write.csv(longDressCode, here("processed_data", "clean_dress_code.csv"), row.names = FALSE)
+```
+## Exploring Data
+
+### Body Parts
+
+Which body parts are specifically prohibited the most on high school campuses? 
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "body") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited body parts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+### Clothing Types {.tabset .tabset-pills}
+What types of clothing have been specifically prohibited?
+
+#### Shirts
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "shirt") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Shirts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Shorts
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "shorts") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Shorts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Pants
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "pants") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited pants") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Skirts
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "skirt") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited skirts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Dresses
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "dress.items") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Dresses") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Accessories
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "accessories" | type == "belt") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Accessories") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Footwear
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "footwear") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Footwear") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Undergarments
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "undergarment") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Undergarments") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Headwear
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "headwear") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Headwear") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+### Clothing Attributes
+
+Sometimes descriptive words are used instead of explicit clothing items (showing items prohibited by a minimum of 3 schools).
+
+
+```{r echo = FALSE}
+desc <- longDressCode %>% 
+  filter(type == "clothing") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 3)
+
+ggplot(desc, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Clothing") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+### Rationale
+
+Typically before listing the actual items that are prohibited, schools give a brief rationale for why their dress codes exist. What words show up the most there?
+
+```{r echo = FALSE}
+rationale <- dressCodes %>% 
+  select(c(1:6), "Check.any.of.the.following.words.phrases.that.appear.in.the.dress.code.") %>% 
+  separate_rows(7, sep = ",") %>% 
+  rename(words = Check.any.of.the.following.words.phrases.that.appear.in.the.dress.code.) %>% 
+  mutate(words = trimws(words)) %>% 
+  count(words) %>% mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2)
+
+ggplot(rationale, aes(x = reorder(words, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Words Used in Dress Code Rationale") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+  
+```
+
+### Punishment
+
+What types of punishements are schools requiring for dress code violations?
+
+```{r echo = FALSE}
+punishment <- dressCodes %>% 
+  select(c(1:6), contains("sanctions")) %>% 
+  rename(sanctions = Check.all.sanctions.that.are.possible.for.students.to.receive.in.response.to.a.dress.code.violation) %>% 
+  separate_rows(sanctions, sep = ",") %>% 
+  mutate(sanctions = trimws(sanctions)) %>% 
+  count(sanctions) %>% 
+  mutate(percent = (n / nrow(dressCodes)) * 100) %>% 
+  filter(n >= 2) %>% 
+  filter(!is.na(sanctions))
+
+ggplot(punishment, aes(x = reorder(sanctions, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Sanctions for Dress Code Violations") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+### Rules per School
+What does the distribution look like in terms of prohibited items per school? (Currently based on one school per state)
+
+```{r}
+perSchool <- longDressCode %>% 
+  count(School.State)
+
+ggplot(perSchool, aes(x = reorder(School.State, n), y = n)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("State") + ylab("Number of Prohibited Items")
+```
+
+

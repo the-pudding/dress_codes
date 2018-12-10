@@ -1,0 +1,6 @@
+"0","searchMatches <- read.csv(here::here(""processed_data"", ""handbookMatches.csv""), stringsAsFactors = FALSE) %>% 
+  filter(!matches == ERROR)
+"
+"2","Error in filter_impl(.data, quo) : 
+  Evaluation error: object 'ERROR' not found.
+"

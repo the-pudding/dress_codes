@@ -1,0 +1,2 @@
+"0","localeAdjust <- handbookFull %>% "
+"0","  separate(locale, into = c(""localeGroup"", ""localeSpecific""), sep = "": "")"

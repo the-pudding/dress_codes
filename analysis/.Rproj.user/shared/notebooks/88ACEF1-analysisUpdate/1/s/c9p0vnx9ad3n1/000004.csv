@@ -1,0 +1,1 @@
+"0","ggplot(raceDemo, aes(x = pBlack, y = pRac)) + geom_point()+ xlab(""percentage of black students"") + ylab(""percentage of implicitly racial prohibited items"")"

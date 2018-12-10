@@ -1,0 +1,14 @@
+"0","write.csv(shuffledHandbooks, here::here(""processed_data"", ""shuffledHandbooks.csv""), row.names = FALSE)"
+"0","drive_upload(media = here::here(""processed_data"", ""shuffledHandbooks.csv""), "
+"0","             path = ""dress code/"", "
+"0","             name = ""shuffledHandbooks"", "
+"0","             type = ""spreadsheet"")"
+"2","Auto-refreshing stale OAuth token.
+"
+"2","Local file:
+  * /Users/amberthomas/Documents/dataScience/pudding/dress_code/analysis/processed_data/shuffledHandbooks.csv
+uploaded into Drive file:
+  * shuffledHandbooks: 1PJejlAKj2rgcygF7WLZkkWmhN4PidN2aqhjaW2jg8rU
+with MIME type:
+  * application/vnd.google-apps.spreadsheet
+"

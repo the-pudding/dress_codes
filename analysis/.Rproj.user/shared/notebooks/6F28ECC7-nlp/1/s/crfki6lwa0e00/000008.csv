@@ -1,0 +1,5 @@
+"0","txt <- c(d1 = ""Sleeveless shirts, blouses, and dresses are acceptable as long as the armholes have finished edges and do not expose the torso."","
+"0","         d2 = ""Holes in jeans or pants will be permitted only below mid-thigh length. Holes that are ruled potentially disruptive by the principal will not be permitted."")"
+"0","# process documents and obtain a data.table"
+"0","parsedtxt <- spacy_parse(txt)"
+"0","parsedtxt"

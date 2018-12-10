@@ -1,0 +1,4 @@
+"0","byState <- responses %>% count(School.State.Abbreviation, sort = TRUE) %>% "
+"0","  mutate(state = state.name[match(School.State.Abbreviation, state.abb)]) %>% "
+"0","  mutate(state = tolower(state))"
+"0","ggplot(byState, aes(x = reorder(School.State.Abbreviation, n), y = n)) + geom_bar(stat = ""identity"")"

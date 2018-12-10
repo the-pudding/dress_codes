@@ -1,0 +1,785 @@
+---
+title: "analysisUpdate"
+author: "Amber Thomas"
+date: "12/6/2018"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: true
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This is an exploration into the following question:
+
+**How do public high schools police bodies differently?**
+
+As such, I have been surveying public high schools with available dress codes for the 2018-2019 school year (and no uniform policy) across the US. I found a list of potential schools using the National Center for Education Statistic's [search function for public schools](https://nces.ed.gov/ccd/schoolsearch). I limited the resulting schools to just those that had a web address listed. I then scraped the homepage content for each website and searched for words like `handbook`, `dress code` and `code of conduct`. I further filtered my list of schools to just those that contained one of the above phrases. Then I manually visited each of the resulting (2000+) websites to find the actual dress code and to verify that there was no uniform policy and that the dress code was from the 2018 - 2019 school year. I ended up with a list of 831 schools considered to be "regular", "non-magnet", "non-boarding" high schools that met my qualifications. I've been manually collecting information from them in this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSe7dN-V5PTBNinyDVieO-4rYuObSBjZCqvag6bwyQXDJHzEBw/formResponse). 
+
+Now to process that data. 
+
+## Loading packages
+
+To start, I'll only need a few packages, mostly to connect me with the Google Sheets where the data from my form is being collected. 
+
+```{r warning = FALSE, message = FALSE}
+library(tidyverse)
+library(here)
+library(maps)
+```
+
+## Downloading Google Drive Data
+
+I'll download the data from Google Drive and set the overwrite permissions to `TRUE` so that I can re-run this analysis easily as I update more data. 
+
+```{r message = FALSE}
+googledrive::drive_download("Dress Code Responses", path = here::here("raw_data", "collected", "responses.csv"), type = "csv", overwrite = TRUE)
+
+responses <- read.csv(here::here("raw_data", "collected", "responses.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " "))
+```
+
+## Organizing the Data
+
+Because of the way that Google Sheets works, we end up with very *wide* data. That is, each clothing item is listed as a column instead of having several rows per school. Therefore, my data needs to go from wide to long.
+
+In order to do that, I need to first split out information about specific item length and strap width since these data were entered in a slightly different way than the rest. 
+
+### Length
+```{r}
+length <- responses %>% 
+  select(c("School.Name", "School.State.Abbreviation"), contains("length.limit")) %>% 
+  rename(limits = !!names(.[3]), length = !!names(.[4])) %>% 
+  filter(limits != "") %>% 
+  # Separate comma delimited list of items
+  separate_rows(limits, sep = ",") %>% 
+  mutate(limits = trimws(limits)) 
+```
+
+How many schools regulate the length of clothing items? 
+
+```{r}
+schools <- length %>% 
+  distinct(School.Name) 
+
+# Return count
+nrow(schools)
+
+# Return percentage
+nrow(schools) / nrow(responses)
+```
+
+Alright, so about 74% of the schools that I've surveyed so far have some length limitations. 
+
+What are those length limitations? 
+
+```{r}
+lengthLimits <- length %>% 
+  separate_rows(length, sep = ",") %>% 
+  filter(!grepl("\\(?[0-9,.]+\\)?", length)) %>% 
+  count(length, sort = TRUE) %>% 
+  filter(n >= 10)
+
+lengthLimits
+```
+
+
+### Strap Width
+```{r}
+straps <- responses %>% 
+  select(c("School.Name", "School.State.Abbreviation"), contains("shirt.straps")) %>% 
+  rename(limits = !!names(.[3])) %>% 
+  filter(limits != "") %>% 
+  # Separate comma delimited list of items
+  separate(limits, into = c("limits", "inches"), sep = ",") %>% 
+  mutate(limits = trimws(limits)) 
+```
+
+How many about strap width? 
+
+```{r}
+schoolsStrap <- straps %>% 
+  distinct(School.Name) 
+
+# Return count
+nrow(schoolsStrap)
+
+# Return percentage
+nrow(schoolsStrap) / nrow(responses)
+```
+
+Only 28% have some limitations on strap width explicitly laid out in the handbook. 
+
+### Banned Items
+
+In order to figure out all of the banned items, we need to eliminate some columns of unneccessary information. 
+
+```{r}
+banned <- responses %>% 
+  select(-contains("sanctions"), - contains("shirt.straps"), -contains("length.limit"))
+```
+
+
+```{r warning = FALSE}
+elongateCode <- function(type){
+
+  if(type == "clothing" || type == "body"){
+    regex <- paste0("other.", type)
+  } else {
+    regex <- paste0("\\b", type, "\\b.*?\\gender\\b")
+  }
+  bonusColumn <- colnames(select(banned, matches(regex)))
+  
+  new <- banned %>%
+    # First sort out any additional items that we added to our bonus column
+    separate_rows_(bonusColumn, sep = ",") %>%
+    separate(bonusColumn, into = c("item", "prohibited"), sep = ":") %>%
+    mutate(type = type) %>% 
+    select(c(1:6), c(item, prohibited, type)) %>% 
+    filter(!is.na(prohibited)) %>% 
+    mutate(prohibited = ifelse(prohibited == "NA", "none", prohibited))
+  
+  new2 <- banned %>%
+    select(-contains("any.other")) %>% 
+    gather(key = item, value = prohibited, colnames(select(., contains(!!type)))) %>%
+    filter(!is.na(prohibited)) %>%
+    mutate(item = gsub("(.*\\.{3})", "", item),
+         item = gsub("\\.", " ", item),
+         item = trimws(item)) %>%
+    mutate(type = type) %>%
+    select(c(1:6), c(item:type))
+  
+  combined <- rbind(new, new2)
+}
+
+
+
+clothingTypes <- c("accessories", "shirt", "skirt.dress", "pants", "shorts", "undergarment", "footwear", "headwear", "grooming", "body", "clothing")
+
+longDressCode <- map_dfr(clothingTypes, elongateCode)
+
+#write.csv(longDressCode, here("processed_data", "clean_dress_code.csv"), row.names = FALSE)
+```
+
+
+
+## Exploring Data
+
+### Explicit Bans
+
+Some schools do explicitly ban things for either male or female students. 
+
+How many things are explicitly banned for male vs. female students?
+```{r}
+explicitCount <- longDressCode %>% 
+  filter(prohibited != "none") %>% 
+  separate_rows(prohibited, sep = ",") %>% 
+  mutate(prohibited = trimws(prohibited),
+         prohibited = case_when(
+           prohibited == "boys" ~ "male",
+           prohibited == "Na" ~ NA_character_,
+           prohibited == "NA" ~ NA_character_,
+           TRUE ~ prohibited
+         )) %>% 
+  filter(prohibited == "male" | prohibited == "female") %>% 
+  count(prohibited)
+
+explicitCount
+```
+So it's more common to explicitly ban things for male students.
+
+Let's take a look at what those things were. 
+
+```{r}
+explicit <- longDressCode %>% 
+  filter(prohibited != "none") %>% 
+  separate_rows(prohibited, sep = ",") %>% 
+  mutate(prohibited = trimws(prohibited),
+         prohibited = case_when(
+           prohibited == "boys" ~ "male",
+           prohibited == "Na" ~ NA_character_,
+           prohibited == "NA" ~ NA_character_,
+           TRUE ~ prohibited
+         )) %>% 
+  filter(prohibited == "male" | prohibited == "female") %>% 
+  group_by(prohibited) %>% 
+  count(item) %>% 
+  filter(n >= 8)
+
+explicit
+```
+
+Alright, so there aren't too many items that are explicitly gendered. Let's look at what types of items are banned overall and then I'll get into things that are implicitly targetting students of a particular gender.
+
+### Body Parts
+
+Which body parts are specifically prohibited the most on high school campuses? 
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "body") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited body parts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+### Clothing Types {.tabset .tabset-pills}
+What types of clothing have been specifically prohibited?
+
+#### Shirts
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "shirt") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Shirts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Shorts
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "shorts") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Shorts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Pants
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "pants") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited pants") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Skirts
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "skirt.dress") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited skirts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Accessories
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "accessories" | type == "belt") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Accessories") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Footwear
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "footwear") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Footwear") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Undergarments
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "undergarment") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Undergarments") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Headwear
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "headwear") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Headwear") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Grooming
+
+```{r echo = FALSE}
+bodyOnly <- longDressCode %>% 
+  filter(type == "grooming") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Headwear") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+### Clothing Attributes
+
+Sometimes descriptive words are used instead of explicit clothing items (showing items prohibited by a minimum of 3 schools).
+
+
+```{r echo = FALSE}
+desc <- longDressCode %>% 
+  filter(type == "clothing") %>% 
+  count(item) %>% 
+  mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(desc, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Clothing") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+
+### Rationale
+
+Typically before listing the actual items that are prohibited, schools give a brief rationale for why their dress codes exist. What words show up the most there?
+
+```{r echo = FALSE}
+rationale <- responses %>% 
+  select(c(1:6), "Check.any.of.the.following.words.phrases.that.appear.in.the.dress.code.") %>% 
+  separate_rows(7, sep = ",") %>% 
+  rename(words = Check.any.of.the.following.words.phrases.that.appear.in.the.dress.code.) %>% 
+  mutate(words = trimws(words)) %>% 
+  count(words) %>% mutate(percent = (n / nrow(responses)) * 100) %>% 
+  filter(n >= 30)
+
+ggplot(rationale, aes(x = reorder(words, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Words Used in Dress Code Rationale") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+  
+```
+
+### Targetted Prohibitions
+
+I need to create a list of items that have been prohibited so I can get a better sense of how many are targetted towards specific types of students. 
+
+```{r}
+bannedItems <- longDressCode %>% 
+  group_by(type, item) %>% 
+  count(item, sort = TRUE)
+
+write.csv(bannedItems, here::here("processed_data", "bannedItems.csv"), row.names = FALSE)
+```
+
+I'll now upload this to Google Drive to make some manual annotations.
+
+```{r eval = FALSE, echo = FALSE}
+googledrive::drive_upload(media = here::here("processed_data", "bannedItems.csv"), 
+             path = "dress code/", 
+             name = "bannedItems", 
+             type = "spreadsheet")
+
+```
+
+```{r message = FALSE, echo = FALSE}
+googledrive::drive_download("bannedItems", path = here::here("raw_data", "collected", "bannedItems.csv"), type = "csv", overwrite = TRUE)
+
+bannedAnno <- read.csv(here::here("raw_data", "collected", "bannedItems.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " "))
+
+banned <- left_join(longDressCode, bannedAnno)
+```
+
+Let's take a look again at the banned items highlighting the gender (if any) that these items implicitly target. 
+
+### Body Parts
+
+Which body parts are specifically prohibited the most on high school campuses? 
+```{r echo = FALSE}
+bodyOnly <- banned %>% 
+  filter(type == "body") %>% 
+  group_by(gender) %>% 
+  count(item) %>% 
+  mutate(percent = (nn / nrow(responses)) * 100) %>% 
+  filter(nn >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent, fill = gender)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited body parts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+### Clothing Types {.tabset .tabset-pills}
+What types of clothing have been specifically prohibited?
+
+#### Shirts
+
+```{r echo = FALSE}
+shirtsOnly <- banned %>% 
+  filter(type == "shirt") %>% 
+  group_by(gender) %>% 
+  count(item) %>% 
+  mutate(percent = (nn / nrow(responses)) * 100) %>% 
+  filter(nn >= 30)
+
+ggplot(shirtsOnly, aes(x = reorder(item, percent), y = percent, fill = gender)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Shirts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Shorts
+
+```{r echo = FALSE}
+shortsOnly <- banned %>% 
+  filter(type == "shorts") %>% 
+    group_by(gender) %>% 
+  count(item) %>% 
+  mutate(percent = (nn / nrow(responses)) * 100) %>% 
+  filter(nn >= 30)
+
+ggplot(shortsOnly, aes(x = reorder(item, percent), y = percent, fill = gender)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Shorts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Pants
+
+```{r echo = FALSE}
+pantsOnly <- banned %>% 
+  filter(type == "pants") %>% 
+  group_by(gender) %>% 
+  count(item) %>% 
+  mutate(percent = (nn / nrow(responses)) * 100) %>% 
+  filter(nn >= 30)
+
+ggplot(pantsOnly, aes(x = reorder(item, percent), y = percent, fill = gender)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited pants") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Skirts & Dresses
+
+```{r echo = FALSE}
+skirtsOnly <- banned %>% 
+  filter(type == "skirt.dress") %>% 
+    group_by(gender) %>% 
+  count(item) %>% 
+  mutate(percent = (nn / nrow(responses)) * 100) %>% 
+  filter(nn >= 30)
+
+ggplot(skirtsOnly, aes(x = reorder(item, percent), y = percent, fill = gender)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited skirts") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Accessories
+
+```{r echo = FALSE}
+accOnly <- banned %>% 
+  filter(type == "accessories" | type == "belt") %>% 
+  group_by(gender) %>% 
+  count(item) %>% 
+  mutate(percent = (nn / nrow(responses)) * 100) %>% 
+  filter(nn >= 30)
+
+ggplot(accOnly, aes(x = reorder(item, percent), y = percent, fill = gender)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Accessories") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Footwear
+
+```{r echo = FALSE}
+bodyOnly <- banned %>% 
+  filter(type == "footwear") %>% 
+  group_by(gender) %>% 
+  count(item) %>% 
+  mutate(percent = (nn / nrow(responses)) * 100) %>% 
+  filter(nn >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Footwear") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Undergarments
+
+```{r echo = FALSE}
+bodyOnly <- banned %>% 
+  filter(type == "undergarment") %>% 
+  group_by(gender) %>% 
+  count(item) %>% 
+  mutate(percent = (nn / nrow(responses)) * 100) %>% 
+  filter(nn >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent, fill = gender)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Undergarments") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Headwear
+
+```{r echo = FALSE}
+bodyOnly <- banned %>% 
+  filter(type == "headwear") %>% 
+    group_by(gender) %>% 
+  count(item) %>% 
+  mutate(percent = (nn / nrow(responses)) * 100) %>% 
+  filter(nn >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent, fill = gender)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Headwear") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+#### Grooming
+
+```{r echo = FALSE}
+bodyOnly <- banned %>% 
+  filter(type == "grooming") %>% 
+  group_by(gender) %>% 
+  count(item) %>% 
+  mutate(percent = (nn / nrow(responses)) * 100) %>% 
+  filter(nn >= 30)
+
+ggplot(bodyOnly, aes(x = reorder(item, percent), y = percent, fill = gender)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Headwear") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+### Clothing Attributes
+
+Sometimes descriptive words are used instead of explicit clothing items (showing items prohibited by a minimum of 3 schools).
+
+
+```{r echo = FALSE}
+desc <- banned %>% 
+  filter(type == "clothing") %>% 
+    group_by(gender) %>% 
+  count(item) %>% 
+  mutate(percent = (nn / nrow(responses)) * 100) %>% 
+  filter(nn >= 30)
+
+ggplot(desc, aes(x = reorder(item, percent), y = percent, fill = gender)) + geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Prohibited Clothing") + ylab("Percent of schools") +
+  scale_y_continuous(limits=c(0, 100))
+```
+
+If we were to look at the breakdown between the banned items that are implicitly targetted at female students vs. male students: (100% = 100% female targeted, 0% = 100% male targeted). This calculation does not include the banned items that are not implicitly targeted at either male or female students. 
+```{r echo = FALSE}
+
+
+bannedGender <- banned %>% 
+  group_by(School.Name) %>% 
+  count(gender) %>% 
+  filter(!is.na(gender)) %>% 
+  spread(gender, nn) %>% 
+  replace_na(list(m = 0, f = 0)) %>% 
+  mutate(pFem = (f / (m+f)) * 100)
+
+ggplot(bannedGender, aes(x = pFem)) + geom_histogram(stat = "bin")
+```
+
+If we do look at the percentage of female gender-targetted items compared to all items, here is the distribution:
+
+```{r echo = FALSE}
+bannedGender <- banned %>% 
+  group_by(School.Name) %>% 
+  count(gender) %>% 
+  spread(gender, nn) %>% 
+  rename(none = "<NA>") %>% 
+  replace_na(list(m = 0, f = 0)) %>% 
+  mutate(pFem = (f / (m+f+none)) * 100)
+
+ggplot(bannedGender, aes(x = pFem)) + geom_histogram(stat = "bin")
+```
+And male gender-targeted:
+
+If we do look at the percentage of female gender-targetted items compared to all items, here is the distribution:
+
+```{r echo = FALSE}
+bannedGenderM <- banned %>% 
+  group_by(School.Name) %>% 
+  count(gender) %>% 
+  spread(gender, nn) %>% 
+  rename(none = "<NA>") %>% 
+  replace_na(list(m = 0, f = 0)) %>% 
+  mutate(pMal = (m / (m+f+none)) * 100)
+
+ggplot(bannedGenderM, aes(x = pMal)) + geom_histogram(stat = "bin")
+```
+
+
+Similarly, this is the percentage of items in the dresscode implicitly target students of color (with 100% = 100% poc targetted, and 0% = 0% poc targetted). 
+```{r echo = FALSE}
+bannedRace <- banned %>% 
+  group_by(School.Name) %>% 
+  count(race) %>%
+  replace_na(list(race = "n")) %>% 
+  spread(race, nn) %>% 
+  replace_na(list(n = 0, y = 0)) %>% 
+  mutate(pRac = (y / (y+n)) * 100)
+
+ggplot(bannedRace, aes(x = pRac)) + geom_histogram(stat = "bin")
+
+```
+
+
+### Demographic Data 
+
+
+Of the 300 schools I've collected data for so far, what is their state distribution? 
+```{r}
+byState <- responses %>% count(School.State.Abbreviation, sort = TRUE) %>% 
+  mutate(state = state.name[match(School.State.Abbreviation, state.abb)]) %>% 
+  mutate(state = tolower(state))
+
+ggplot(byState, aes(x = reorder(School.State.Abbreviation, n), y = n)) + geom_bar(stat = "identity")
+```
+
+Let's try to look at this on a map:
+
+```{r}
+us <- map_data("state")
+
+ggplot() + geom_map(data = us, map = us, aes(x = long, y = lat, map_id = region),
+                    fill = "#ffffff", color="#ffffff", size = 0.15) +
+  geom_map(data = byState, map = us, aes(fill = n, map_id = state)) + 
+  scale_fill_continuous(low='thistle2', high='darkred', 
+                                 guide='colorbar') 
+```
+
+Alright, so Texas and NY are pretty high here and we're missing some decent chunks of the country but overall, not terrible. 
+
+
+Let's combine our demographic data with our dress code data 
+
+```{r}
+shuffledHandbooks <- read.csv(here::here("processed_data", "shuffledHandbooks.csv"), stringsAsFactors = FALSE, header = TRUE) %>% 
+  mutate(schoolName = trimws(schoolName),
+         stateAbb = trimws(stateAbb)) 
+
+demo <- banned %>% 
+  mutate(schoolName = trimws(School.Name),
+         stateAbb = trimws(School.State.Abbreviation)) %>% 
+  left_join(shuffledHandbooks)
+```
+Are schools with a lower percentage of white students more likely to implicitly target students of color? 
+```{r}
+raceDemo <- demo %>% 
+  left_join(bannedRace, by = "School.Name")
+
+ggplot(raceDemo, aes(x = pWhite, y = pRac)) + geom_point() + xlab("percentage of white students") + ylab("percentage of implicitly racial prohibited items")
+```
+
+This appears to be either flat, or slightly the opposite of what I expected. Let's look for a quick correlation.
+
+
+```{r}
+cor(raceDemo$pRac, raceDemo$pWhite)
+```
+That is pretty low, looks like there isn't much of a correlation between the population of white students and items specifically targetted at students of color. However, that may change if we look specifically at the population of black students (since many of these banned items are specifically targeted at black students).
+
+```{r}
+ggplot(raceDemo, aes(x = pBlack, y = pRac)) + geom_point()+ xlab("percentage of black students") + ylab("percentage of implicitly racial prohibited items")
+```
+
+Again, really flat. 
+
+```{r}
+cor(raceDemo$pBlack, raceDemo$pRac)
+```
+
+Slightly higher correlation than with white students, but still nothing explanatory. Maybe take a quick look at the state distribution. 
+
+```{r}
+ggplot(raceDemo, aes(reorder(School.State.Abbreviation, pRac), pRac)) + geom_point() + xlab("state") + ylab("percentage of implicitly racial prohibited items")
+```
+
+There's a pretty wide spread within and between schools in a single state. Maybe there's a difference in gender-targetted policies within/between states.
+```{r}
+genDemo <- demo %>% 
+  left_join(bannedGender, by = "School.Name")
+
+ggplot(genDemo, aes(reorder(School.State.Abbreviation, pFem), pFem)) + geom_point() + xlab("state") + ylab("percentage of implicitly gender prohibited items")
+
+```
+
+
+Not so much. Perhaps gender differences by the school locale? 
+```{r}
+ggplot(genDemo, aes(reorder(locale, pFem), pFem)) + geom_point() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + xlab("school locale") + ylab("percentage of implicitly gender prohibited items")
+```
+
+Not so much. Perhaps race differences by the school locale? 
+```{r}
+ggplot(raceDemo, aes(reorder(locale, pRac), pRac)) + geom_point() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + xlab("school locale") + ylab("percentage of implicitly racial prohibited items")
+```
+
+Seemingly a few more outliers here, but no major trends. 
+
+## Things Left that I could look at
+
+- Sanctions 
+
+

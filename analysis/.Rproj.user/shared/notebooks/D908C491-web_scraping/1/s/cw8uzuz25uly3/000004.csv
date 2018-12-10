@@ -1,0 +1,8 @@
+"0","cleanHandbooks <- foundHandbooks %>% 
+  filter(!is.na(dressCode)) %>% 
+  filter(handbookYear == ""2018-2019"",
+         uniform == FALSE) %>% 
+  mutate(pWhite = as.numeric(pWhite)) %>% 
+  distinct(dressCode, .keep_all = TRUE)
+"
+"2","NAs introduced by coercion"

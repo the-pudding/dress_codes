@@ -1,0 +1,2 @@
+"0","ggplot(raceDemo, aes(reorder(locale, pRac), pRac)) + geom_point() +"
+"0","  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + xlab(""school locale"") + ylab(""percentage of implicitly racial prohibited items"")"

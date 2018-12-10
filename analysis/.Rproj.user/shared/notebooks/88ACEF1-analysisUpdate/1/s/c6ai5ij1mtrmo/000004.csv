@@ -1,0 +1,4 @@
+"0","bannedItems <- longDressCode %>% "
+"0","  group_by(type, item) %>% "
+"0","  count(item, sort = TRUE)"
+"0","write.csv(bannedItems, here::here(""processed_data"", ""bannedItems.csv""), row.names = FALSE)"

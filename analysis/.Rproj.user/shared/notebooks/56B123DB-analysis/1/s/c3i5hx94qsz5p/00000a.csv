@@ -1,0 +1,10 @@
+"0","sheetID <- googledrive::as_id(""https://docs.google.com/spreadsheets/d/1TgmALnY8qc8Aahy1QdV0CvX_SNl4sL6ErPpWwYcdfOk/edit#gid=602462357"")"
+"0","googledrive::drive_download(sheetID, path = here(""raw_data"", ""dress_codes.csv""), overwrite = TRUE)"
+"2","Auto-refreshing stale OAuth token.
+"
+"2","File downloaded:
+  * dress code data
+Saved locally as:
+  * /Users/amberthomas/Documents/dataScience/pudding/dress_code/analysis/raw_data/dress_codes.csv
+"
+"0","dressCodes <- read.csv(here::here(""raw_data"", ""dress_codes.csv""), stringsAsFactors = FALSE, header = TRUE, na.strings = c("""", "" "", ""none""))"

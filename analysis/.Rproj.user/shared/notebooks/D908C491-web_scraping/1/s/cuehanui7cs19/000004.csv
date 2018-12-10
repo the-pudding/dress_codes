@@ -1,0 +1,1 @@
+"0","searchMatches %>% distinct(schoolName) %>% summarise(count = n())"

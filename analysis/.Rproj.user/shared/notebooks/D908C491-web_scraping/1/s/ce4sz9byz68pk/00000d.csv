@@ -1,0 +1,2 @@
+"0","ggplot(cleanHandbooks, aes(x = pWhite)) + geom_histogram(stat = ""count"", bins = 5)"
+"2","Ignoring unknown parameters: binwidth, bins, pad"

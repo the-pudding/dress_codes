@@ -1,0 +1,3 @@
+"0","parsedtxtAnalyzed <- parsedtxt %>%"
+"0","  group_by(doc_id, paragraph_id, sentence_id) %>% "
+"0","  mutate(nextToken = lead(token, n = 2))"

@@ -1,0 +1,2 @@
+"0","hasWebsite <- schoolData %>% "
+"0","  filter(!is.na(website))"

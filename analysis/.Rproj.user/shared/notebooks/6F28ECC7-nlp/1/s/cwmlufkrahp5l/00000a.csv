@@ -1,0 +1,7 @@
+"0","txt <- c(d1 = ""Sleeveless shirts, blouses, and dresses are acceptable as long as the armholes have finished edges and do not expose the torso. "","
+"0","         d2 = ""tube tops, tank tops, and halter tops are not allowed"")"
+"0","parsedtxt <- udpipe(txt, object = udEnglish)"
+"0","parsedtxt$phrase_tag <- as_phrasemachine(parsedtxt$upos, type = ""upos"")"
+"0","stats <- keywords_phrases(x = parsedtxt$xpos, term = tolower(parsedtxt$token), "
+"0","                          pattern = ""((JJ.|NN.)*(NN.*))"", "
+"0","                          is_regex = TRUE, detailed = FALSE)"

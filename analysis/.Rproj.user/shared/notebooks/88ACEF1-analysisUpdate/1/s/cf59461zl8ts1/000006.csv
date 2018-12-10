@@ -1,0 +1,2 @@
+"0","ggplot(genDemo, aes(reorder(locale, pFem), pFem)) + geom_point() +"
+"0","  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + xlab(""school locale"") + ylab(""percentage of implicitly gender prohibited items"")"

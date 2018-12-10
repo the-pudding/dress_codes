@@ -1,0 +1,1 @@
+"0","parsedtxt <- spacy_parse(txt, dependency = TRUE, nounphrase = TRUE)"

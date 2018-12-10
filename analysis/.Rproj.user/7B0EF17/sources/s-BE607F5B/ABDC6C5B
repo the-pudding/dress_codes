@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1544146077078.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "ABDC6C5B",
+    "lastKnownWriteTime" : 7307985536057437537,
+    "last_content_update" : 1544146077078,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "DB3758A9",
+        "caption" : "raceDemo",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=raceDemo&cache_key=DB3758A9",
+        "displayedObservations" : 292,
+        "environment" : "",
+        "object" : "raceDemo",
+        "preview" : 0,
+        "totalObservations" : 292,
+        "variables" : 3
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,11 @@
+"0","googledrive::drive_upload(media = here::here(""processed_data"", ""bannedItems.csv""), "
+"0","             path = ""dress code/"", "
+"0","             name = ""bannedItems"", "
+"0","             type = ""spreadsheet"")"
+"2","Local file:
+  * /Users/amberthomas/Documents/dataScience/pudding/dress_code/analysis/processed_data/bannedItems.csv
+uploaded into Drive file:
+  * bannedItems: 1njEz5GWnvoEa71Ns6_tyILHiJeiW97FEf31SmLahTuA
+with MIME type:
+  * application/vnd.google-apps.spreadsheet
+"

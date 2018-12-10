@@ -1,0 +1,2 @@
+"0","banned <- responses %>% "
+"0","  select(-contains(""sanctions""), - contains(""shirt.straps""), -contains(""length.limit""))"

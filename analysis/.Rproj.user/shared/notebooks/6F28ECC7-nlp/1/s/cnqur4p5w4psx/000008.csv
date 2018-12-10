@@ -1,0 +1,4 @@
+"0","grammar = ('''NP: {<DT>?<VBD>*<NNS>} # NP''')
+"
+"2","Error: unexpected string constant in ""grammar = ('''NP: {<DT>?<VBD>*<NNS>} # NP'""
+"

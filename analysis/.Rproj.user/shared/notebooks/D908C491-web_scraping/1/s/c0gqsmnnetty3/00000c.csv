@@ -1,0 +1,12 @@
+"0","drive_upload(media = here::here(""processed_data"", ""handbookFullMatches.csv""), 
+             path = ""dress code/"", 
+             name = ""handbookMatches"", 
+             type = ""spreadsheet"")
+"
+"2","Local file:
+  * /Users/amberthomas/Documents/dataScience/pudding/dress_code/analysis/processed_data/handbookFullMatches.csv
+uploaded into Drive file:
+  * handbookMatches: 1e3VyRTWnWG6WYFKsD3yw6vNj4ETutLHHcaKfC7128uw
+with MIME type:
+  * application/vnd.google-apps.spreadsheet
+"

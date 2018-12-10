@@ -1,0 +1,2 @@
+"0","googledrive::drive_download(""Dress Code Responses"", path = here::here(""raw_data"", ""collected"", ""responses.csv""), type = ""csv"", overwrite = TRUE)"
+"0","responses <- read.csv(here::here(""raw_data"", ""collected"", ""responses.csv""), stringsAsFactors = TRUE, header = TRUE)"

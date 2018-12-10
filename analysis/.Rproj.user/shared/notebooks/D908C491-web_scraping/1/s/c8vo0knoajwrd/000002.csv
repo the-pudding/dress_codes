@@ -1,0 +1,3 @@
+"0","handbookType <- handbookFull %>% "
+"0","  group_by(stateAbb) %>% "
+"0","  count(schoolType)"

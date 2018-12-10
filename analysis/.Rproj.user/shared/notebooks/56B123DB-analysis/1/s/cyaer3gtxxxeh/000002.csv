@@ -1,0 +1,5 @@
+"0","perSchool <- longDressCode %>% "
+"0","  count(School.State)"
+"0","ggplot(perSchool, aes(x = reorder(School.State, n), y = n)) + geom_bar(stat = ""identity"") +"
+"0","	theme(axis.text.x = element_text(angle = 45, hjust = 1)) + "
+"0","  xlab(""State"") + ylab(""Number of Prohibited Items"")"

@@ -1,0 +1,1 @@
+"0","ggplot(raceDemo, aes(reorder(School.State.Abbreviation, pRac), pRac)) + geom_point() + xlab(""state"") + ylab(""percentage of implicitly racial prohibited items"")"

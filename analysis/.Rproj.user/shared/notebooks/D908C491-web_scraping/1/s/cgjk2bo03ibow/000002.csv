@@ -1,0 +1,3 @@
+"0","schoolData <- read.csv(here::here(""raw_data"", ""schools"", ""elsi.csv""), skip = 6, header = TRUE, na.strings = c(""†"", ""-""), stringsAsFactors = FALSE)"
+"0","columns <- c(""schoolName"", ""state"", ""website"", ""stateAbb"", ""schoolType"", ""charterSchool"", ""magnetSchool"", ""locale"", ""totalStudents"", ""lowestGrade"", ""highestGrade"", ""totalRace"", ""raceNative"", ""raceAsian"", ""raceHispanic"", ""raceBlack"", ""raceWhite"", ""raceHawaiian"", ""raceMultiple"", ""studentTeacherRatio"", ""teacherCount"")"
+"0","colnames(schoolData) <- columns"

@@ -1,0 +1,302 @@
+---
+title: "web scraping"
+author: "Amber Thomas"
+date: "11/8/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Figuring out how many public high schools are in the US as well as how many have websites online (and within that, how many have student handbooks or dress codes accessible) has been a really manual process.  
+
+I've decided to try to automate the process a bit using the National Center for Education Statistic's [search function for public schools](https://nces.ed.gov/ccd/schoolsearch). 
+
+<!-- I decided to try to automate the process a bit using Wikipedia. It seems that Wikipedia has a list of public schools in the state. Although not every school has a Wikipedia page, at first glance it does appear that most do. On some school's Wikipedia pages, there is also a link to the school's website. My current plan is to loop through Wikipedia's state pages and collect the URL's of any schools that are listed. This could be a good way to limit the number of schools in my sampleset. Then, I can possibly scrape the site map's of the school's websites looking for either student handbook or dress code files or sections.  -->
+
+Phew, let's see how that would work. 
+
+## Loading Packages
+```{r}
+library(tidyverse)
+library(rvest)
+library(httr)
+library(here)
+library(qdapRegex)
+library(xml2)
+library(googledrive)
+```
+
+## Collecting Schools
+
+Using the Institute of Education Services and National Center for Education Statistics Public School Search feature and tableGenerator, I was able to create a list of 15,549 public high schools in the US. 
+
+```{r}
+schoolData <- read.csv(here::here("raw_data", "schools", "elsi.csv"), skip = 6, header = TRUE, na.strings = c("†", "-"), stringsAsFactors = FALSE)
+
+columns <- c("schoolName", "state", "website", "stateAbb", "schoolType", "charterSchool", "magnetSchool", "locale", "totalStudents", "lowestGrade", "highestGrade", "totalRace", "raceNative", "raceAsian", "raceHispanic", "raceBlack", "raceWhite", "raceHawaiian", "raceMultiple", "studentTeacherRatio", "teacherCount")
+
+colnames(schoolData) <- columns
+```
+
+
+Great, so how many of these schools have websites listed? 
+
+```{r}
+hasWebsite <- schoolData %>% 
+  filter(!is.na(website))
+```
+
+Looks like 8,496 schools (56% of schools) has a website. 
+
+Let's see if we can search the html content of each school's homepage for any mention of a student handbook or dresscode policy. We'll create a function called `findHandbook()`.
+
+```{r}
+findTerms <- function(term, codeAsText){
+    present <- grepl(term, codeAsText)
+    if(present == TRUE) {
+      val <- term
+    } else {
+      val <- NA
+    }
+    return(val)
+}
+
+
+findHandbook <- function(school, state, url, .pb = NULL){
+	if ((!is.null(.pb)) && inherits(.pb, "Progress") && (.pb$i < .pb$n)) .pb$tick()$print()
+
+	Sys.sleep(0.001)
+  
+  http <- ifelse(grepl("www|http", url) == FALSE, paste0("http://www.", url),
+                 ifelse(grepl("www", url) == TRUE & grepl("http", url == FALSE), paste0("http://", url), url))
+  
+  possiblyRead <- possibly(GET, otherwise = NULL)
+  html <- possiblyRead(http)
+  
+  if (!is.null(html)){
+    ## Convert xml to text
+    code <- content(html, as = "text", encoding = "UTF-8")
+    
+    searchTerms <- c("form ", "handbook"," dress", "dress code", "appearance", "guide", "guidebook", "code of conduct", "manual")
+    
+    data <- tibble(
+      schoolName = school,
+      stateAbb = state,
+      matches = map2_chr(searchTerms, code, findTerms)
+    ) %>% 
+      filter(!is.na(matches))
+    
+    fileName <- here::here("processed_data", "handbookMatches.csv")
+  
+    write.table(data, file = fileName, append = TRUE, sep = ",", row.names = FALSE, col.names = !file.exists(fileName))
+    
+    return(data)
+  } else {
+    data <- tibble(
+      schoolName = school,
+      stateAbb = state,
+      matches = "ERROR"
+    )
+    
+    fileName <- here::here("processed_data", "handbookMatches.csv")
+  
+    write.table(data, file = fileName, append = TRUE, sep = ",", row.names = FALSE, col.names = !file.exists(fileName))
+    
+    return(data)
+  }
+  
+}
+```
+
+Function seems to be working, let's let it run. 
+```{r}
+sub <- hasWebsite[1099:nrow(hasWebsite), ]
+
+argList <- list(hasWebsite$schoolName, hasWebsite$stateAbb, hasWebsite$website)
+
+# for progress bar
+pb <- progress_estimated(nrow(hasWebsite))
+
+handbooksFound <- pmap_dfr(argList, findHandbook, .pb = pb)
+```
+```{r}
+handbooksFound <- read.csv(here::here("processed_data", "handbookMatches.csv"), stringsAsFactors = FALSE) %>% 
+  filter(matches == "handbook")
+
+countByState <- schoolData %>% 
+  count(stateAbb)
+
+countByWebsite <- hasWebsite %>% 
+  count(stateAbb)
+
+handbookFull <- schoolData %>% 
+  inner_join(handbooksFound, by = c("schoolName", "stateAbb"))
+```
+
+Alright, let's calculate a few things.
+
+* **handbook**: Raw count of websites that explicitly say "handbook" somewhere in the html of the homepage per state. 
+* **website**: Raw count of school websites that exist per state. 
+* **total**: Raw count of schools in each state. 
+* **percentHandbook**: Percentage of total available schools per state that explicitly say "handbook"
+* **percentWebsite**: Percentage of total available schools per state that have a website. 
+* **percentHandbookWebsite**: Percentage of schools *with* a website that *also* explicitly state "handbook" somewhere on the homepage. 
+
+```{r}
+handbookPercents <- handbookFull %>% 
+  count(stateAbb) %>% 
+  left_join(countByWebsite, by = "stateAbb") %>% 
+  left_join(countByState, by = "stateAbb") %>% 
+  rename(handbook = n.x, website = n.y, total = n) %>% 
+  mutate(percentHandbook = round((handbook/total) * 100, 0),
+         percentWebsite = round((website/total) * 100, 0),
+         percentHandbookWebsite = round((handbook/website) * 100, 0))
+
+handbookPGraph <- ggplot(handbookPercents, aes(x = reorder(stateAbb, percentHandbook), y = percentHandbook)) + geom_bar(stat = "identity")
+```
+Lots of variation between states on the availability of handbook on the website. 
+```{r}
+handbookType <- handbookFull %>% 
+  group_by(stateAbb) %>% 
+  count(schoolType)
+```
+
+It also looks like most of the schools in this dataset are considered "regular" schools, so it may be worth filtering it down to just "regular" schools at some point. 
+
+```{r}
+handbookLocale <- handbookFull %>%
+  group_by(stateAbb) %>% 
+  count(locale)
+
+handbookLocaleCountry <- handbookFull %>% 
+  count(locale)
+
+ggplot(handbookLocaleCountry, aes(x = reorder(locale, n), y = n)) + geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+Let's try combining some of those groups: 
+
+```{r}
+localeAdjust <- handbookFull %>% 
+  separate(locale, into = c("localeGroup", "localeSpecific"), sep = ": ") %>% 
+  mutate()
+```
+
+I've re-run the script with a few extra search terms. Let's see what we've got. 
+
+```{r}
+searchMatches <- read.csv(here::here("processed_data", "handbookMatches.csv"), stringsAsFactors = FALSE) %>% 
+  filter(!matches == "ERROR")
+```
+
+Alright, so we had 8,516 non-error matches. Let's see how many schools that is. 
+
+```{r}
+searchMatches %>% distinct(schoolName) %>% summarise(count = n())
+```
+
+Alright, so just over 5,000 schools. Let's see what the breakdown of term matching was. 
+
+```{r}
+searchMatches %>% count(matches)
+```
+
+For now, let's remove "form" but keep everything else (since that is the least likely to lead to an actual handbook of sorts). 
+
+```{r}
+searchMatches %>% filter(matches != "form ") %>% distinct(schoolName) %>% count()
+```
+
+Alright, so getting rid of "form" cuts the number of schools in half to 2,574.  
+
+Let's join this list with our original data. 
+
+```{r}
+cleanVar <- c("totalStudents", "totalRace", "raceNative", "raceAsian", "raceHispanic", "raceBlack", "raceWhite", "raceHawaiian", "raceMultiple", "studentTeacherRatio", "teacherCount")
+
+handbookFull <- schoolData %>% 
+  inner_join(searchMatches, by = c("schoolName", "stateAbb")) %>% 
+  filter(matches != "form ") %>% 
+  distinct(schoolName, stateAbb, .keep_all = TRUE) %>% 
+  mutate_at(vars(cleanVar), .funs = funs(gsub("=0", "0", ., fixed = TRUE))) %>% 
+  mutate_at(vars(cleanVar), .funs = funs(gsub("-", NA_character_, trimws(.), fixed = TRUE))) %>%   mutate_at(vars(cleanVar), .funs = funs(as.numeric(.))) %>% 
+  mutate(pWhite = round((raceWhite/totalRace) * 100, 0),
+         pBlack = round((raceBlack/totalRace) * 100, 0),
+         pHispanic = round((raceHispanic/totalRace) * 100, 0))
+            
+```
+
+Let's look at the racial diversity of these schools. 
+
+```{r}
+ggplot(handbookFull, aes(x = pWhite)) + geom_histogram() +
+  xlab("Percentage of White Students")
+
+ggplot(handbookFull, aes(x = pBlack)) + geom_histogram() +
+  xlab("Percentage of Black Students")
+
+ggplot(handbookFull, aes(x = pHispanic)) + geom_histogram() +
+  xlab("Percentage of Hispanic Students")
+```
+
+Let's upload this to Google Drive so that we can easily add more information manually to it (specifically links to handbooks or dress codes if they exist!)
+
+```{r eval = FALSE}
+write.csv(handbookFull, here::here("processed_data", "handbookFullMatches.csv"), row.names = FALSE)
+
+drive_upload(media = here::here("processed_data", "handbookFullMatches.csv"), 
+             path = "dress code/", 
+             name = "handbookMatches", 
+             type = "spreadsheet")
+```
+
+Looked great and we had about a 63% success rate on actually finding high school handbooks. Not great, but it worked! 
+
+Let's re-download the sheet. 
+
+```{r}
+drive_download("handbookMatches", path = here::here("raw_data", "handbookMatches.csv"), type = "csv")
+
+foundHandbooks <- read.csv(here::here("raw_data", "handbookMatches.csv"), stringsAsFactors = FALSE, na.strings = "")
+```
+
+```{r}
+cleanHandbooks <- foundHandbooks %>% 
+  filter(!is.na(dressCode)) %>% 
+  filter(handbookYear == "2018-2019",
+         uniform == FALSE) %>% 
+  mutate(pWhite = as.numeric(pWhite)) %>% 
+  distinct(dressCode, .keep_all = TRUE)
+
+hbState <- cleanHandbooks %>% 
+  group_by(stateAbb) %>% 
+  distinct(dressCode) %>% 
+  count()
+```
+
+What is the race distribution of the schools for which I found dress codes? 
+
+```{r}
+ggplot(cleanHandbooks, aes(x = pWhite)) + geom_histogram(stat = "count", bins = 5)
+```
+
+
+Alright, so the plan is to collect data for all 891 dress codes that I found. Let's shuffle them up and re-upload this list to Google Sheets for me to work on. 
+
+```{r}
+shuffledHandbooks <- cleanHandbooks[sample(nrow(cleanHandbooks)), ]
+```
+
+
+```{r}
+write.csv(shuffledHandbooks, here::here("processed_data", "shuffledHandbooks.csv"), row.names = FALSE)
+
+drive_upload(media = here::here("processed_data", "shuffledHandbooks.csv"), 
+             path = "dress code/", 
+             name = "shuffledHandbooks", 
+             type = "spreadsheet")
+```
+

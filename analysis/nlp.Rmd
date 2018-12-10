@@ -1,0 +1,91 @@
+---
+title: "NLP"
+author: "Amber Thomas"
+date: "11/17/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Up until this point, I had assumed that all of the dress codes would need to be manually processed, but I think I'd like to give Natural Language Processing a try. Specifically with Part of Sentence and chunking analysis (like [this](https://medium.com/greyatom/learning-pos-tagging-chunking-in-nlp-85f7f811a8cb)). 
+
+```{r}
+library(tidyverse)
+library(reticulate)
+use_python('/usr/local/bin/python3', required = TRUE)
+spacy <- import("spacy")
+nlp <- spacy$load('en')
+library(spacyr)
+spacy_initialize(python_executable = '/usr/local/bin/python3')
+
+library(udpipe)
+udEnglish <- udpipe_download_model(language = "english")
+```
+
+## Test Data
+Using NLTK
+
+```{r eval = FALSE}
+sentence <- "Sleeveless shirts, blouses, and dresses are acceptable as long as the armholes have finished edges and do not expose the torso."
+token <- nltk$word_tokenize(sentence)
+tagged <- nltk$pos_tag(token)
+
+grammar = ('''NP: {<DT>?<VBD>*<NNS>} # NP''')
+
+chunkParser = nltk.RegexpParser(grammar)
+
+tree = chunkParser.parse(tagged)
+
+for subtree in tree.subtrees():
+    print(subtree)
+```
+Using spacy
+```{r}
+doc <- nlp('Apple is looking at buying U.K. startup for $1 billion')
+
+for (i in 10:15){
+  print(i)
+}
+```
+Using `spacyr` instead of python's `spacy` inside of `reticulate`.
+```{r}
+txt <- c(d1 = "Sleeveless shirts, blouses, and dresses are acceptable as long as the armholes have finished edges and do not expose the torso.",
+         d2 = "Holes in jeans or pants will be permitted only below mid-thigh length. Holes that are ruled potentially disruptive by the principal will not be permitted.")
+
+# process documents and obtain a data.table
+parsedtxt <- spacy_parse(txt)
+parsedtxt
+```
+```{r}
+parsedtxt <- spacy_parse(txt, dependency = TRUE, nounphrase = TRUE)
+```
+
+
+Trying with `udpipe` R package
+
+```{r}
+txt <- c(d1 = "Sleeveless shirts, blouses, and dresses are acceptable as long as the armholes have finished edges and do not expose the torso. ",
+         d2 = "tube tops, tank tops, and halter tops are not allowed")
+parsedtxt <- udpipe(txt, object = udEnglish)
+
+parsedtxt$phrase_tag <- as_phrasemachine(parsedtxt$upos, type = "upos")
+
+stats <- keywords_phrases(x = parsedtxt$xpos, term = tolower(parsedtxt$token), 
+                          pattern = "((JJ.|NN.)*(NN.*))", 
+                          is_regex = TRUE, detailed = FALSE)
+```
+
+Since I am trying to solve a very specific problem, I may need to analyze this text in a specific way. 
+```{r}
+parsedtxtAnalyzed <- parsedtxt %>%
+  group_by(doc_id, paragraph_id, sentence_id) %>% 
+  mutate(nextToken = lead(token, n = 2)) %>% 
+  mutate(adjCombo = case_when(
+    
+  ))
+```
+

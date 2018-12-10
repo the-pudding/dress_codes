@@ -1,0 +1,8 @@
+"0","bannedRace <- banned %>% "
+"0","  group_by(School.Name) %>% "
+"0","  count(race) %>%"
+"0","  replace_na(list(race = ""n"")) %>% "
+"0","  spread(race, nn) %>% "
+"0","  replace_na(list(n = 0, y = 0)) %>% "
+"0","  mutate(pRac = (y / (y+n)) * 100)"
+"0","ggplot(bannedRace, aes(x = pRac)) + geom_histogram(stat = ""bin"")"

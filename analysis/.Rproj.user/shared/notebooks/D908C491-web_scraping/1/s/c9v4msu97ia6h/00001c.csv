@@ -1,0 +1,20 @@
+"0","handbookFull <- schoolData %>% 
+  inner_join(searchMatches, by = c(""schoolName"", ""stateAbb"")) %>% 
+  filter(matches != ""form "") %>% 
+  distinct(schoolName, stateAbb, .keep_all = TRUE) %>% 
+  mutate_at(vars(cleanVar), .funs = funs(gsub(""=0"", ""0"", ., fixed = TRUE))) %>% 
+  mutate_at(vars(cleanVar), .funs = funs(gsub(""-"", NA_character_, trimws(.), fixed = TRUE))) %>%   mutate_at(vars(cleanVar), .funs = funs(as.numeric(.))) %>% 
+  mutate(pWhite = round((raceWhite/totalRace) * 100, 0),
+         pBlack = round((raceBlack/totalRace) * 100, 0),
+         pHispanic = round((raceHispanic/totalRace) * 100, 0))
+"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"
+"2","NAs introduced by coercion"

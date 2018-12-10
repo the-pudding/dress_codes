@@ -1,0 +1,7 @@
+"0","length <- responses %>% "
+"0","  select(c(""School.Name"", ""School.State.Abbreviation""), contains(""length.limit"")) %>% "
+"0","  rename(limits = !!names(.[3]), length = !!names(.[4])) %>% "
+"0","  filter(limits != """") %>% "
+"0","  # Separate comma delimited list of items"
+"0","  separate_rows(limits, sep = "","") %>% "
+"0","  mutate(limits = trimws(limits)) "

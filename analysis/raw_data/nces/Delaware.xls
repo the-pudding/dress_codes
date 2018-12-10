@@ -1,0 +1,788 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+
+<!-- ENCRYPT:D1BA6401::29:A6:42:2:83:23:0:1:E8:DB:97:59:CC:79:DC:24:C0:1C:67:93:3:99:71:EA:58:AF:52:FC:CB:BA:52:9D:B5:1E:17:4:EB:A7:67:A2:54:29:5E:A9:58:2C:62:F7:58:7:DD:2F:F4:1B:97:7E:76:7B:AE:C1:3F:FF:80:C7:49:42:D9:32:FC:B:A2:A3:CA:9A:AF:8B:7C:13:57:3F:A3:F0:D0:D6:A1:DC:96:1B:18:A7:75:58:F:96:E9:5B:1E:E9:4A:39:B6:16:89:E4:67:DF:44:1E:AD:32:4C:10:5B:30:70:4B:F1:92:94:C3:AA:56:30:CD:F2:0:F5:4E:D1:75:38:58:D0:2A:E9:DB:C7:CF:A6:42:E5:EC:8F:38:22:4E:BE:E2:5D:6D:BA:B8:8D:4F:FE:E7:9D:BA:74:8:36:B2:57:FF:A2:4D:7:D3:73:A9:78:91:84:68:2C:E5:B4:FB:5E:CA:1B:44:57:F:8:41:4E:8:25:E3:20:91:6B:82:80:FE:35:51:FD:2B:71:15:EA:95:D3:6C:A6:6:D3:DF:48:7A:78:BC:67:EB:74:99:A4:C2:C3:46:80:20:D6:45:54:A:2C:1E:48:8:19:FF:E4:D0:F5:B9:2F:72:5B:A9:54:F5:54:CA:7F:E1:5D:B3:0:F5:C8:A9:C2:17:F8:F5:45:2D:5A:3E:CE:3D:E8:68:D0:DF:39:9E:2A:A:E6:CC:C7:A2:23:4F:14:D:15:50:C:81:79:92:6B:31:7:2C:B4:F3:C1:3E:E4:78:E0:BE:4D:FD:21:62:C6:D1:71:C:E:C6:4D:2:3F:62:CB:5E:5B:6D:99:8E:D1:55:9C:B1:6:F:2C:CF:A:D0:A8:15:2E:7:4C:9C:E:30:8:69:8B:65:92:B4:4:9B:97:98:B5:ED:65:FC:82:FF:F9:BB:E7:28:C8:16:FA:2D:82:97:70:9A:46:2:67:9:B2:65:7E:C:55:B5:F2:D2:40:C7:2A:E2:6B:37:7A:2C:D2:54:58:AF:93:F8:57:72:5C:E1:7A:6A:2A:CA:29:EE:22:89:91:AF:F5:7:F3:3D:8:EF:EB:60:C8:B0:9E:4B:38:CE:EE:6B:A7:D9:A:21:78:1B:E6:90:F2:38:16:42:53:E3:A1:BC:1D:98:5A:52:EE:1F:A7:25:F1:BD:F7:CD:47:59:2:D3:B6:E5:7:2E:1A:85:AC:FB:AF:4A:10:D0:BE:B8:6F:A8:86:1F:8E:E6:A1:CF:57:A:34:29:BF:2F:C1:30:26:F4:E7:3B:5E:A5:EC:A2:3C:20:2E:2F:D:7A:2A:EA:F6:E0:60:E2:F2:22:76:AA:38:8A:A1:5E:3F:1A:93:76:C6:36:6A:4:C3:72:F9:6C:9B:63:A1:C:17:E:16:B1:E5:83:27:EA:E1:78:3C:53:E3:B9:EB:BE:8F:46:72:AB:80:91:46:E6:87:EA:2A:B6:73:24:CA:6F:57:FC:F6:81:9:7A:2C:59:D6:B1:6E:83:EF:22:F2:AC:E7:F9:AC:78:81:9A:9:FD:67:CA:EE:FE:8A:B7:DA:D3:BD:B6:8A:2E:8A:D2:28:4B:99:88:89:50:CA:94:30:28:17:D6:E4:BA:BD:40:79:CD:7:0:FC:66:F3:89:56:E3:D9:B8:27:85:46:51:E9:42:D:9F:E2:49:BD:3D:CB:CD:68:32:D5:33:5C:70:5C:BB:C9:8C:BA:11:D0:9B:DA:28:10:25:7B:18:E6:38:8B:9B:3D:B2:C2:99:AB:A6:A5:20:3D:E8:26:24:69:92:98:CA:96:D0:D2:C0:3D:35:8B:B1:5:29:FA:2A:B0:79:A8:7B:1C:4E:3C:5:14:20:E1:CA:9E:F:C:FB:67:48:EF:6:82:94:DB:5:70:3E:42:71:91:B8:81:F1:1D:9E:B0:5A:CF:44:63:BE:A4:93:70:7D:91:E9:4A:EB:76:87:57:90:E1:C2:74:84:B1:CE:A5:5E:F:8D:CC:2E:54:F2:5E:5A:5E:98:17:32:A0:23:94:B9:8F:77:4:FC:D6:4B:75:9D:4A:70:C9:82:E2:CD:EA:80:F3:D4:AA:2:50:21:AB:4A:B5:5D:C6:37:21:C2:B9:2D:81:C9:6D:1E:BD:DF:8B:DC:DE:F7:47:79:4E:3B:54:D2:6B:C7:6C:B8:9C:B:4E:38:F4:3D:2A:97:FF:F4:B:C6:63:B:93:C3:85:71:61:A1:AC:BC:72:B4:7C:A9:51:25:3:62:90:36:9F:93:C7:40:DC:95:69:51:BD:F6:48:1B:CC:52:4D:1C:42:9E:D3:C0:8D:2C:B6:A3:AB:5B:CC:FD:86:6A:B:D:C7:5A:6E:D2:1D:3F:DC:B7:94:A9:18:B2:AD:1E:DF:44:2E:E1:F4:F3:4A:AC:7:22:26:83:3B:7B:78:F3:1F:5C:3:9D:E5:87:8D:E3:9F:5C:48:A5:6B:88:9D:B7:AA:19:F:FC:85:F9:DB:7B:3F:C0:71:77:63:FF:EF:A:EB:6E:AE:D:CC:49:1C:26:5F:E9:37:17:82:0:53:92:1A:94:E0:CC:96:CE:80:86:AB:BA:5C:52:C0:E9:13:D6:C6:A2:77:66:75:DF:7F:BD:9E:FB:67:7A:7F:35:9A:AF:84:56:40:65:28:2B:32:93:F2:BF:69:67:71:93:B:28:F7:1B:24:B7:3F:39:20:B2:28:65:8D:CE:3E:B4:29:FA:CE:FD:E0:E1:D5:D7:84:9F:9:F3:E5:85:2C:A5:60:67:71:6:9A:71:1D:6F:EE:CB:CD:56:9A:FF:3A:6F:1B:60:9A:76:84:42:A4:33:EA:74:79:BC:AC:CA:B4:81:A3:F6:D0:AA:52:C9:E9:56:59:90:91:D1:B6:52:E3:5C:B9:8F:BD:E2:47:19:54:61:7:B6:27:B1:76:1A:69:51:84:F2:B9:FA:CB:57:D9:45:50:B5:10:EC:A6:23:75:2E:22:8A:CC:BF:E0:5A:11:4D:EA:1A:CE:A:B3:B4:1E:8F:9E:E7:2C:A9:68:7C:B6:DA:AA:95:30:E:F4:65:F0:E7:39:BC:ED:36:5C:73:DB:FF:22:7B:41:39:FA:9A:23:96:3D:A3:70:BD:55:94:1F:D7:26:76:B9:E4:78:4F:16:A0:93:0:7C:6C:28:18:DC:1E:2F:49:3C:B8:13:F5:17:14:C:26:28:9D:8F:9E:4D:DF:10:C0:5:9E:83:28:11:6F:64:26:DD:2E:6E:74:78:AC:B5:7A:C9:50:A8:9D:27:C4:F4:4D:3:3C:C2:94:85:78:6:A9:E5:BF:13:71:43:DA:75:D5:E9:40:D7:E8:E:C:DB:7:66:4D:2C:A2:C0:8F:59:7A:2C:85:FC:A8:38:63:9C:3B:A9:CC:6C:EF:4E:F6:7E:67:B2:9E:34:97:63:C3:DB:5A:A5:F5:E9:60:C6:C7:93:7C:B:DF:C5:A3:9:DA:29:9:15:94:91:E7:83:86:CC:EE:D4:FD:C1:D9:43:3:F9:44:81:E9:59:6C:41:C0:CC:C1:76:A0:3:8C:4:96:EF:A2:E9:84:12:1E:1B:F7:A3:C4:D6:C2:EB:9C:18:3C:35:88:82:E0:A9:F5:9E:9C:61:B4:29:1A:D9:EC:2:8A:11:CD:7B:FD:B9:73:92:64:ED:F:9F:92:3C:D0:D7:55:A9:5D:2:F5:64:3A:6:79:3D:D4:48:28:AA:55:50:12:B5:BF:9F:F8:A6:F5:65::54405C45:ENCRYPT -->
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Excel.Sheet>
+
+<title>National Center for Education Statistics</title>
+
+<style>
+<!--
+.txtcol
+	{
+	mso-number-format:"\@";
+	font-size:8pt;
+	mso-width-source:auto;
+	}
+.numcol
+	{
+	mso-number-format:"general";
+	text-align:right;
+	font-size:8pt;
+	mso-width-source:auto;
+	}
+.headrow
+	{
+	border-bottom-style: solid;
+	border-top-style: solid;
+	border-bottom-color: #000000;
+	border-top-color: #000000;
+	font-size:8pt;
+	mso-width-source:auto;
+	}
+-->
+</style>
+
+</head>
+<body>
+
+<table border=1 bordercolor=#bbbbbb cellpadding=0 cellspacing=0>
+<tr>
+  <td height=31 colspan=6 valign=bottom style="border-style: solid; border-color: #FFFFFF"><font size=5 face=impact><b>National Center for Education Statistics</font></b></td>
+</tr>
+<tr>
+  <td height=25 colspan=6 valign=bottom style="border-style: solid; border-color: #FFFFFF"><font size=3><b>CCD public school data 2015-2016, 2017-2018 school years</b></font></td>
+</tr>
+<tr>
+  <td height=30 colspan=6 valign=top style="border-style: solid; border-color: #FFFFFF">The file contains (<B>25</B>) records based on your search.</td>
+</tr>
+<tr>
+  <td height=48 colspan=6 valign=top style="border-style: solid; border-color: #FFFFFF"><font size=1><strong>NOTES:</strong><ul><li class='noteAsterisk'>* denotes a column with data from 2015-2016</li><li>[ † ] indicates that the data are not applicable. For example, the enrollment and staff characteristics for schools that opened in the 2017-2018 school year will not be available until the full 2017-2018 file is released.</li><li>[ – ] indicates that the data are missing.</li><li>[ ‡ ] indicates that the data do not meet NCES data quality standards.</li><li>The directory information on school name, address, and phone number are preliminary data from initial submissions of school level data for 2017-2018.</li><li>Data provided on student membership and staffing are from the official school level data for 2015-2016.</li></ul><strong>SEARCH CRITERIA:</strong> State: "Delaware" - School Description: "Regular, Special Education, Vocational, Other/Alternative" - Low Grade: "09" - High Grade: "12"</font></td>
+</tr>
+<tr>
+  <td height=30 colspan=6 valign=top style="border-style: solid; border-color: #FFFFFF"><font size=1>NCES is not responsible for the manner in which this data is presented. This data is provided as an extra service to the user. To download full CCD datasets, please go to the CCD home page. <strong>http://nces.ed.gov/ccd</strong></font></td>
+</tr>
+<TR height=17>
+  <TD class="headrow"><b>NCES School ID</b></TD>
+  <TD class="headrow"><b>State School ID</b></TD>
+  <TD class="headrow"><b>NCES District ID</b></TD>
+  <TD class="headrow"><b>State District ID</b></TD>
+  <TD class="headrow"><b>Low Grade*</b></TD>
+  <TD class="headrow"><b>High Grade*</b></TD>
+  <TD class="headrow"><b>School Name</b></TD>
+  <TD class="headrow"><b>District</b></TD>
+  <TD class="headrow"><b>County Name*</b></TD>
+  <TD class="headrow"><b>Street Address</b></TD>
+  <TD class="headrow"><b>City</b></TD>
+  <TD class="headrow"><b>State</b></TD>
+  <TD class="headrow"><b>ZIP</b></TD>
+  <TD class="headrow"><b>ZIP 4-digit</b></TD>
+  <TD class="headrow"><b>Phone</b></TD>
+  <TD class="headrow"><b>Locale Code*</b></TD>
+  <TD class="headrow"><b>Locale*</b></TD>
+  <TD class="headrow"><b>Charter</b></TD>
+  <TD class="headrow"><b>Magnet*</b></TD>
+  <TD class="headrow"><b>Title I School*</b></TD>
+  <TD class="headrow"><b>Title 1 School Wide*</b></TD>
+  <TD class="headrow"><b>Students*</b></TD>
+  <TD class="headrow"><b>Teachers*</b></TD>
+  <TD class="headrow"><b>Student Teacher Ratio*</b></TD>
+  <TD class="headrow"><b>Free Lunch*</b></TD>
+  <TD class="headrow"><b>Reduced Lunch*</b></TD>
+</TR>
+
+<TR height=17>
+  <TD class="txtcol">100008000225</TD>
+  <TD class="txtcol">DE-29-24</TD>
+  <TD class="txtcol">1000080</TD>
+  <TD class="txtcol">DE-29</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Appoquinimink High School</TD>
+  <TD class="txtcol">Appoquinimink School District</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">1080 Bunker Hill Road</TD>
+  <TD class="txtcol">Middletown</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19709</TD>
+  <TD class="txtcol"></TD>
+  <TD class="txtcol">(302)449-3840</TD>
+  <TD class="txtcol">41</TD>
+  <TD class="txtcol">Rural: Fringe</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">1589.00000</TD>
+  <TD class="txtcol">91.00000</TD>
+  <TD class="txtcol">17.5000000</TD>
+  <TD class="txtcol">172.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100124000242</TD>
+  <TD class="txtcol">DE-31-190</TD>
+  <TD class="txtcol">1001240</TD>
+  <TD class="txtcol">DE-31</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Brandywine High School</TD>
+  <TD class="txtcol">Brandywine School District</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">1400 Foulk Road</TD>
+  <TD class="txtcol">Wilmington</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19803</TD>
+  <TD class="txtcol">2794</TD>
+  <TD class="txtcol">(302)479-1600</TD>
+  <TD class="txtcol">21</TD>
+  <TD class="txtcol">Suburb: Large</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">824.00000</TD>
+  <TD class="txtcol">64.00000</TD>
+  <TD class="txtcol">12.9000000</TD>
+  <TD class="txtcol">254.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100018000040</TD>
+  <TD class="txtcol">DE-10-626</TD>
+  <TD class="txtcol">1000180</TD>
+  <TD class="txtcol">DE-10</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Caesar Rodney High School</TD>
+  <TD class="txtcol">Caesar Rodney School District</TD>
+  <TD class="txtcol">Kent County</TD>
+  <TD class="txtcol">239 Old North Road</TD>
+  <TD class="txtcol">Camden</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19934</TD>
+  <TD class="txtcol">1248</TD>
+  <TD class="txtcol">(302)697-2161</TD>
+  <TD class="txtcol">22</TD>
+  <TD class="txtcol">Suburb: Midsize</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">2003.00000</TD>
+  <TD class="txtcol">134.00000</TD>
+  <TD class="txtcol">14.9000000</TD>
+  <TD class="txtcol">498.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100000400012</TD>
+  <TD class="txtcol">DE-70-295</TD>
+  <TD class="txtcol">1000004</TD>
+  <TD class="txtcol">DE-70</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Charter School of Wilmington</TD>
+  <TD class="txtcol">Charter School of Wilmington</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">100 North duPont Road</TD>
+  <TD class="txtcol">Wilmington</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19807</TD>
+  <TD class="txtcol">3199</TD>
+  <TD class="txtcol">(302)651-2727</TD>
+  <TD class="txtcol">13</TD>
+  <TD class="txtcol">City: Small</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">972.00000</TD>
+  <TD class="txtcol">49.00000</TD>
+  <TD class="txtcol">19.8000000</TD>
+  <TD class="txtcol">36.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100020000240</TD>
+  <TD class="txtcol">DE-33-390</TD>
+  <TD class="txtcol">1000200</TD>
+  <TD class="txtcol">DE-33</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Christiana High School</TD>
+  <TD class="txtcol">Christina School District</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">190 Salem Church Road</TD>
+  <TD class="txtcol">Newark</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19713</TD>
+  <TD class="txtcol">2998</TD>
+  <TD class="txtcol">(302)631-2400</TD>
+  <TD class="txtcol">21</TD>
+  <TD class="txtcol">Suburb: Large</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">835.00000</TD>
+  <TD class="txtcol">53.00000</TD>
+  <TD class="txtcol">15.8000000</TD>
+  <TD class="txtcol">309.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100124000247</TD>
+  <TD class="txtcol">DE-31-194</TD>
+  <TD class="txtcol">1001240</TD>
+  <TD class="txtcol">DE-31</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Concord High School</TD>
+  <TD class="txtcol">Brandywine School District</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">2501 Ebright Road</TD>
+  <TD class="txtcol">Wilmington</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19810</TD>
+  <TD class="txtcol">1198</TD>
+  <TD class="txtcol">(302)475-3951</TD>
+  <TD class="txtcol">21</TD>
+  <TD class="txtcol">Suburb: Large</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">1126.00000</TD>
+  <TD class="txtcol">70.00000</TD>
+  <TD class="txtcol">16.1000000</TD>
+  <TD class="txtcol">206.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100004900341</TD>
+  <TD class="txtcol">DE-68-567</TD>
+  <TD class="txtcol">1000049</TD>
+  <TD class="txtcol">DE-68</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Delaware Academy of Public Safety and Security</TD>
+  <TD class="txtcol">Delaware Academy of Public Safety and Security</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">801 North DuPont Highway</TD>
+  <TD class="txtcol">New Castle</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19720</TD>
+  <TD class="txtcol"></TD>
+  <TD class="txtcol">(302)322-6050</TD>
+  <TD class="txtcol">21</TD>
+  <TD class="txtcol">Suburb: Large</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">303.00000</TD>
+  <TD class="txtcol">27.00000</TD>
+  <TD class="txtcol">11.2000000</TD>
+  <TD class="txtcol">98.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100005600369</TD>
+  <TD class="txtcol">DE-9609-4065</TD>
+  <TD class="txtcol">1000056</TD>
+  <TD class="txtcol">DE-9609</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Delaware Design-Lab High School</TD>
+  <TD class="txtcol">Delaware Design-Lab High School</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">179 Stanton Christiana Road</TD>
+  <TD class="txtcol">Newark</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19702</TD>
+  <TD class="txtcol"></TD>
+  <TD class="txtcol">(302)660-1190</TD>
+  <TD class="txtcol">13</TD>
+  <TD class="txtcol">City: Small</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">233.00000</TD>
+  <TD class="txtcol">12.00000</TD>
+  <TD class="txtcol">19.4000000</TD>
+  <TD class="txtcol">89.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100001600143</TD>
+  <TD class="txtcol">DE-79-578</TD>
+  <TD class="txtcol">1000016</TD>
+  <TD class="txtcol">DE-79</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Delaware Military Academy</TD>
+  <TD class="txtcol">Delaware Military Academy</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">112 Middleboro Road</TD>
+  <TD class="txtcol">Wilmington</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19804</TD>
+  <TD class="txtcol"></TD>
+  <TD class="txtcol">(302)998-0745</TD>
+  <TD class="txtcol">21</TD>
+  <TD class="txtcol">Suburb: Large</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">564.00000</TD>
+  <TD class="txtcol">25.00000</TD>
+  <TD class="txtcol">22.6000000</TD>
+  <TD class="txtcol">38.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100027000080</TD>
+  <TD class="txtcol">DE-37-730</TD>
+  <TD class="txtcol">1000270</TD>
+  <TD class="txtcol">DE-37</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Delmar High School</TD>
+  <TD class="txtcol">Delmar School District</TD>
+  <TD class="txtcol">Sussex County</TD>
+  <TD class="txtcol">200 North Eighth Street</TD>
+  <TD class="txtcol">Delmar</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19940</TD>
+  <TD class="txtcol">1399</TD>
+  <TD class="txtcol">(302)846-9544</TD>
+  <TD class="txtcol">23</TD>
+  <TD class="txtcol">Suburb: Small</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">649.00000</TD>
+  <TD class="txtcol">38.00000</TD>
+  <TD class="txtcol">17.1000000</TD>
+  <TD class="txtcol">94.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100019000050</TD>
+  <TD class="txtcol">DE-13-648</TD>
+  <TD class="txtcol">1000190</TD>
+  <TD class="txtcol">DE-13</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Dover High School</TD>
+  <TD class="txtcol">Capital School District</TD>
+  <TD class="txtcol">Kent County</TD>
+  <TD class="txtcol">One Dover High Drive</TD>
+  <TD class="txtcol">Dover</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19904</TD>
+  <TD class="txtcol"></TD>
+  <TD class="txtcol">(302)241-2400</TD>
+  <TD class="txtcol">13</TD>
+  <TD class="txtcol">City: Small</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">1800.00000</TD>
+  <TD class="txtcol">114.00000</TD>
+  <TD class="txtcol">15.8000000</TD>
+  <TD class="txtcol">765.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100130000276</TD>
+  <TD class="txtcol">DE-32-292</TD>
+  <TD class="txtcol">1001300</TD>
+  <TD class="txtcol">DE-32</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">duPont (Alexis I.) High School</TD>
+  <TD class="txtcol">Red Clay Consolidated School District</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">50 Hillside Road</TD>
+  <TD class="txtcol">Wilmington</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19807</TD>
+  <TD class="txtcol">2297</TD>
+  <TD class="txtcol">(302)651-2626</TD>
+  <TD class="txtcol">21</TD>
+  <TD class="txtcol">Suburb: Large</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">1093.00000</TD>
+  <TD class="txtcol">63.00000</TD>
+  <TD class="txtcol">17.3000000</TD>
+  <TD class="txtcol">401.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100005500363</TD>
+  <TD class="txtcol">DE-9604-4040</TD>
+  <TD class="txtcol">1000055</TD>
+  <TD class="txtcol">DE-9604</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Early College High School at Delaware State University</TD>
+  <TD class="txtcol">Early College High School at Delaware State University</TD>
+  <TD class="txtcol">Kent County</TD>
+  <TD class="txtcol">1570 North DuPont Highway</TD>
+  <TD class="txtcol">Dover</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19901</TD>
+  <TD class="txtcol"></TD>
+  <TD class="txtcol">(302)678-3247</TD>
+  <TD class="txtcol">13</TD>
+  <TD class="txtcol">City: Small</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">209.00000</TD>
+  <TD class="txtcol">11.00000</TD>
+  <TD class="txtcol">19.0000000</TD>
+  <TD class="txtcol">69.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100020000239</TD>
+  <TD class="txtcol">DE-33-392</TD>
+  <TD class="txtcol">1000200</TD>
+  <TD class="txtcol">DE-33</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Glasgow High School</TD>
+  <TD class="txtcol">Christina School District</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">1901 South College Avenue</TD>
+  <TD class="txtcol">Newark</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19702</TD>
+  <TD class="txtcol">2395</TD>
+  <TD class="txtcol">(302)631-5600</TD>
+  <TD class="txtcol">21</TD>
+  <TD class="txtcol">Suburb: Large</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">864.00000</TD>
+  <TD class="txtcol">49.00000</TD>
+  <TD class="txtcol">17.6000000</TD>
+  <TD class="txtcol">328.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100081000100</TD>
+  <TD class="txtcol">DE-16-756</TD>
+  <TD class="txtcol">1000810</TD>
+  <TD class="txtcol">DE-16</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Laurel Senior High School</TD>
+  <TD class="txtcol">Laurel School District</TD>
+  <TD class="txtcol">Sussex County</TD>
+  <TD class="txtcol">1133 South Central Avenue</TD>
+  <TD class="txtcol">Laurel</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19956</TD>
+  <TD class="txtcol">1491</TD>
+  <TD class="txtcol">(302)875-6120</TD>
+  <TD class="txtcol">41</TD>
+  <TD class="txtcol">Rural: Fringe</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">481.00000</TD>
+  <TD class="txtcol">37.00000</TD>
+  <TD class="txtcol">13.0000000</TD>
+  <TD class="txtcol">228.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100108000111</TD>
+  <TD class="txtcol">DE-18-678</TD>
+  <TD class="txtcol">1001080</TD>
+  <TD class="txtcol">DE-18</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Milford Senior High School</TD>
+  <TD class="txtcol">Milford School District</TD>
+  <TD class="txtcol">Kent County</TD>
+  <TD class="txtcol">1019 North Walnut Street</TD>
+  <TD class="txtcol">Milford</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19963</TD>
+  <TD class="txtcol">1298</TD>
+  <TD class="txtcol">(302)422-1610</TD>
+  <TD class="txtcol">31</TD>
+  <TD class="txtcol">Town: Fringe</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">1008.00000</TD>
+  <TD class="txtcol">65.00000</TD>
+  <TD class="txtcol">15.5000000</TD>
+  <TD class="txtcol">326.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100124000246</TD>
+  <TD class="txtcol">DE-31-196</TD>
+  <TD class="txtcol">1001240</TD>
+  <TD class="txtcol">DE-31</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Mount Pleasant High School</TD>
+  <TD class="txtcol">Brandywine School District</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">5201 Washington Street Extensi</TD>
+  <TD class="txtcol">Wilmington</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19809</TD>
+  <TD class="txtcol">2198</TD>
+  <TD class="txtcol">(302)762-7125</TD>
+  <TD class="txtcol">21</TD>
+  <TD class="txtcol">Suburb: Large</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">1108.00000</TD>
+  <TD class="txtcol">76.00000</TD>
+  <TD class="txtcol">14.6000000</TD>
+  <TD class="txtcol">280.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100020000238</TD>
+  <TD class="txtcol">DE-33-394</TD>
+  <TD class="txtcol">1000200</TD>
+  <TD class="txtcol">DE-33</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Newark High School</TD>
+  <TD class="txtcol">Christina School District</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">750 East Delaware Avenue</TD>
+  <TD class="txtcol">Newark</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19711</TD>
+  <TD class="txtcol">7188</TD>
+  <TD class="txtcol">(302)631-4700</TD>
+  <TD class="txtcol">21</TD>
+  <TD class="txtcol">Suburb: Large</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">1317.00000</TD>
+  <TD class="txtcol">78.00000</TD>
+  <TD class="txtcol">16.9000000</TD>
+  <TD class="txtcol">416.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100023000209</TD>
+  <TD class="txtcol">DE-34-490</TD>
+  <TD class="txtcol">1000230</TD>
+  <TD class="txtcol">DE-34</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Penn (William) High School</TD>
+  <TD class="txtcol">Colonial School District</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">713 East Basin Road</TD>
+  <TD class="txtcol">New Castle</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19720</TD>
+  <TD class="txtcol">4295</TD>
+  <TD class="txtcol">(302)323-2800</TD>
+  <TD class="txtcol">21</TD>
+  <TD class="txtcol">Suburb: Large</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">2048.00000</TD>
+  <TD class="txtcol">126.00000</TD>
+  <TD class="txtcol">16.3000000</TD>
+  <TD class="txtcol">701.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100075000092</TD>
+  <TD class="txtcol">DE-39-652</TD>
+  <TD class="txtcol">1000750</TD>
+  <TD class="txtcol">DE-39</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">POLYTECH High School</TD>
+  <TD class="txtcol">POLYTECH School District</TD>
+  <TD class="txtcol">Kent County</TD>
+  <TD class="txtcol">PO Box 97</TD>
+  <TD class="txtcol">Woodside</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19980</TD>
+  <TD class="txtcol">0097</TD>
+  <TD class="txtcol">(302)697-3255</TD>
+  <TD class="txtcol">41</TD>
+  <TD class="txtcol">Rural: Fringe</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">1194.00000</TD>
+  <TD class="txtcol">88.00000</TD>
+  <TD class="txtcol">13.6000000</TD>
+  <TD class="txtcol">225.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100162000299</TD>
+  <TD class="txtcol">DE-24-688</TD>
+  <TD class="txtcol">1001620</TD>
+  <TD class="txtcol">DE-24</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Smyrna High School</TD>
+  <TD class="txtcol">Smyrna School District</TD>
+  <TD class="txtcol">Kent County</TD>
+  <TD class="txtcol">500 Duck Creek Parkway</TD>
+  <TD class="txtcol">Smyrna</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19977</TD>
+  <TD class="txtcol">1091</TD>
+  <TD class="txtcol">(302)653-8581</TD>
+  <TD class="txtcol">41</TD>
+  <TD class="txtcol">Rural: Fringe</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">1405.00000</TD>
+  <TD class="txtcol">95.00000</TD>
+  <TD class="txtcol">14.8000000</TD>
+  <TD class="txtcol">300.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100128000181</TD>
+  <TD class="txtcol">DE-38-44</TD>
+  <TD class="txtcol">1001280</TD>
+  <TD class="txtcol">DE-38</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">St. Georges Technical High School</TD>
+  <TD class="txtcol">New Castle County Vocational-Technical School District</TD>
+  <TD class="txtcol">New Castle County</TD>
+  <TD class="txtcol">555 Hyetts Corner Rd.</TD>
+  <TD class="txtcol">Middletown</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19709</TD>
+  <TD class="txtcol"></TD>
+  <TD class="txtcol">(302)449-3360</TD>
+  <TD class="txtcol">41</TD>
+  <TD class="txtcol">Rural: Fringe</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">&dagger;</TD>
+  <TD class="txtcol">1069.00000</TD>
+  <TD class="txtcol">76.00000</TD>
+  <TD class="txtcol">14.1000000</TD>
+  <TD class="txtcol">138.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100068000090</TD>
+  <TD class="txtcol">DE-36-748</TD>
+  <TD class="txtcol">1000680</TD>
+  <TD class="txtcol">DE-36</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Sussex Central High School</TD>
+  <TD class="txtcol">Indian River School District</TD>
+  <TD class="txtcol">Sussex County</TD>
+  <TD class="txtcol">26026 Patriots Way</TD>
+  <TD class="txtcol">Georgetown</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19947</TD>
+  <TD class="txtcol">2399</TD>
+  <TD class="txtcol">(302)934-3166</TD>
+  <TD class="txtcol">41</TD>
+  <TD class="txtcol">Rural: Fringe</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">1450.00000</TD>
+  <TD class="txtcol">97.00000</TD>
+  <TD class="txtcol">14.9000000</TD>
+  <TD class="txtcol">512.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100168000170</TD>
+  <TD class="txtcol">DE-40-770</TD>
+  <TD class="txtcol">1001680</TD>
+  <TD class="txtcol">DE-40</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Sussex Technical High School</TD>
+  <TD class="txtcol">Sussex Technical School District</TD>
+  <TD class="txtcol">Sussex County</TD>
+  <TD class="txtcol">17099 County Seat Highway</TD>
+  <TD class="txtcol">Georgetown</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19947</TD>
+  <TD class="txtcol">0351</TD>
+  <TD class="txtcol">(302)856-0961</TD>
+  <TD class="txtcol">42</TD>
+  <TD class="txtcol">Rural: Distant</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">1444.00000</TD>
+  <TD class="txtcol">92.00000</TD>
+  <TD class="txtcol">15.7000000</TD>
+  <TD class="txtcol">274.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+<TR height=17>
+  <TD class="txtcol">100185000194</TD>
+  <TD class="txtcol">DE-35-780</TD>
+  <TD class="txtcol">1001850</TD>
+  <TD class="txtcol">DE-35</TD>
+  <TD class="txtcol">09</TD>
+  <TD class="txtcol">12</TD>
+  <TD class="txtcol">Woodbridge High School</TD>
+  <TD class="txtcol">Woodbridge School District</TD>
+  <TD class="txtcol">Sussex County</TD>
+  <TD class="txtcol">14712 Woodbridge Road</TD>
+  <TD class="txtcol">Greenwood</TD>
+  <TD class="txtcol">DE</TD>
+  <TD class="txtcol">19950</TD>
+  <TD class="txtcol"></TD>
+  <TD class="txtcol">(302)232-3333</TD>
+  <TD class="txtcol">41</TD>
+  <TD class="txtcol">Rural: Fringe</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">No</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">Yes</TD>
+  <TD class="txtcol">656.00000</TD>
+  <TD class="txtcol">45.00000</TD>
+  <TD class="txtcol">14.6000000</TD>
+  <TD class="txtcol">278.00000</TD>
+  <TD class="txtcol">0.00000</TD>
+</TR>
+</TABLE></BODY></HTML>

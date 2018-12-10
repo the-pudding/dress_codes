@@ -1,0 +1,11 @@
+"0","banned <- left_join(longDressCode, bannedAnno)"
+"2","Joining, by = c(""item"", ""type"")
+"
+"0","bannedGender <- banned %>% "
+"0","  group_by(School.Name) %>% "
+"0","  count(gender) %>% "
+"0","  filter(!is.na(gender)) %>% "
+"0","  spread(gender, nn) %>% "
+"0","  replace_na(list(m = 0, f = 0)) %>% "
+"0","  mutate(pFem = (f / (m+f)) * 100)"
+"0","ggplot(bannedGender, aes(x = pFem)) + geom_histogram(stat = ""bin"")"

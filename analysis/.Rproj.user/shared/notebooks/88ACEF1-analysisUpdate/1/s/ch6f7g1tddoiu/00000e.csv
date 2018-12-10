@@ -1,0 +1,9 @@
+"0","shuffledHandbooks <- read.csv(here::here(""processed_data"", ""shuffledHandbooks.csv""), stringsAsFactors = FALSE, header = TRUE) %>% "
+"0","  mutate(schoolName = trimws(schoolName),"
+"0","         stateAbb = trimws(stateAbb)) "
+"0","demo <- banned %>% "
+"0","  mutate(schoolName = trimws(School.Name),"
+"0","         stateAbb = trimws(School.State.Abbreviation)) %>% "
+"0","  left_join(shuffledHandbooks)"
+"2","Joining, by = c(""schoolName"", ""stateAbb"")
+"

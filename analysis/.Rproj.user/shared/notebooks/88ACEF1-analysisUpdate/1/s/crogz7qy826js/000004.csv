@@ -1,0 +1,3 @@
+"0","genDemo <- demo %>% "
+"0","  left_join(bannedGender, by = ""School.Name"")"
+"0","ggplot(genDemo, aes(reorder(School.State.Abbreviation, pFem), pFem)) + geom_point() + xlab(""state"") + ylab(""percentage of implicitly gender prohibited items"")"
