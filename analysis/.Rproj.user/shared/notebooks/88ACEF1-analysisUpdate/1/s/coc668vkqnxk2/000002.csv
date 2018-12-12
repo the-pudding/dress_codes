@@ -1,2 +1,3 @@
 "0","googledrive::drive_download(""bannedItems"", path = here::here(""raw_data"", ""collected"", ""bannedItems.csv""), type = ""csv"", overwrite = TRUE)"
 "0","bannedAnno <- read.csv(here::here(""raw_data"", ""collected"", ""bannedItems.csv""), stringsAsFactors = FALSE, header = TRUE, na.strings = c("""", "" ""))"
+"0","banned <- left_join(longDressCode, bannedAnno)"

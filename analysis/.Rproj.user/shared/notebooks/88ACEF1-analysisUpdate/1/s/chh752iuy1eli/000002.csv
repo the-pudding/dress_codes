@@ -9,6 +9,6 @@
 "0","# Return percentage"
 "0","nrow(schoolsStrap) / nrow(responses)"
 "1","[1]"
-"1"," 0.2766667"
+"1"," 0.2677419"
 "1","
 "

@@ -412,7 +412,7 @@ ggplot(rationale, aes(x = reorder(words, percent), y = percent)) + geom_bar(stat
 
 I need to create a list of items that have been prohibited so I can get a better sense of how many are targetted towards specific types of students. 
 
-```{r}
+```{r eval = FALSE}
 bannedItems <- longDressCode %>% 
   group_by(type, item) %>% 
   count(item, sort = TRUE)
@@ -635,13 +635,13 @@ bannedGender <- banned %>%
   replace_na(list(m = 0, f = 0)) %>% 
   mutate(pFem = (f / (m+f)) * 100)
 
-ggplot(bannedGender, aes(x = pFem)) + geom_histogram(stat = "bin")
+ggplot(bannedGender, aes(x = pFem)) + geom_histogram(stat = "bin", binwidth = 5)
 ```
 
 If we do look at the percentage of female gender-targetted items compared to all items, here is the distribution:
 
 ```{r echo = FALSE}
-bannedGender <- banned %>% 
+bannedGenderAll <- banned %>% 
   group_by(School.Name) %>% 
   count(gender) %>% 
   spread(gender, nn) %>% 
@@ -649,7 +649,7 @@ bannedGender <- banned %>%
   replace_na(list(m = 0, f = 0)) %>% 
   mutate(pFem = (f / (m+f+none)) * 100)
 
-ggplot(bannedGender, aes(x = pFem)) + geom_histogram(stat = "bin")
+ggplot(bannedGenderAll, aes(x = pFem)) + geom_histogram(stat = "bin", binwidth = 5)
 ```
 And male gender-targeted:
 
@@ -680,6 +680,64 @@ bannedRace <- banned %>%
 
 ggplot(bannedRace, aes(x = pRac)) + geom_histogram(stat = "bin")
 
+```
+
+
+```{r}
+histogramData <- bannedGenderAll %>% 
+  select(c(School.Name, pFem)) %>% 
+  left_join(bannedRace) %>% 
+  select(-c(n, y)) %>% 
+  mutate(femCat = case_when(
+    pFem <= 5 ~ 0,
+    between(pFem, 5, 10) ~ 1,
+    between(pFem, 10, 15) ~ 2,
+    between(pFem, 15, 20) ~ 3,
+    between(pFem, 20, 25) ~ 4,
+    between(pFem, 25, 30) ~ 5,
+    between(pFem, 30, 35) ~ 6,
+    between(pFem, 35, 40) ~ 7,
+    between(pFem, 40, 45) ~ 8,
+    between(pFem, 45, 50) ~ 9,
+    between(pFem, 50, 55) ~ 10,
+    between(pFem, 55, 60) ~ 11,
+    between(pFem, 60, 65) ~ 12,
+    between(pFem, 65, 70) ~ 13,
+    between(pFem, 70, 75) ~ 14,
+    between(pFem, 75, 80) ~ 15,
+    between(pFem, 80, 85) ~ 16,
+    between(pFem, 85, 90) ~ 17,
+    between(pFem, 90, 95) ~ 18,
+    between(pFem, 95, 100) ~ 19,
+    TRUE ~ pFem
+  ),
+  raceCat = case_when(
+    pRac <= 5 ~ 0,
+    between(pRac, 5, 10) ~ 1,
+    between(pRac, 10, 15) ~ 2,
+    between(pRac, 15, 20) ~ 3,
+    between(pRac, 20, 25) ~ 4,
+    between(pRac, 25, 30) ~ 5,
+    between(pRac, 30, 35) ~ 6,
+    between(pRac, 35, 40) ~ 7,
+    between(pRac, 40, 45) ~ 8,
+    between(pRac, 45, 50) ~ 9,
+    between(pRac, 50, 55) ~ 10,
+    between(pRac, 55, 60) ~ 11,
+    between(pRac, 60, 65) ~ 12,
+    between(pRac, 65, 70) ~ 13,
+    between(pRac, 70, 75) ~ 14,
+    between(pRac, 75, 80) ~ 15,
+    between(pRac, 80, 85) ~ 16,
+    between(pRac, 85, 90) ~ 17,
+    between(pRac, 90, 95) ~ 18,
+    between(pRac, 95, 100) ~ 19,
+    TRUE ~ pRac
+  )) %>% 
+  select(-c(pFem, pRac))
+
+# Save into JS analysis folder
+write.csv(histogramData, "../src/assets/data/histogramData.csv", row.names = FALSE, na = "")
 ```
 
 
