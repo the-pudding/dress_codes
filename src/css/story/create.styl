@@ -1,9 +1,9 @@
 .create
+  max-width $column-width
+  margin 0 auto
   &__grid
     display flex
     flex-wrap wrap
-    max-width $column-width
-    margin 0 auto
     justify-content: space-between;
 
     .grid__item
@@ -53,3 +53,41 @@
           opacity 0.9
           color $off-black
           transition 300ms
+
+  &__button
+    display flex
+    align-items: center;
+
+    #createFinish
+      background-color $secondary
+      padding 0.75rem 1rem
+      color $primary
+      font-weight 600
+      text-transform uppercase
+      margin 3rem auto
+
+  &__results
+    display flex
+    flex-direction column
+    align-items: center
+
+    .create__results-overall
+      display flex
+      flex-direction row
+      justify-content: space-between
+      max-width $column-width
+
+      .result-group
+        max-width 20rem
+        margin 0 4rem
+        text-align: center
+
+        .result
+          margin 0
+          set-type-size('xx-large', true)
+          color $primary
+          font-weight 600
+
+        .result-prose
+          margin 0
+          set-type-size('medium', true)

@@ -4,4 +4,22 @@
   <p class='prose__instructions tk-atlas'>{{doc.createInstructions}}</p>
 
   {{> story/createGrid }}
+
+  <div class='create__button'>
+    <button id='createFinish' type ='button'>{{doc.createFinish}}</button>
+  </div>
+
+  <div class='create__results'>
+    <p class='result-pre tk-atlas'>{{{doc.resultProse}}}</p>
+    <div class='create__results-overall'>
+      <div class='create__results-gender result-group'>
+        <p class='result result-gender tk-canela'>0%</p>
+        <p class='result-prose tk-atlas'>{{{doc.resultGenderProse}}}</p>
+      </div>
+      <div class='create__results-race result-group'>
+        <p class='result result-race tk-canela'>0%</p>
+        <p class='result-prose tk-atlas'>{{{doc.resultRaceProse}}}</p>
+      </div>
+    </div>
+  </div>
 </section>
