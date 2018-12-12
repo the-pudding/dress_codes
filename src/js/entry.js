@@ -1,7 +1,7 @@
 /* global d3 */
 import debounce from 'lodash.debounce';
 import isMobile from './utils/is-mobile';
-import graphic from './graphic';
+import create from './create';
 
 const $body = d3.select('body');
 let previousWidth = 0;
@@ -37,7 +37,7 @@ function init() {
 	// setup sticky header menu
 	setupStickyHeader();
 	// kick off graphic code
-	graphic.init();
+	create.init();
 }
 
 init();

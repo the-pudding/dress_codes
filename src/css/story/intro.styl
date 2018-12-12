@@ -13,18 +13,37 @@
 			set-type-size('xxx-large', true)
 		+mq('bp-5')
 			set-type-size('xxxx-large', true)
-	
-	&__byline
-		max-width $column-width
-		margin 0 auto
-		padding-top 5rem
-		padding-bottom 1.5rem
-		text-align center
-		set-type-size('small', true)
-		
+
+	// &__byline
+	// 	max-width $column-width
+	// 	margin 0 auto
+	// 	padding-top 5rem
+	// 	padding-bottom 1.5rem
+	// 	text-align center
+	// 	set-type-size('small', true)
+
 	&__dek
 		max-width $column-width
 		margin 0 auto
 		padding-top 1.5rem
 		text-align center
 		set-type-size('medium', true)
+
+	&__info
+		display flex
+		flex-direction row
+		max-width $column-width
+		margin 0 auto
+		padding-top 3rem
+		padding-bottom 1.5rem
+		justify-content: center;
+
+
+		p
+			set-type-size('small', true)
+			text-align center
+			margin 0 2rem 0 0
+
+	&__text
+		max-width $column-width
+		margin 0 auto

@@ -1,0 +1,55 @@
+.create
+  &__grid
+    display flex
+    flex-wrap wrap
+    max-width $column-width
+    margin 0 auto
+    justify-content: space-between;
+
+    .grid__item
+      display flex
+      flex-direction column
+      width 100px
+      align-items: center;
+      // padding 0.5rem
+
+      &-icons
+        position relative
+        width 75px
+        height 90px
+        display flex
+        justify-content: center;
+        align-items: center
+
+        svg
+          position absolute
+          transform scale(2.5)
+          opacity 0
+
+      &-img
+        border-radius 10px
+        order 0
+        opacity 1
+        transition 300ms
+        position absolute
+
+      &-name
+        margin 0 auto
+        text-align: center
+        set-type-size('small', true)
+        line-height 1.2
+        order 1
+        color $off-black
+        transition 300ms
+
+      &.disabled
+        img
+          opacity 0.15
+          transition 300ms
+        p
+          color $gray
+          transition 300ms
+        svg
+          opacity 0.9
+          color $off-black
+          transition 300ms
