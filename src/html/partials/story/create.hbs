@@ -23,5 +23,29 @@
     </div>
   </div>
 
-  <div class='container container__create'></div>
+  <div class='create__button'>
+    <button id='createCalc' type ='button'>{{doc.createCalc}}</button>
+  </div>
+
+  <p class='prose tk-atlas'>{{{doc.postCreate}}}</p>
+
+  <div class='container container__create' data-group='f'>
+    <h4 class='chart-title tk-atlas'>{{{doc.femTitle}}}</h4>
+    <h5 class='chart-subtitle tk-atlas'>{{{doc.femSubTitle}}}</h5>
+    <div class='legend'>
+      <div class='block'></div>
+      <span class='legend-text tk-atlas'>{{{doc.blockLegend}}}</span>
+    </div>
+  </div>
+
+  <p class='prose tk-atlas'>{{{doc.preRace}}}</p>
+
+  <div class='container container__create' data-group='r'>
+    <h4 class='chart-title tk-atlas'>{{{doc.raceTitle}}}</h4>
+    <h5 class='chart-subtitle tk-atlas'>{{{doc.raceSubTitle}}}</h5>
+    <div class='legend'>
+      <div class='block'></div>
+      <span class='legend-text tk-atlas'>{{{doc.blockLegend}}}</span>
+    </div>
+  </div>
 </section>

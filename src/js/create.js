@@ -6,6 +6,7 @@ const items = grid.selectAll('.grid__item')
 const results = d3.select('.create__results')
 const $container = d3.selectAll('.container__create')
 
+
 // data
 let data = null
 
@@ -44,6 +45,9 @@ function cleanData(arr){
 }
 
 function setupChart(){
+	let $sel = d3.select(this)
+	let type = $sel.at('data-group')
+
 	let nested = d3.nest()
 		.key(d => d.type)
 		.key(d => d.group)
@@ -65,13 +69,12 @@ function setupChart(){
 		return {key: e.key, values: updatedVal}
 	})
 
-	console.log({allNested})
 
-	const charts = $container
-		.selectAll('.chart')
-		.data(allNested)
-		.enter()
-		.append('div.chart')
+	let filtered = allNested.filter(d => d.key === type)
+	console.log({filtered})
+
+	const charts = $sel
+		.datum(filtered)
 		.histogram()
 }
 
@@ -84,7 +87,7 @@ function init() {
 			console.log({data})
 			setupItems()
 			setupCompleteButton()
-			setupChart()
+			$container.each(setupChart)
 			resolve()
 		})
 	})

@@ -34,6 +34,11 @@ d3.selection.prototype.histogram = function init(options) {
 		const Chart = {
 			// called once at start
 			init() {
+        $sel.selectAll('.chart')
+          .data(data)
+          .enter()
+          .append('div.chart')
+
 				Chart.resize();
 				Chart.render();
 			},
@@ -47,12 +52,12 @@ d3.selection.prototype.histogram = function init(options) {
 			},
 			// update scales and render chart
 			render() {
-        console.log({data})
         const barWidth = (width / 20) - (padding * 2)
+        const $chart = $sel.selectAll('.chart')
         // enter groups
-        const histGroup = $sel
+        const histGroup = $chart
           .selectAll('.hist-group')
-          .data(data.values)
+          .data(d => d.values)
           .enter()
           .append('div')
           .attr('class', (d, i) => `hist-group hist-group-${i}`)
@@ -82,6 +87,9 @@ d3.selection.prototype.histogram = function init(options) {
           .text(d => `${d.key * 5}`)
           .style('text-align', 'center')
           .translate([-barWidth / 2, 0])
+
+        // adjust legend size
+        const legend = d3.selectAll('.legend .block').style('width', `${barWidth}px`)
 
 
 				return Chart;
