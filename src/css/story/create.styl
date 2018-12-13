@@ -91,3 +91,22 @@
         .result-prose
           margin 0
           set-type-size('medium', true)
+.container__create
+  .chart
+    display flex
+    flex-direction row
+    align-items: flex-end
+  .hist-group
+    display flex
+    flex-direction column
+    margin 0 1px
+    .block
+      background-color $primary
+      margin-top 1px
+
+    .hist-label
+      set-type-size('small', true)
+      color $gray
+
+      &-five
+        opacity 0
