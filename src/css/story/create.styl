@@ -1,6 +1,42 @@
 .create
   max-width $column-width
   margin 0 auto
+
+  &__example-outer
+    background-color $off-white
+    position relative
+    max-width 24rem
+    margin 40px auto
+    transform rotate(-2deg)
+
+  &__example-inner
+    height auto
+    overflow hidden
+    padding 20px
+    box-shadow 2px 4px 6px rgba(0,0,0,0.15)
+
+    &:before, &:after
+    	content ""
+    	height 1px
+    	position absolute
+    	left 0
+    	right 0
+    	-webkit-clip-path polygon(0% 0%, 5%  100%, 10% 0%, 15%  100%, 20% 0%, 25% 100%, 30% 0%, 35%  100%, 40% 0%, 45%  100%, 50% 0%, 55%  100%, 60% 0%, 65%  100%, 70% 0%, 75%  100%, 80% 0%, 85%  100%, 90% 0%, 95%  100%, 100% 0%)
+    &:before
+    	background-color white
+    	top 0
+    &:after
+    	background-color $off-white
+    	bottom -1px
+
+    p
+      font-weight 600
+      margin 0
+      text-align center
+
+    .strike
+      text-decoration line-through
+
   &__grid
     display flex
     flex-wrap wrap

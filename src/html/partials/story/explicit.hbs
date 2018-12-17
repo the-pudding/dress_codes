@@ -13,20 +13,24 @@
 
   <p class='prose tk-atlas'>{{{doc.explicit-3}}}</p>
   <div class='explicit__common'>
-    <div class='female'>
-      <h4>Female Students</h4>
-      <div class='grid'>
-        {{> story/explicitBans }}
+    <h3>Items explicitly prohibited for</h3>
+    <div class='gender'>
+      <div class='female'>
+        <h4 class='label label-female'>Female Students</h4>
+        <div class='grid'>
+          {{> story/explicitBansF }}
+        </div>
       </div>
-    </div>
-    <div class='male'>
-      <h4>Male Students</h4>
-      <div class='grid'>
-        {{> story/explicitBans }}
+      <div class='male'>
+        <h4 class='label label-male'>Male Students</h4>
+        <div class='grid'>
+          {{> story/explicitBansM }}
+        </div>
       </div>
     </div>
   </div>
 
-
-  <p class='prose tk-atlas'>{{{doc.explicit-4}}}</p>
+  {{#each doc.explicit-4}}
+    <p class='prose tk-atlas'>{{{value}}}</p>
+  {{/each}}
 </section>

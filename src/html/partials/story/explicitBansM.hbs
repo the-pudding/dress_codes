@@ -1,0 +1,12 @@
+{{#each doc.explicitBans-m}}
+<div class='grid__item grid__item-{{@index}}' data-gen='{{{gen}}}'>
+    <p class='grid__item-name tk-atlas'>{{{name}}}</p>
+
+    <!-- <img class='grid__item-img' src='assets/images/{{slug}}.png'> -->
+    <div class='grid__item-icons'>
+      <img class='grid__item-img' src='assets/images/placeholder.png'>
+      @@include('x-square.svg')
+    </div>
+
+</div>
+{{/each}}

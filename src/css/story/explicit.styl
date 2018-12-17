@@ -34,25 +34,44 @@
       margin 0
       text-align center
   &__common
-    display flex
-    flex-direction column
-    width $column-width
-    margin 0 auto
+
+    h3
+      text-align center
+      font-weight 600
+
+    .gender
+      display flex
+      flex-direction row
+      width $column-width
+      margin 0 auto
 
     .male, .female
       display flex
       flex-direction column
+      margin 0 2rem
+
+      .label
+        text-align center
+        font-weight 600
+        margin-top 0
+
+        &-female
+          color $primary
+
+        &-male
+          color $secondary
 
     .grid
       display flex
       flex-wrap wrap
-      justify-content: space-between;
+      justify-content: center;
 
     .grid__item
       display flex
       flex-direction column
       width 100px
       align-items: center;
+      margin-bottom 1rem
       // padding 0.5rem
 
       &-icons

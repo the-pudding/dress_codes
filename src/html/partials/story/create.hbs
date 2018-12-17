@@ -1,6 +1,12 @@
 <section class='create'>
   <h2 class='section__title tk-canela'>{{doc.createTitle}}</h2>
-  <p class='prose tk-atlas'>{{doc.createIntro}}</p>
+  <p class='prose tk-atlas'>{{{doc.createIntro1}}}</p>
+  <div class='create__example-outer'>
+    <div class='create__example-inner'>
+      <p>{{{doc.createExample}}}</p>
+    </div>
+  </div>
+  <p class='prose tk-atlas'>{{{doc.createIntro2}}}
   <p class='prose__instructions tk-atlas'>{{doc.createInstructions}}</p>
 
   {{> story/createGrid }}
