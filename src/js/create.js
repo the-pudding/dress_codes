@@ -5,6 +5,7 @@ const grid = d3.select('.create__grid')
 const items = grid.selectAll('.grid__item')
 const results = d3.select('.create__results')
 const $container = d3.selectAll('.container__create')
+const $userSelected = d3.selectAll('.create__prohibited')
 
 
 // data
@@ -24,6 +25,11 @@ function setupCompleteButton(){
   button
     .on('click', d => {
       const prohibited = items.filter((d, i, n) => d3.select(n[i]).classed('disabled'))
+			const proArray = prohibited.nodes().map( d => {
+				console.log({d})
+				return d.dataset.index
+			})
+			console.log({proArray})
       const fem = prohibited.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'f')
       const poc = prohibited.filter((d, i, n) => d3.select(n[i]).attr('data-race') === 'y')
       const pFem = d3.round((fem.size()/prohibited.size()) * 100, 0)
@@ -31,6 +37,14 @@ function setupCompleteButton(){
 
       results.selectAll('.result-gender').text(`${pFem}%`)
       results.selectAll('.result-race').text(`${pPoc}%`)
+
+			// setup selected prohibitions
+			const prohibitedItems = $userSelected
+				.selectAll('.grid__item')
+				.filter((d, i, n) => d3.select(n[i]).attr('data-index') === proArray)
+
+				console.log({prohibited, prohibitedItems})
+
 
     })
 }
@@ -76,6 +90,10 @@ function setupChart(){
 	const charts = $sel
 		.datum(filtered)
 		.histogram()
+}
+
+function setupProhibitions(){
+
 }
 
 function resize() {}

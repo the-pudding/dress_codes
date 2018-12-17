@@ -1,6 +1,6 @@
 <div class='create__grid'>
   {{#each doc.createItem}}
-  <div class='grid__item grid__item-{{@index}}' data-gen='{{{gen}}}' data-race='{{{race}}}'>
+  <div class='grid__item grid__item-{{@index}}' data-gen='{{{gen}}}' data-race='{{{race}}}' data-index='{{{@index}}}'>
       <p class='grid__item-name tk-atlas'>{{{name}}}</p>
 
       <!-- <img class='grid__item-img' src='assets/images/{{slug}}.png'> -->
@@ -8,7 +8,6 @@
         <img class='grid__item-img' src='assets/images/placeholder.png'>
         @@include('x-square.svg')
       </div>
-
 
   </div>
   {{/each}}

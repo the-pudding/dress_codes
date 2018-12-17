@@ -14,7 +14,7 @@
   <div class='create__button'>
     <button id='createFinish' type ='button'>{{doc.createFinish}}</button>
   </div>
-
+<!--
   <div class='create__results'>
     <p class='result-pre tk-atlas'>{{{doc.resultProse}}}</p>
     <div class='create__results-overall'>
@@ -31,9 +31,13 @@
 
   <div class='create__button'>
     <button id='createCalc' type ='button'>{{doc.createCalc}}</button>
-  </div>
+  </div> -->
 
   <p class='prose tk-atlas'>{{{doc.postCreate}}}</p>
+
+  <div class='create__prohibited create__prohibited-gender'>
+      {{> story/createGrid }}
+  </div>
 
 <div class='container container__create' data-group='f'>
     <h4 class='chart-title tk-atlas'>{{{doc.femTitle}}}</h4>
