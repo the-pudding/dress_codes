@@ -1,0 +1,97 @@
+.explicit
+  .percentage
+    font-weight 600
+    color $primary
+  &__example-outer
+    background-color $off-white
+    position relative
+    max-width 24rem
+    margin 40px auto
+    transform rotate(2deg)
+
+  &__example-inner
+    height auto
+    overflow hidden
+    padding 20px
+    box-shadow 2px 4px 6px rgba(0,0,0,0.15)
+
+    &:before, &:after
+    	content ""
+    	height 1px
+    	position absolute
+    	left 0
+    	right 0
+    	-webkit-clip-path polygon(0% 0%, 5%  100%, 10% 0%, 15%  100%, 20% 0%, 25% 100%, 30% 0%, 35%  100%, 40% 0%, 45%  100%, 50% 0%, 55%  100%, 60% 0%, 65%  100%, 70% 0%, 75%  100%, 80% 0%, 85%  100%, 90% 0%, 95%  100%, 100% 0%)
+    &:before
+    	background-color white
+    	top 0
+    &:after
+    	background-color $off-white
+    	bottom -1px
+
+    p
+      font-weight 600
+      margin 0
+      text-align center
+  &__common
+    display flex
+    flex-direction column
+    width $column-width
+    margin 0 auto
+
+    .male, .female
+      display flex
+      flex-direction column
+
+    .grid
+      display flex
+      flex-wrap wrap
+      justify-content: space-between;
+
+    .grid__item
+      display flex
+      flex-direction column
+      width 100px
+      align-items: center;
+      // padding 0.5rem
+
+      &-icons
+        position relative
+        width 75px
+        height 90px
+        display flex
+        justify-content: center;
+        align-items: center
+
+        svg
+          position absolute
+          transform scale(2.5)
+          opacity 0
+
+      &-img
+        border-radius 10px
+        order 0
+        opacity 1
+        transition 300ms
+        position absolute
+
+      &-name
+        margin 0 auto
+        text-align: center
+        set-type-size('small', true)
+        line-height 1.2
+        order 1
+        color $off-black
+        transition 300ms
+
+      &.disabled
+        img
+          opacity 0.15
+          transition 300ms
+        p
+          color $gray
+          transition 300ms
+        svg
+          opacity 0.9
+          color $off-black
+          transition 300ms

@@ -173,6 +173,49 @@ longDressCode <- map_dfr(clothingTypes, elongateCode)
 
 Some schools do explicitly ban things for either male or female students. 
 
+How many schools explicitly ban things for male vs. female students? 
+
+```{r}
+explicitSchools <- longDressCode %>% 
+  filter(prohibited != "none") %>% 
+  separate_rows(prohibited, sep = ",") %>% 
+  mutate(prohibited = trimws(prohibited),
+         prohibited = case_when(
+           prohibited == "boys" ~ "male",
+           prohibited == "Na" ~ NA_character_,
+           prohibited == "NA" ~ NA_character_,
+           TRUE ~ prohibited
+         )) %>% 
+  filter(prohibited == "male" | prohibited == "female") %>% 
+  group_by(School.Name, prohibited) %>% 
+  count()
+
+nrow(explicitSchools) / nrow(responses)
+```
+Alright so 29% of schools have banned at least one item explicitly for either male or female students. 
+```{r}
+explicitCount <- longDressCode %>% 
+  filter(prohibited != "none") %>% 
+  separate_rows(prohibited, sep = ",") %>% 
+  mutate(prohibited = trimws(prohibited),
+         prohibited = case_when(
+           prohibited == "boys" ~ "male",
+           prohibited == "Na" ~ NA_character_,
+           prohibited == "NA" ~ NA_character_,
+           TRUE ~ prohibited
+         )) %>% 
+  filter(prohibited == "male" | prohibited == "female") %>% 
+  group_by(School.Name, prohibited) %>% 
+  count() %>% 
+  spread(prohibited, n) %>%
+  replace(is.na(.), 0) %>% 
+  mutate(diff = (abs(male-female)) / ((male + female) / 2))
+
+mean(explicitCount$diff)
+  
+```
+
+
 How many things are explicitly banned for male vs. female students?
 ```{r}
 explicitCount <- longDressCode %>% 
@@ -207,8 +250,7 @@ explicit <- longDressCode %>%
          )) %>% 
   filter(prohibited == "male" | prohibited == "female") %>% 
   group_by(prohibited) %>% 
-  count(item) %>% 
-  filter(n >= 8)
+  count(item) 
 
 explicit
 ```
@@ -647,7 +689,8 @@ bannedGenderAll <- banned %>%
   spread(gender, nn) %>% 
   rename(none = "<NA>") %>% 
   replace_na(list(m = 0, f = 0)) %>% 
-  mutate(pFem = (f / (m+f+none)) * 100)
+  mutate(pFem = (f / (m+f+none)) * 100) %>% 
+  mutate(pMal = (m / (m+f+none)) * 100)
 
 ggplot(bannedGenderAll, aes(x = pFem)) + geom_histogram(stat = "bin", binwidth = 5)
 ```
@@ -685,7 +728,7 @@ ggplot(bannedRace, aes(x = pRac)) + geom_histogram(stat = "bin")
 
 ```{r}
 histogramData <- bannedGenderAll %>% 
-  select(c(School.Name, pFem)) %>% 
+  select(c(School.Name, pFem, pMal)) %>% 
   left_join(bannedRace) %>% 
   select(-c(n, y)) %>% 
   mutate(femCat = case_when(
@@ -710,6 +753,29 @@ histogramData <- bannedGenderAll %>%
     between(pFem, 90, 95) ~ 18,
     between(pFem, 95, 100) ~ 19,
     TRUE ~ pFem
+  ), 
+  malCat = case_when(
+     pMal <= 5 ~ 0,
+    between(pMal, 5, 10) ~ 1,
+    between(pMal, 10, 15) ~ 2,
+    between(pMal, 15, 20) ~ 3,
+    between(pMal, 20, 25) ~ 4,
+    between(pMal, 25, 30) ~ 5,
+    between(pMal, 30, 35) ~ 6,
+    between(pMal, 35, 40) ~ 7,
+    between(pMal, 40, 45) ~ 8,
+    between(pMal, 45, 50) ~ 9,
+    between(pMal, 50, 55) ~ 10,
+    between(pMal, 55, 60) ~ 11,
+    between(pMal, 60, 65) ~ 12,
+    between(pMal, 65, 70) ~ 13,
+    between(pMal, 70, 75) ~ 14,
+    between(pMal, 75, 80) ~ 15,
+    between(pMal, 80, 85) ~ 16,
+    between(pMal, 85, 90) ~ 17,
+    between(pMal, 90, 95) ~ 18,
+    between(pMal, 95, 100) ~ 19,
+    TRUE ~ pMal
   ),
   raceCat = case_when(
     pRac <= 5 ~ 0,
@@ -734,7 +800,15 @@ histogramData <- bannedGenderAll %>%
     between(pRac, 95, 100) ~ 19,
     TRUE ~ pRac
   )) %>% 
-  select(-c(pFem, pRac))
+  select(-c(pFem, pRac)) %>% 
+  gather(type, group, -School.Name) %>% 
+  rename(school = School.Name) %>% 
+  mutate(type = case_when(
+    type == "femCat" ~ "f",
+    type == "malCat" ~ "m",
+    type == "raceCat" ~ "r",
+    TRUE ~ "other"
+  ))
 
 # Save into JS analysis folder
 write.csv(histogramData, "../src/assets/data/histogramData.csv", row.names = FALSE, na = "")

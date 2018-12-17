@@ -5,6 +5,8 @@
 		<p class='intro__byline tk-atlas'>{{{doc.author}}}</p>
 		<p class='intro__date tk-atlas'>{{doc.date}}</p>
 	</div>
+	{{#each doc.intro}}
+		<p class='prose tk-atlas'>{{{value}}}</p>
+	{{/each}}
 
-	<p class='prose tk-atlas'>{{{doc.intro}}}</p>
 </div>
