@@ -26,7 +26,6 @@ function setupCompleteButton(){
     .on('click', d => {
       const prohibited = items.filter((d, i, n) => d3.select(n[i]).classed('disabled'))
 			const proArray = prohibited.nodes().map( d => {
-				console.log({d})
 				return d.dataset.index
 			})
 			console.log({proArray})
@@ -41,7 +40,21 @@ function setupCompleteButton(){
 			// setup selected prohibitions
 			const prohibitedItems = $userSelected
 				.selectAll('.grid__item')
-				.filter((d, i, n) => d3.select(n[i]).attr('data-index') === proArray)
+				.classed('visible', function(d){
+					const ind = d3.select(this).attr('data-index')
+					if (proArray.indexOf(ind) > -1) return true
+					else return false
+				})
+			//   .classed("hidden", (d, i, n) => {
+			// 		const ind = d3.select(n[i])
+			// 		console.log({ind})
+			// 		if (proArray.indexOf(d.dataset.index) > -1) return true
+			// 	 	else return false
+			// 	})
+			//
+			// const test = indexOf(prohibited)
+			//console.log({test})
+
 
 				console.log({prohibited, prohibitedItems})
 
