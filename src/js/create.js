@@ -3,7 +3,7 @@ import './pudding-chart/histogram-template'
 // selections
 const grid = d3.select('.create__grid')
 const items = grid.selectAll('.grid__item')
-const results = d3.select('.create__results')
+const results = d3.selectAll('.create__results')
 const $container = d3.selectAll('.container__create')
 const $userSelected = d3.selectAll('.create__prohibited')
 
@@ -17,6 +17,8 @@ function setupItems(){
       const item = d3.select(this)
       item.classed('disabled', !item.classed('disabled'))
 		})
+
+	$userSelected.selectAll('.grid__item').classed('hidden', true)
 }
 
 function setupCompleteButton(){
@@ -28,13 +30,18 @@ function setupCompleteButton(){
 			const proArray = prohibited.nodes().map( d => {
 				return d.dataset.index
 			})
-			console.log({proArray})
       const fem = prohibited.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'f')
+			const masc = prohibited.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'm')
+			const genNeu = prohibited.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'n')
       const poc = prohibited.filter((d, i, n) => d3.select(n[i]).attr('data-race') === 'y')
       const pFem = d3.round((fem.size()/prohibited.size()) * 100, 0)
+			const pMas = d3.round((masc.size()/prohibited.size()) * 100, 0)
+			const pGenNeu = d3.round((genNeu.size()/prohibited.size()) * 100, 0)
       const pPoc = d3.round((poc.size()/prohibited.size()) * 100, 0)
 
-      results.selectAll('.result-gender').text(`${pFem}%`)
+      results.selectAll('.femPer').text(`${pFem}%`)
+			results.selectAll('.masPer').text(`${pMas}%`)
+			results.selectAll('.neuPer').text(`${pGenNeu}%`)
       results.selectAll('.result-race').text(`${pPoc}%`)
 
 			// setup selected prohibitions
@@ -45,6 +52,11 @@ function setupCompleteButton(){
 					if (proArray.indexOf(ind) <= -1) return true
 					else return false
 				})
+
+			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'f').classed('is-feminine', true)
+			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'm').classed('is-masculine', true)
+			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'n').classed('is-genNeutral', true)
+
 			//   .classed("hidden", (d, i, n) => {
 			// 		const ind = d3.select(n[i])
 			// 		console.log({ind})

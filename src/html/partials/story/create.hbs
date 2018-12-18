@@ -39,24 +39,30 @@
       {{> story/createGrid }}
   </div>
 
-<div class='container container__create' data-group='f'>
-    <h4 class='chart-title tk-atlas'>{{{doc.femTitle}}}</h4>
-    <h5 class='chart-subtitle tk-atlas'>{{{doc.femSubTitle}}}</h5>
-    <div class='legend'>
-      <div class='block'></div>
-      <span class='legend-text tk-atlas'>{{{doc.blockLegend}}}</span>
+  {{#each doc.resultProseGen}}
+    <p class='prose create__results tk-atlas'>{{{value}}}</p>
+  {{/each}}
+
+  <div class='container__gender'>
+
+    <div class='container container__create container__create-f' data-group='f'>
+        <!-- <h4 class='chart-title tk-atlas'>{{{doc.femTitle}}}</h4>
+        <h5 class='chart-subtitle tk-atlas'>{{{doc.femSubTitle}}}</h5> -->
+        <!-- <div class='legend'>
+          <div class='block'></div>
+          <span class='legend-text tk-atlas'>{{{doc.blockLegend}}}</span>
+        </div> -->
+      </div>
+
+      <div class='container container__create container__create-m' data-group='m'>
+      <!-- <h4 class='chart-title tk-atlas'>{{{doc.femTitle}}}</h4>
+      <h5 class='chart-subtitle tk-atlas'>{{{doc.femSubTitle}}}</h5> -->
+      <!-- <div class='legend'>
+        <div class='block'></div>
+        <span class='legend-text tk-atlas'>{{{doc.blockLegend}}}</span>
+      </div> -->
     </div>
   </div>
-
-    <!-- <div class='container container__create' data-group='m'>
-    <h4 class='chart-title tk-atlas'>{{{doc.femTitle}}}</h4>
-    <h5 class='chart-subtitle tk-atlas'>{{{doc.femSubTitle}}}</h5>
-    <div class='legend'>
-      <div class='block'></div>
-      <span class='legend-text tk-atlas'>{{{doc.blockLegend}}}</span>
-    </div>
-  </div> -->
-
   <!-- <div class='create__gender'>
     <div class='container container__create' data-group='f'></div>
     <div class='container container__create' data-group='m'></div>

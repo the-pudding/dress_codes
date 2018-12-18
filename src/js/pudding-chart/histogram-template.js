@@ -52,7 +52,8 @@ d3.selection.prototype.histogram = function init(options) {
 			},
 			// update scales and render chart
 			render() {
-        const barWidth = (width / 20) - (padding * 2)
+        const barHeight = (height / 20) - (padding * 2)
+        const barWidth = 3
         const $chart = $sel.selectAll('.chart')
         // enter groups
         const histGroup = $chart
@@ -61,8 +62,7 @@ d3.selection.prototype.histogram = function init(options) {
           .enter()
           .append('div')
           .attr('class', (d, i) => `hist-group hist-group-${i}`)
-          .style('width', `${barWidth}px`)
-
+          .style('height', `${barHeight}px`)
         // add blocks
 
         const blocks = histGroup
@@ -74,19 +74,19 @@ d3.selection.prototype.histogram = function init(options) {
           .enter()
           .append('div')
           .attr('class', 'block')
-          .style('height', `3px`)
+          .style('height', `${barHeight}px`)
           .style('width', `${barWidth}px`)
 
         // add x axis labels
-        const labels = histGroup
-          .append('text')
-          .attr('class', d => {
-            if ((d.key * 5) % 10 == 0) return `hist-label hist-label-ten hist-label-${d.key} tk-atlas`
-            else return `hist-label hist-label-five hist-label-${d.key} tk-atlas`
-          })
-          .text(d => `${d.key * 5}`)
-          .style('text-align', 'center')
-          .translate([-barWidth / 2, 0])
+        // const labels = histGroup
+        //   .append('text')
+        //   .attr('class', d => {
+        //     if ((d.key * 5) % 10 == 0) return `hist-label hist-label-ten hist-label-${d.key} tk-atlas`
+        //     else return `hist-label hist-label-five hist-label-${d.key} tk-atlas`
+        //   })
+        //   .text(d => `${d.key * 5}`)
+        //   .style('text-align', 'center')
+        //   .translate([-barWidth / 2, 0])
 
         // adjust legend size
         const legend = d3.selectAll('.legend .block').style('width', `${barWidth}px`)
