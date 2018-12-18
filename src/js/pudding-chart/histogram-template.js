@@ -52,9 +52,10 @@ d3.selection.prototype.histogram = function init(options) {
 			},
 			// update scales and render chart
 			render() {
-        const barHeight = (height / 20) - (padding * 2)
+        const barHeight = 23
         const barWidth = 3
         const $chart = $sel.selectAll('.chart')
+          .style('height', `${height}px`)
         // enter groups
         const histGroup = $chart
           .selectAll('.hist-group')
@@ -67,15 +68,15 @@ d3.selection.prototype.histogram = function init(options) {
 
         const blocks = histGroup
           .selectAll('.block')
-          .data(d => {
-            console.log({d})
-            return d.values
-          })
+          .data(d => d.values)
           .enter()
           .append('div')
           .attr('class', 'block')
           .style('height', `${barHeight}px`)
           .style('width', `${barWidth}px`)
+
+        const axisLabels = d3.selectAll('.axis-label')
+          .attr('height', `${barHeight}px`)
 
         // add x axis labels
         // const labels = histGroup

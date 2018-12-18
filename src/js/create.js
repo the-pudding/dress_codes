@@ -6,6 +6,8 @@ const items = grid.selectAll('.grid__item')
 const results = d3.selectAll('.create__results')
 const $container = d3.selectAll('.container__create')
 const $userSelected = d3.selectAll('.create__prohibited')
+const $axes = d3.selectAll('.container__create-axis')
+const barHeight = 23
 
 
 // data
@@ -110,7 +112,22 @@ function setupChart(){
 
 
 	let filtered = allNested.filter(d => d.key === type)
-	console.log({filtered})
+	const levels = d3.range(0, 20)
+	const labels = $axes
+			.selectAll('.axis-label')
+			.data(levels)
+			.enter()
+			.append('div.axis-label')
+
+	labels.append('text')
+		.attr('class', d => {
+	    if ((d * 5) % 10 == 0) return `hist-label hist-label-ten hist-label-${d} tk-atlas`
+	    else return `hist-label hist-label-five hist-label-${d} tk-atlas`
+	  })
+	  .text(d => `${d * 5}%`)
+	  .style('text-align', 'center')
+		.translate([0, -barHeight / 2])
+
 
 	const charts = $sel
 		.datum(filtered)

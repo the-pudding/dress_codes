@@ -189,27 +189,46 @@
   height 500px
 .container__create
   width 50%
+  .chart-title
+    height 2rem
+    margin 0 0 0.5rem 0
+    text-align center
   &-f
     margin-right 0.5rem
+    .chart-title
+      color $primary
     .hist-group
       flex-direction row-reverse
+    .block
+      background-color $primary
   &-m
     margin-left 0.5rem
+    .chart-title
+      color $secondary
     .chart
       align-items flex-start
     .hist-group
       flex-direction row
+    .block
+      background-color $secondary
 
   .chart
     display flex
     flex-direction column
-    margin-top: 2rem
   .hist-group
     display flex
     margin 1px 0
     .block
-      background-color $primary
       margin-right 1px
+
+
+  &-axis
+    margin-top 2.5rem
+    .axis-label
+      height 23px
+      margin 2px 0
+      display flex
+      justify-content center
 
     .hist-label
       set-type-size('small', true)
