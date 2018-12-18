@@ -68,15 +68,35 @@ d3.selection.prototype.histogram = function init(options) {
 
         const blocks = histGroup
           .selectAll('.block')
-          .data(d => d.values)
+          .data(d => {
+            const val = d.values
+            val.push({school: "User"})
+            return val})
           .enter()
           .append('div')
-          .attr('class', 'block')
+          .attr('class', d => {
+            if (d.school === "User") return `block-user`
+            else return `block`
+          })
           .style('height', `${barHeight}px`)
           .style('width', `${barWidth}px`)
 
         const axisLabels = d3.selectAll('.axis-label')
           .attr('height', `${barHeight}px`)
+
+        // add user labels
+
+        histGroup
+          .append('div.label-line')
+          .style('height', `1px`)
+          .style('width', `1rem`)
+
+        histGroup
+          .append('text')
+          .text('You')
+          .attr('class', d => {
+            return `label-user label-user-${d.key} tk-atlas`
+          })
 
         // add x axis labels
         // const labels = histGroup

@@ -194,15 +194,20 @@
     margin 0 0 0.5rem 0
     text-align center
   &-f
-    margin-right 0.5rem
+    margin-right 0.25rem
     .chart-title
       color $primary
     .hist-group
       flex-direction row-reverse
     .block
       background-color $primary
+      margin-left 1px
+    .block-user
+      margin-left 1px
+    .label-line
+      margin 0 0 0 0.15rem
   &-m
-    margin-left 0.5rem
+    margin-left 0.25rem
     .chart-title
       color $secondary
     .chart
@@ -211,15 +216,38 @@
       flex-direction row
     .block
       background-color $secondary
+      margin-right 1px
+    .block-user
+      margin-right 1px
+    .label-line
+      margin 0 0.15rem 0 0
 
   .chart
     display flex
     flex-direction column
   .hist-group
     display flex
+    align-items: center;
     margin 1px 0
-    .block
-      margin-right 1px
+    .block-user
+      background-color $gray
+      opacity 0
+      &.is-active
+        opacity 1
+
+    .label-line
+      background-color $off-black
+      opacity 0
+      &.is-active
+        opacity 1
+    .label-user
+      set-type-size('small', true)
+      color $gray-dark
+      margin 0
+      opacity 0
+      &.is-active 
+        opacity 1
+
 
 
   &-axis

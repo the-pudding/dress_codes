@@ -28,6 +28,8 @@ function setupCompleteButton(){
 
   button
     .on('click', d => {
+			d3.selectAll('.block-user, .label-line, .label-user').classed('is-active', false)
+			
       const prohibited = items.filter((d, i, n) => d3.select(n[i]).classed('disabled'))
 			const proArray = prohibited.nodes().map( d => {
 				return d.dataset.index
@@ -58,6 +60,20 @@ function setupCompleteButton(){
 			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'f').classed('is-feminine', true)
 			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'm').classed('is-masculine', true)
 			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'n').classed('is-genNeutral', true)
+
+			// turn on histogram annotations
+			const femGroup = Math.floor(pFem/5)
+			const mascGroup = Math.floor(pMas/5)
+			console.log({pFem, femGroup})
+			d3.select('.container__create-f')
+				.select(`.hist-group-${femGroup}`)
+				.selectAll('.block-user, .label-line, .label-user')
+				.classed('is-active', true)
+
+			d3.select('.container__create-m')
+				.select(`.hist-group-${mascGroup}`)
+				.selectAll('.block-user, .label-line, .label-user')
+				.classed('is-active', true)
 
 			//   .classed("hidden", (d, i, n) => {
 			// 		const ind = d3.select(n[i])
