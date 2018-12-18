@@ -29,7 +29,7 @@ function setupCompleteButton(){
   button
     .on('click', d => {
 			d3.selectAll('.block-user, .label-line, .label-user').classed('is-active', false)
-			
+
       const prohibited = items.filter((d, i, n) => d3.select(n[i]).classed('disabled'))
 			const proArray = prohibited.nodes().map( d => {
 				return d.dataset.index
@@ -64,7 +64,6 @@ function setupCompleteButton(){
 			// turn on histogram annotations
 			const femGroup = Math.floor(pFem/5)
 			const mascGroup = Math.floor(pMas/5)
-			console.log({pFem, femGroup})
 			d3.select('.container__create-f')
 				.select(`.hist-group-${femGroup}`)
 				.selectAll('.block-user, .label-line, .label-user')
@@ -74,21 +73,6 @@ function setupCompleteButton(){
 				.select(`.hist-group-${mascGroup}`)
 				.selectAll('.block-user, .label-line, .label-user')
 				.classed('is-active', true)
-
-			//   .classed("hidden", (d, i, n) => {
-			// 		const ind = d3.select(n[i])
-			// 		console.log({ind})
-			// 		if (proArray.indexOf(d.dataset.index) > -1) return true
-			// 	 	else return false
-			// 	})
-			//
-			// const test = indexOf(prohibited)
-			//console.log({test})
-
-
-				console.log({prohibited, prohibitedItems})
-
-
     })
 }
 
@@ -160,7 +144,6 @@ function init() {
 	return new Promise((resolve) => {
 		d3.loadData('assets/data/histogramData.csv', (err, response) => {
 			data = cleanData(response[0])
-			console.log({data})
 			setupItems()
 			setupCompleteButton()
 			$container.each(setupChart)
