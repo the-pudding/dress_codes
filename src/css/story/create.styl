@@ -182,7 +182,7 @@
   height 350px
   align-items: flex-end;
 
-.container__gender
+.container__gender, .container__race
   display flex
   flex-direction row
   max-width $column-width
@@ -193,7 +193,7 @@
     height 2rem
     margin 0 0 0.5rem 0
     text-align center
-  &-f
+  &-f, &-c
     margin-right 0.25rem
     .chart-title
       color $primary
@@ -206,7 +206,7 @@
       margin-left 1px
     .label-line
       margin 0 0 0 0.15rem
-  &-m
+  &-m, &-w
     margin-left 0.25rem
     .chart-title
       color $secondary
@@ -245,7 +245,7 @@
       color $gray-dark
       margin 0
       opacity 0
-      &.is-active 
+      &.is-active
         opacity 1
 
 

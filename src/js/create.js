@@ -37,11 +37,10 @@ function setupCompleteButton(){
       const fem = prohibited.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'f')
 			const masc = prohibited.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'm')
 			const genNeu = prohibited.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'n')
-      const poc = prohibited.filter((d, i, n) => d3.select(n[i]).attr('data-race') === 'y')
       const pFem = d3.round((fem.size()/prohibited.size()) * 100, 0)
 			const pMas = d3.round((masc.size()/prohibited.size()) * 100, 0)
 			const pGenNeu = d3.round((genNeu.size()/prohibited.size()) * 100, 0)
-      const pPoc = d3.round((poc.size()/prohibited.size()) * 100, 0)
+
 
       results.selectAll('.femPer').text(`${pFem}%`)
 			results.selectAll('.masPer').text(`${pMas}%`)
@@ -57,6 +56,8 @@ function setupCompleteButton(){
 					else return false
 				})
 
+			console.log({prohibitedItems})
+
 			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'f').classed('is-feminine', true)
 			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'm').classed('is-masculine', true)
 			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'n').classed('is-genNeutral', true)
@@ -71,6 +72,15 @@ function setupCompleteButton(){
 
 			d3.select('.container__create-m')
 				.select(`.hist-group-${mascGroup}`)
+				.selectAll('.block-user, .label-line, .label-user')
+				.classed('is-active', true)
+
+			const poc = prohibited.filter((d, i, n) => d3.select(n[i]).attr('data-race') === 'y')
+			const pPoc = d3.round((poc.size()/prohibited.size()) * 100, 0)
+			const pocGroup = Math.floor(pPoc / 5)
+
+			d3.select('.container__create-c')
+				.select(`.hist-group-${pocGroup}`)
 				.selectAll('.block-user, .label-line, .label-user')
 				.classed('is-active', true)
     })
@@ -109,7 +119,6 @@ function setupChart(){
 		})
 		return {key: e.key, values: updatedVal}
 	})
-
 
 	let filtered = allNested.filter(d => d.key === type)
 	const levels = d3.range(0, 20)
