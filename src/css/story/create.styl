@@ -47,15 +47,20 @@
       flex-direction column
       width 100px
       align-items: center;
+
+      &.hidden
+        display none
       // padding 0.5rem
 
       &-icons
         position relative
-        width 75px
+        width 90px
         height 90px
         display flex
         justify-content: center;
         align-items: center
+        background-color: $quarternary
+        border-radius: 5px
 
         svg
           position absolute
@@ -95,7 +100,7 @@
     align-items: center;
 
     #createFinish
-      background-color $secondary
+      background-color $gray-light
       padding 0.75rem 1rem
       color $primary
       font-weight 600

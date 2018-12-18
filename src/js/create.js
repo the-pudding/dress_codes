@@ -40,9 +40,9 @@ function setupCompleteButton(){
 			// setup selected prohibitions
 			const prohibitedItems = $userSelected
 				.selectAll('.grid__item')
-				.classed('visible', function(d){
+				.classed('hidden', function(d){
 					const ind = d3.select(this).attr('data-index')
-					if (proArray.indexOf(ind) > -1) return true
+					if (proArray.indexOf(ind) <= -1) return true
 					else return false
 				})
 			//   .classed("hidden", (d, i, n) => {
