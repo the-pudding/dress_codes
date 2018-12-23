@@ -81,10 +81,27 @@ What are those length limitations?
 lengthLimits <- length %>% 
   separate_rows(length, sep = ",") %>% 
   filter(!grepl("\\(?[0-9,.]+\\)?", length)) %>% 
+  mutate(type = "length",
+    item = paste0("short ", limits)) %>% 
+  select(-c(limits, length))
+
+lengthCount <- lengthLimits %>% 
   count(length, sort = TRUE) %>% 
   filter(n >= 10)
 
 lengthLimits
+```
+
+What about by item type? 
+
+```{r}
+lengthByItem <- length %>% 
+  count(limits, sort = TRUE) %>% 
+  mutate(type = "length",
+         limits = paste0("short ", limits)) %>% 
+  rename(item = limits)
+
+lengthByItem
 ```
 
 
@@ -113,6 +130,24 @@ nrow(schoolsStrap) / nrow(responses)
 ```
 
 Only 28% have some limitations on strap width explicitly laid out in the handbook. 
+
+### Promotion
+
+Many dress codes ban clothes that have words and/or pictures that promote specific things (alcohol, tobacco, drugs, etc.) Let's take a look at those. 
+
+```{r}
+promotion <- responses %>% 
+  select(c("School.Name", "School.State.Abbreviation"), contains("promotion")) %>% 
+  rename(item = !!names(.[3])) %>% 
+  separate_rows(item, sep = ", ") %>% 
+  mutate(item = trimws(item)) %>% 
+    mutate(type = 'promotion')
+  
+promotionCount <- promotion %>% 
+  count(item)
+
+```
+
 
 ### Banned Items
 
@@ -192,7 +227,7 @@ explicitSchools <- longDressCode %>%
 
 nrow(explicitSchools) / nrow(responses)
 ```
-Alright so 29% of schools have banned at least one item explicitly for either male or female students. 
+Alright so 26% of schools have banned at least one item explicitly for either male or female students. 
 ```{r}
 explicitCount <- longDressCode %>% 
   filter(prohibited != "none") %>% 
@@ -250,10 +285,31 @@ explicit <- longDressCode %>%
          )) %>% 
   filter(prohibited == "male" | prohibited == "female") %>% 
   group_by(prohibited) %>% 
-  count(item) 
+  count(item, sort = TRUE) %>% 
+  group_by(prohibited) %>% 
+  head(n = 10)
 
 explicit
+
+ggplot(explicit, aes(x = item, y = n, fill = prohibited)) + geom_bar(stat = "identity", position = "dodge") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
+
+```{r}
+maleHair <- longDressCode %>% 
+  filter(prohibited != "none") %>% 
+  separate_rows(prohibited, sep = ",") %>% 
+  mutate(prohibited = trimws(prohibited),
+         prohibited = case_when(
+           prohibited == "boys" ~ "male",
+           prohibited == "Na" ~ NA_character_,
+           prohibited == "NA" ~ NA_character_,
+           TRUE ~ prohibited
+         )) %>% 
+  filter(prohibited == "male" | prohibited == "female") %>% 
+  mutate(hair = grepl("collar|lobe", item))
+```
+
 
 Alright, so there aren't too many items that are explicitly gendered. Let's look at what types of items are banned overall and then I'll get into things that are implicitly targetting students of a particular gender.
 
@@ -456,8 +512,18 @@ I need to create a list of items that have been prohibited so I can get a better
 
 ```{r eval = FALSE}
 bannedItems <- longDressCode %>% 
+  mutate(item = trimws(item)) %>% 
   group_by(type, item) %>% 
   count(item, sort = TRUE)
+
+bannedwithLength <- bannedItems %>% 
+  ungroup() %>% 
+  bind_rows(lengthByItem) %>% 
+  bind_rows(promotionByItem) %>%  
+  arrange(type)
+
+write.csv(bannedwithLength, here::here("processed_data", "needsManualCorrections.csv"), row.names = FALSE)
+  
 
 write.csv(bannedItems, here::here("processed_data", "bannedItems.csv"), row.names = FALSE)
 ```
@@ -470,7 +536,16 @@ googledrive::drive_upload(media = here::here("processed_data", "bannedItems.csv"
              name = "bannedItems", 
              type = "spreadsheet")
 
+
+googledrive::drive_upload(media = here::here("processed_data", "needsManualCorrections.csv"), 
+             path = "dress code/", 
+             name = "manualCorrections", 
+             type = "spreadsheet")
+
 ```
+
+
+
 
 ```{r message = FALSE, echo = FALSE}
 googledrive::drive_download("bannedItems", path = here::here("raw_data", "collected", "bannedItems.csv"), type = "csv", overwrite = TRUE)
@@ -481,6 +556,40 @@ banned <- left_join(longDressCode, bannedAnno)
 ```
 
 Let's take a look again at the banned items highlighting the gender (if any) that these items implicitly target. 
+
+
+
+```{r message = FALSE, echo = FALSE}
+googledrive::drive_download("manualCorrections", path = here::here("raw_data", "collected", "manualCorrections.csv"), type = "csv", overwrite = TRUE)
+
+manual <- read.csv(here::here("raw_data", "collected", "manualCorrections.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " "))
+
+bannedManual <- longDressCode %>% 
+  select(c("School.Name", "School.State.Abbreviation", "item", "type")) %>% 
+  bind_rows(lengthLimits) %>% 
+  bind_rows(promotion) %>% 
+  mutate(item = trimws(item)) %>% 
+  left_join(manual) 
+  
+```
+
+```{r}
+cleanItems <- bannedManual %>% 
+  mutate(item = ifelse(!is.na(itemCorrect), itemCorrect, item),
+         type = ifelse(!is.na(catCorrect), catCorrect, type)) %>% 
+  group_by(type, item) %>% 
+  count() %>% 
+  # Items that showed up in 1% of schools
+  filter(nn >= 3,
+         !is.na(item)) %>% 
+  left_join(bannedAnno) %>% 
+  select(-n) %>% 
+  filter(item != "Are there exemptions for headwear") %>% 
+  rename(n = nn) %>% 
+  arrange(desc(n))
+
+write.csv(cleanItems, "../src/assets/data/bubbleData.csv", row.names = FALSE, na = "" )
+```
 
 ### Body Parts
 
@@ -731,6 +840,7 @@ histogramData <- bannedGenderAll %>%
   select(c(School.Name, pFem, pMal)) %>% 
   left_join(bannedRace) %>% 
   select(-c(n, y)) %>% 
+  mutate(wCat = 0) %>% 
   mutate(femCat = case_when(
     pFem <= 5 ~ 0,
     between(pFem, 5, 10) ~ 1,
@@ -800,18 +910,29 @@ histogramData <- bannedGenderAll %>%
     between(pRac, 95, 100) ~ 19,
     TRUE ~ pRac
   )) %>% 
-  select(-c(pFem, pRac)) %>% 
+  select(-c(pFem, pRac, pMal)) %>% 
   gather(type, group, -School.Name) %>% 
   rename(school = School.Name) %>% 
   mutate(type = case_when(
     type == "femCat" ~ "f",
     type == "malCat" ~ "m",
-    type == "raceCat" ~ "r",
+    type == "raceCat" ~ "c",
+    type == "wCat" ~ "w",
     TRUE ~ "other"
   ))
 
 # Save into JS analysis folder
 write.csv(histogramData, "../src/assets/data/histogramData.csv", row.names = FALSE, na = "")
+```
+
+
+```{r}
+intersections <- banned %>% 
+  replace_na(list(race = "n", gender = "n")) %>% 
+  group_by(gender, race) %>% 
+  count()
+
+intersections
 ```
 
 

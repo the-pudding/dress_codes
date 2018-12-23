@@ -2,6 +2,7 @@
 import debounce from 'lodash.debounce';
 import isMobile from './utils/is-mobile';
 import create from './create';
+import bubble from './bubble'
 
 const $body = d3.select('body');
 let previousWidth = 0;
@@ -37,7 +38,8 @@ function init() {
 	// setup sticky header menu
 	setupStickyHeader();
 	// kick off graphic code
-	create.init();
+	//create.init();
+	bubble.init()
 }
 
 init();

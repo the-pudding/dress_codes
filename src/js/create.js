@@ -56,11 +56,16 @@ function setupCompleteButton(){
 					else return false
 				})
 
-			console.log({prohibitedItems})
+			const $prohibitedGen = d3.selectAll('.create__prohibited-gender').selectAll('.grid__item')
+			const $prohibitedRace = d3.selectAll('.create__prohibited-race').selectAll('.grid__item')
 
-			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'f').classed('is-feminine', true)
-			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'm').classed('is-masculine', true)
-			prohibitedItems.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'n').classed('is-genNeutral', true)
+			console.log({$prohibitedGen})
+
+			$prohibitedGen.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'f').classed('is-feminine', true)
+			$prohibitedGen.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'm').classed('is-masculine', true)
+			$prohibitedGen.filter((d, i, n) => d3.select(n[i]).attr('data-gen') === 'n').classed('is-genNeutral', true)
+			$prohibitedRace.filter((d, i, n) => d3.select(n[i]).attr('data-race') === 'y').classed('is-race', true)
+			$prohibitedRace.filter((d, i, n) => d3.select(n[i]).attr('data-race') === 'n').classed('is-race', false)
 
 			// turn on histogram annotations
 			const femGroup = Math.floor(pFem/5)

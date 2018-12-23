@@ -1,0 +1,228 @@
+type,item,n,gender,race
+promotion,alcohol,286,NA,NA
+length,short shorts,277,f,NA
+promotion,drugs,256,NA,NA
+body,midsection midriff,245,f,NA
+length,short skirts,241,f,NA
+promotion,tobacco,241,NA,NA
+headwear,hats,230,m,c
+promotion,gangs,206,m,c
+promotion,vulgarity/profanity,198,NA,NA
+footwear,bare feet,196,NA,NA
+undergarment,visible,182,NA,NA
+pants,sagging rest below waist,156,m,c
+accessories,sunglasses,152,NA,NA
+promotion,violence,152,NA,NA
+headwear,bandanas,151,m,c
+promotion,obscene,151,NA,NA
+clothing,see through sheer,149,f,NA
+length,short dresses,144,f,NA
+shirt,tube strapless,142,f,NA
+promotion,discriminatory,139,NA,NA
+shirt,spaghetti string straps,135,f,NA
+accessories,chains,134,m,c
+clothing,low necklines,132,f,NA
+shirt,halter tops,130,f,NA
+headwear,head coverings,127,m,c
+promotion,sex,123,NA,NA
+headwear,hoods,122,m,c
+clothing,pajamas,121,NA,NA
+footwear,slippers soft sole shoes,118,NA,NA
+headwear,caps,109,m,c
+shirt,muscle shirts open sides,100,m,NA
+shirt,tank tops,96,NA,NA
+clothing,too tight,91,f,NA
+accessories,spiked studded accessories,90,NA,NA
+promotion,offensive,84,NA,NA
+pants,leggings yoga pants  without cover,82,f,NA
+body,cleavage,76,f,NA
+clothing,too loose,73,m,c
+clothing,revealing,68,f,NA
+accessories,unsafe accessories,64,NA,NA
+shirt,crop top,62,f,NA
+grooming,piercings other than ear lobes,57,f,NA
+shirt,backless,57,f,NA
+clothing,fishnet mesh attire,56,f,NA
+accessories,jackets,55,NA,NA
+undergarment,visible  specifically including bras and or bra straps,55,f,NA
+accessories,wallet chains,53,m,NA
+body,breasts chest,51,f,NA
+body,back,50,f,NA
+promotion,double meanings,50,NA,NA
+headwear,scarves,47,f,c
+promotion,weapons,47,NA,NA
+pants,with holes above mid thigh,45,NA,NA
+shirt,sleeveless,45,m,NA
+accessories,trench coats,43,m,NA
+grooming,disruptive  hair color,43,f,NA
+shorts,bike shorts,41,f,NA
+accessories,blankets,40,NA,NA
+clothing,extremely brief short,40,f,NA
+clothing,frayed cut torn with holes,40,NA,NA
+promotion,suggestive,38,NA,NA
+body,buttocks,37,NA,NA
+footwear,roller blades shoes with wheels,35,NA,NA
+grooming,disruptive hairstyles,35,NA,c
+shorts,cutoffs un hemmed,34,f,NA
+skirt.dress,backless,34,f,NA
+clothing,sexually provocative suggestive,33,f,NA
+clothing,spandex,31,f,NA
+headwear,sweat bands,31,m,c
+clothing,immodest,29,f,NA
+body,shoulders,26,NA,NA
+grooming,hairstyles that obstruct vision,26,NA,c
+headwear,do rags,26,m,c
+headwear,headbands,26,m,c
+grooming,dirty hair,25,NA,NA
+undergarment,none,25,f,NA
+body,torso,24,NA,NA
+clothing,dirty,24,NA,NA
+footwear,cleats,24,NA,NA
+headwear,beanie skull cap,24,m,c
+footwear,unsafe,23,NA,NA
+grooming,long hair,22,NA,NA
+pants,un hemmed,22,NA,NA
+shirt,off the shoulder,21,f,NA
+shirt,undershirts,21,m,NA
+accessories,collars,20,NA,NA
+grooming,untidy hair,20,NA,NA
+pants,with holes above knee,20,NA,NA
+clothing,low backlines,19,f,NA
+promotion,illegal for minors,19,NA,NA
+grooming,designs cut in hair,18,m,c
+grooming,earrings,18,NA,NA
+grooming,visible tattoos,18,NA,NA
+headwear,hair nets,18,m,c
+headwear,visors,18,NA,NA
+shirt,unfastened,18,NA,NA
+accessories,ear gauges,17,NA,NA
+shirt,excessively long,17,m,c
+undergarment,undergarments as outergarments,17,NA,NA
+accessories,backpacks,16,NA,NA
+clothing,beachwear swim suit sun suit,16,NA,NA
+pants,with holes,16,NA,NA
+shirt,too short to touch top of pants,16,f,NA
+skirt.dress,strapless dresses,16,f,NA
+grooming,combs picks worn in hair,15,m,c
+grooming,ungroomed hair,15,NA,NA
+shorts,athletic gym shorts,15,m,NA
+accessories,gloves,14,NA,NA
+accessories,masks,14,NA,NA
+grooming,facial hair,14,m,NA
+grooming,mohawks,14,m,NA
+length,short skorts,14,NA,NA
+skirt.dress,un hemmed,14,f,NA
+clothing,damaging to school property,13,NA,NA
+footwear,flip flops,13,NA,NA
+grooming,face paint,13,NA,NA
+shirt,racer t back,13,f,NA
+footwear,steel toe boots,12,NA,NA
+promotion,nudity,12,NA,NA
+shirt,one shoulder,12,f,NA
+grooming,dirty body,11,NA,NA
+accessories,sharp accessories,10,NA,NA
+body,inappropriate amounts of skin,10,f,NA
+clothing,excessively torn,10,NA,NA
+grooming,inappropriate tattoos,10,NA,NA
+grooming,razor cut in eyebrows,10,m,c
+pants,leggings yoga pants  with cover,10,f,NA
+promotion,death,10,NA,NA
+promotion,Satanic,10,NA,NA
+accessories,grill teeth,9,m,c
+clothing,costumes,9,NA,NA
+clothing,in bad repair,9,NA,NA
+grooming,costume contact lenses,9,NA,NA
+headwear,stocking caps,9,m,c
+pants,low cut pants,9,NA,NA
+pants,unfastened overalls,9,NA,NA
+shirt,athletic jerseys,9,NA,NA
+shirt,too short to tuck in,9,f,NA
+footwear,damaging to school property,8,NA,NA
+grooming,hair rollers,8,f,NA
+grooming,ponytails,8,NA,NA
+promotion,cults,8,NA,NA
+accessories,belt chains,7,m,NA
+accessories,unfastened belts,7,NA,NA
+footwear,stocking feet,7,NA,NA
+grooming,writing on body,7,NA,NA
+length,short pants,7,NA,NA
+pants,dangerously long pants,7,NA,NA
+promotion,suicide,7,NA,NA
+shirt,un-hemmed,7,NA,NA
+accessories,headphones,6,NA,NA
+body,sides,6,NA,NA
+clothing,clothing not worn in the intended manner,6,NA,NA
+clothing,untidy,6,NA,NA
+footwear,tap shoes,6,NA,NA
+grooming,make-up,6,f,NA
+promotion,controversial,6,NA,NA
+promotion,illegal activities,6,NA,NA
+promotion,immoral,6,NA,NA
+shirt,absence of shirt,6,m,NA
+accessories,damaging to property,5,NA,NA
+accessories,dangling belts,5,NA,NA
+accessories,dog chains,5,NA,NA
+accessories,pillows,5,NA,NA
+accessories,pocket chains,5,m,NA
+accessories,purses,5,f,NA
+accessories,spiked studded belt,5,NA,NA
+grooming,untidy,5,NA,NA
+headwear,handkerchiefs,5,NA,NA
+promotion,anti-social behavior,5,NA,NA
+promotion,confederate flag,5,NA,w
+promotion,illegal substances,5,NA,NA
+promotion,inappropriate,5,NA,NA
+promotion,occult,5,NA,NA
+promotion,skulls,5,NA,NA
+skirt.dress,spaghetti strap dresses,5,f,NA
+accessories,athletic bags,4,NA,NA
+accessories,earmuffs,4,NA,NA
+accessories,hanging belts,4,NA,NA
+accessories,rings joining 2 or more fingers,4,NA,NA
+accessories,safety pins,4,NA,NA
+body,genitals,4,NA,NA
+body,skin above mid-thigh,4,f,NA
+clothing,clothing that calls undue attention,4,f,NA
+clothing,inside out,4,NA,NA
+grooming,excessive fragrance/cologne,4,NA,NA
+grooming,excessive make-up,4,f,NA
+grooming,rat-tails,4,NA,NA
+length,short jumpers,4,f,NA
+pants,rolled up pant leg,4,m,c
+pants,sweat pants,4,NA,NA
+promotion,pornography,4,NA,NA
+promotion,swastikas,4,NA,w
+promotion,threatening,4,NA,NA
+undergarment,braless,4,f,NA
+accessories,arm bands,3,NA,NA
+accessories,bike chains,3,NA,NA
+accessories,long chains,3,m,c
+accessories,stuffed animals,3,NA,NA
+accessories,towels,3,m,c
+body,hips,3,NA,NA
+body,underarms,3,NA,NA
+clothing,full body camouflage,3,NA,NA
+clothing,hides face,3,NA,NA
+clothing,holes in inappropriate areas,3,NA,NA
+clothing,not fully clothed,3,NA,NA
+clothing,scoop back,3,f,NA
+clothing,scoop neck,3,f,NA
+footwear,high heels stilettos,3,f,NA
+footwear,shoes with spikes,3,NA,NA
+grooming,bad hygiene,3,NA,NA
+grooming,braids,3,NA,c
+grooming,faux hawks,3,NA,NA
+grooming,nail polish,3,f,NA
+grooming,tails,3,NA,NA
+grooming,untidy facial hair,3,NA,NA
+pants,excessively torn,3,NA,NA
+pants,transparent leggings,3,f,NA
+pants,with holes in inappropriate areas,3,NA,NA
+pants,words printed across the rear,3,f,NA
+promotion,fighting words,3,NA,NA
+shirt,bandeau,3,f,NA
+shirt,too short to cover midriff,3,f,NA
+shorts,boxer shorts,3,NA,NA
+shorts,pocket lining visible,3,f,NA
+skirt.dress,halter dresses,3,f,NA
+skirt.dress,off the shoulder,3,f,NA

@@ -19,3 +19,24 @@
   set-type-size('small', true)
   color $gray
   margin-top 0.25rem
+
+.bubble
+  .chart
+    height 900px
+    width 1400px
+
+  .label
+    opacity 0
+    pointer-events none
+
+  .g-circle
+    pointer-events: all;
+    cursor: pointer;
+    &.is-active
+
+      .label
+        opacity 1
+      .label--bg
+        opacity 1
+        stroke-width 4px
+        stroke white
