@@ -31,6 +31,7 @@ To start, I'll only need a few packages, mostly to connect me with the Google Sh
 library(tidyverse)
 library(here)
 library(maps)
+library(treemap)
 ```
 
 ## Downloading Google Drive Data
@@ -168,6 +169,7 @@ elongateCode <- function(type){
     regex <- paste0("\\b", type, "\\b.*?\\gender\\b")
   }
   bonusColumn <- colnames(select(banned, matches(regex)))
+  print(bonusColumn)
   
   new <- banned %>%
     # First sort out any additional items that we added to our bonus column
@@ -582,14 +584,37 @@ cleanItems <- bannedManual %>%
   # Items that showed up in 1% of schools
   filter(nn >= 3,
          !is.na(item)) %>% 
-  left_join(bannedAnno) %>% 
-  select(-n) %>% 
+  #left_join(bannedAnno) %>% 
+  #select(-n) %>% 
   filter(item != "Are there exemptions for headwear") %>% 
   rename(n = nn) %>% 
   arrange(desc(n))
 
-write.csv(cleanItems, "../src/assets/data/bubbleData.csv", row.names = FALSE, na = "" )
+write.csv(cleanItems, here::here("processed_data", "cleanItems.csv"), row.names = FALSE)
+
+#googledrive::drive_upload(media = here::here("processed_data", "cleanItems.csv"), 
+            # path = "dress code/", 
+            # name = "bannedItemsClean", 
+            # type = "spreadsheet")
+
+googledrive::drive_download("bannedItemsClean", path = here::here("raw_data", "collected", "bannedItemsClean.csv"), type = "csv", overwrite = TRUE)
+
+bannedAnnoClean <- read.csv(here::here("raw_data", "collected", "bannedItemsClean.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " ", "NA"))
+
+cleanItemsAnno <- left_join(cleanItems, bannedAnnoClean) %>% 
+    replace_na(list(gender = 'n', race = 'n'))
+
+
+
+write.csv(cleanItemsAnno, "../src/assets/data/bubbleData.csv", row.names = FALSE, na = "n" )
 ```
+
+Let's check out a treemap:
+
+```{r}
+treemap(cleanItemsAnno, index = c("gender", "race", "item"), vSize = "n")
+```
+
 
 ### Body Parts
 

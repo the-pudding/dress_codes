@@ -1,0 +1,91 @@
+---
+title: "For Presentation"
+author: "Amber Thomas"
+date: "12/26/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## What is this?
+
+This file exists to compile only the pieces of analysis that I need for the final presentation of this work. I will be pulling in R scripts from other files (that were originally tested in the `analysisUpdate.Rmd` file).
+
+As always, I'll load the necessary packages.
+
+```{r}
+library(tidyverse)
+library(googledrive)
+```
+
+And the appropriate R scripts.
+```{r}
+source(here::here("r_scripts", "download_data.R"))
+source(here::here("r_scripts", "length_limits.R"))
+source(here::here("r_scripts", "strap_limits.R"))
+source(here::here("r_scripts", "promotion_limits.R"))
+source(here::here("r_scripts", "other_limits.R"))
+source(here::here("r_scripts", "clean_items.R"))
+```
+
+
+## Downloading the data
+
+By running the `download_data.R` file, we automatically downloaded our data and created the dataframe `responses` which is filled with all of our manually-entered dress code data.
+
+## Cleaning the data
+
+### Length restrictions
+
+To find the length restrictions by garment, we can use the `findLength()` and `findLengthByItem()` functions in the `length_limits.R` script. 
+
+```{r}
+length <- findLength(responses)
+lengthByItem <- findLengthByItem(length)
+```
+
+### Strap width restrictions
+
+To find the strap-width restrictions, we can use the `findStrap()` function in the `strap_limits.R` script.
+
+```{r message = FALSE}
+straps <- findStraps(responses)
+```
+
+### Word or picture promotion
+
+To find the items that are banned based on the words or pictures printed upon them, we'll use the `findPromotions()` function in the `promotion_limits.R` script.
+
+```{r}
+promotions <- findPromotions(responses)
+```
+
+### Other banned items
+
+Now we can process everything else using the `findBanned()` function in the `other_limits.R` script.
+
+```{r}
+bannedBySchool <- findBanned(responses)
+bannedByItem <- findBannedByItem(bannedBySchool)
+```
+
+### Combining Banned Items
+
+Alright, now to put the promotions, lengths, straps, and other banned items together. 
+
+```{r}
+allBans <- bannedByItem %>% 
+  bind_rows(promotions, straps, lengthByItem)
+```
+
+And now to clean them (using some manual corrections).
+
+```{r}
+source(here::here("r_scripts", "clean_items.R"))
+cleanBans <- clean_items(allBans)
+```
+
+
+

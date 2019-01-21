@@ -1,0 +1,30 @@
+.item
+  display flex
+  flex-direction column
+
+  .chart
+    display flex
+    flex-direction column
+    width $column-width
+    margin 0 auto
+    align-items: flex-start;
+
+    .race-group
+      display flex
+      flex-direction row
+
+    .bar
+      background-color: red
+      margin 1px
+
+    &-n
+      .bar
+        background-color: $gray
+
+    &-f
+      .bar
+        background-color $primary
+
+    &-m
+      .bar
+        background-color $secondary

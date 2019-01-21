@@ -1,0 +1,38 @@
+<section class='words'>
+  <h3 class='title__section'>{{doc.wordsTitle}}</h3>
+  {{#each doc.wordsIntro}}
+    <p class='prose'>{{{value}}}</p>
+  {{/each}}
+
+  <div class='explicit__example-outer'>
+    <div class='explicit__example-inner'>
+      <p class='example__text'>{{{doc.wordsText1}}}</p>
+      <p class='example__attr'>{{{doc.wordsSchool1}}}</p>
+    </div>
+  </div>
+
+  <div class='explicit__example-outer'>
+    <div class='explicit__example-inner'>
+      <p class='example__text'>{{{doc.wordsText2}}}</p>
+      <p class='example__attr'>{{{doc.wordsSchool2}}}</p>
+    </div>
+  </div>
+
+  <div class='explicit__example-outer'>
+    <div class='explicit__example-inner'>
+      <p class='example__text'>{{{doc.wordsText3}}}</p>
+      <p class='example__attr'>{{{doc.wordsSchool3}}}</p>
+    </div>
+  </div>
+
+  <div class='explicit__example-outer'>
+    <div class='explicit__example-inner'>
+      <p class='example__text'>{{{doc.wordsText4}}}</p>
+      <p class='example__attr'>{{{doc.wordsSchool4}}}</p>
+    </div>
+  </div>
+
+  {{#each doc.wordsMid}}
+    <p class='prose'>{{{value}}}</p>
+  {{/each}}
+</section>

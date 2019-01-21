@@ -1,0 +1,50 @@
+.words
+  .explicit__example-outer
+    background-color $off-white
+    position relative
+    margin 40px auto
+    transform rotate(0)
+    &:first-of-type
+      transform rotate(2deg)
+      max-width 35rem
+    &:nth-of-type(2)
+      max-width 30rem
+    &:nth-of-type(3)
+      max-width 35rem
+      transform rotate(1deg)
+    &:last-of-type
+      max-width 30rem
+      transform rotate(-2deg)
+
+  .explicit__example-inner
+    height auto
+    overflow hidden
+    padding 20px
+    box-shadow 2px 4px 6px rgba(0,0,0,0.15)
+
+    &:before, &:after
+    	content ""
+    	height 1px
+    	position absolute
+    	left 0
+    	right 0
+    	-webkit-clip-path polygon(0% 0%, 5%  100%, 10% 0%, 15%  100%, 20% 0%, 25% 100%, 30% 0%, 35%  100%, 40% 0%, 45%  100%, 50% 0%, 55%  100%, 60% 0%, 65%  100%, 70% 0%, 75%  100%, 80% 0%, 85%  100%, 90% 0%, 95%  100%, 100% 0%)
+    &:before
+    	background-color white
+    	top 0
+    &:after
+    	background-color $off-white
+    	bottom -1px
+
+    .example__text
+      margin 0
+      text-align center
+
+    .example__attr
+      font-weight 400
+      margin 0.5rem 0 0 0
+      text-align right
+      text-transform uppercase
+      color $gray
+      font-family: 'Atlas Grotesk Web'
+      set-type-size('x-small', true)

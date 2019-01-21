@@ -1,0 +1,61 @@
+type,item,n,market,cover
+length,short shorts,251,f,t
+length,short skirts,217,f,t
+undergarment,visible,195,b,f
+pants,sagging rest below waist,165,m,f
+clothing,see through sheer,158,f,t
+shirt,tube strapless,149,f,t
+clothing,low necklines,143,f,t
+shirt,spaghetti string straps,140,f,t
+shirt,halter tops,139,f,t
+length,short dresses,127,f,t
+clothing,pajamas,124,b,f
+shirt,muscle shirts open sides,105,m,t
+shirt,tank tops,98,b,t
+shirt,narrow straps,92,f,t
+pants,leggings yoga pants  without cover,86,f,f
+clothing,too tight,84,,
+clothing,too loose,77,,
+clothing,revealing,71,,
+shirt,crop top,64,f,t
+clothing,fishnet mesh attire,61,f,t
+shirt,backless,60,f,t
+undergarment,visible  specifically including bras and or bra straps,56,b,f
+shirt,sleeveless,49,b,f
+pants,with holes above mid thigh,45,b,t
+clothing,frayed cut torn with holes,42,b,t
+shorts,bike shorts,42,b,t
+clothing,extremely brief short,40,f,t
+shorts,cutoffs un hemmed,37,f,t
+clothing,sexually provocative suggestive,34,,
+skirt.dress,backless,34,f,t
+clothing,spandex,33,b,f
+clothing,immodest,32,,
+undergarment,none,27,b,t
+clothing,dirty,25,,
+pants,un hemmed,23,b,f
+shirt,undershirts,23,b,f
+shirt,off the shoulder,22,f,t
+pants,with holes above knee,21,b,t
+clothing,low backlines,19,f,t
+clothing,beachwear swim suit sun suit,18,b,t
+pants,with holes,17,b,t
+shirt,excessively long,17,b,f
+shirt,too short to touch top of pants,17,f,t
+shorts,athletic gym shorts,17,b,f
+undergarment,undergarments as outergarments,17,,
+skirt.dress,strapless dresses,16,f,t
+shirt,unfastened,15,b,t
+skirt.dress,un hemmed,15,f,f
+shirt,racer t back,14,f,t
+length,short skorts,13,f,t
+shirt,one shoulder,12,f,t
+clothing,damaging to school property,11,,
+clothing,costumes,10,b,f
+clothing,excessively torn,10,b,t
+pants,leggings yoga pants  with cover,10,f,f
+clothing,in bad repair,9,,
+pants,low cut pants,9,f,t
+pants,unfastened overalls,9,b,f
+shirt,athletic jerseys,9,b,f
+shirt,too short to tuck in,9,f,t

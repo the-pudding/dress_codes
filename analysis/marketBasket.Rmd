@@ -1,0 +1,279 @@
+---
+title: "clusters"
+author: "Amber Thomas"
+date: "1/10/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## What is this?
+
+I was curious about whether or not items banned in dress codes were clustered in any way. For instance, if a school dress code bans "crop tops" are they more likely to ban other feminine items as well (spaghetti strap shirts, short shorts etc.)? Same goes for things like "bandanas" - does banning them increase the likelihood that they also banned things like sagging pants, or "disruptive hairstyles"? 
+
+To figure this out, I'm going to use "Market Basket Analysis". 
+
+```{r}
+library(tidyverse)
+library(here)
+library(arules)
+library(arulesViz)
+```
+
+```{r}
+source(here::here("r_scripts", "download_data.R"))
+source(here::here("r_scripts", "other_limits.R"))
+source(here::here("r_scripts", "length_limits.R"))
+```
+
+## Downloading the data
+
+By running the `download_data.R` file, we automatically downloaded our data and created the dataframe `responses` which is filled with all of our manually-entered dress code data.
+
+## Cleaning Data
+
+First, we need to make our very wide data, long. 
+
+```{r}
+bannedBySchool <- findBanned(responses) %>% 
+  select(c(School.Name, School.State.Abbreviation, item, type))
+```
+
+The above data frame does not include things like length restrictions on pants/shorts/skirts, strap width restrictions, and promotion of various types of products/things on shirts. Let's analyze those here: 
+
+### Length Restrictions
+
+```{r}
+length <- findLength(responses)
+lengthBySchool <- length %>% 
+  mutate(type = "length",
+         limits = paste0("short ", limits)) %>% 
+  rename(item = limits) %>% 
+  select(-length)
+```
+
+### Strap Restrictions
+
+```{r}
+straps <- responses %>% 
+  select(c("School.Name", "School.State.Abbreviation"), contains("shirt.straps")) %>% 
+    rename(limits = !!names(.[3])) %>% 
+    filter(limits != "") %>% 
+    # Separate comma delimited list of items
+    separate(limits, into = c("limits", "inches"), sep = ",") %>% 
+    mutate(limits = trimws(limits)) %>% 
+    mutate(item = "narrow straps",
+             type = "shirt") %>% 
+  select(c("School.Name", "School.State.Abbreviation", "item", "type"))
+```
+
+### Promotions
+
+```{r}
+promotion <- responses %>% 
+    select(c("School.Name", "School.State.Abbreviation"), contains("promotion")) %>% 
+    rename(item = !!names(.[3])) %>% 
+    separate_rows(item, sep = ", ") %>% 
+    mutate(item = trimws(item)) %>% 
+    mutate(type = "promotion")
+```
+
+### Rationale
+
+```{r}
+rationale <- responses %>% 
+  select(c(1:6), "Check.any.of.the.following.words.phrases.that.appear.in.the.dress.code.") %>% 
+  separate_rows(7, sep = ",") %>% 
+  rename(words = Check.any.of.the.following.words.phrases.that.appear.in.the.dress.code.) %>% 
+  mutate(words = trimws(words)) %>% 
+  rename(item = words) %>% 
+  mutate(type = "rationale") %>% 
+  select(c("School.Name", "School.State.Abbreviation", "item", "type"))
+```
+
+
+### Combine All
+
+```{r}
+allBans <- bannedBySchool %>% 
+  bind_rows(promotion, straps, lengthBySchool, rationale)
+
+googledrive::drive_download("manualCorrections", path = here::here("raw_data", "collected", "manualCorrections.csv"), type = "csv", overwrite = TRUE)
+  
+  manualCorrect <- read.csv(here::here("raw_data", "collected", "manualCorrections.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " "))
+  
+cleanBans <- allBans %>% 
+    ungroup() %>% 
+    mutate(item = trimws(item)) %>% 
+    left_join(manualCorrect) %>% 
+    mutate(item = ifelse(!is.na(itemCorrect), itemCorrect, item),
+           type = ifelse(!is.na(catCorrect), catCorrect, type)) %>% 
+    select(c(School.Name, School.State.Abbreviation, item, type)) %>% 
+    distinct(School.Name, type, item, .keep_all = TRUE)
+
+write.csv(cleanBans, here::here("processed_data", "cleaned_bans.csv"), row.names = FALSE)
+
+totalBans <- cleanBans %>% 
+  ## Gather all banned items per school into the same cell, comma separated
+  mutate(itemCat = paste0(type, "--", item)) %>% 
+  select(c(School.Name, itemCat)) %>% 
+  group_by(School.Name) %>% 
+  mutate(allItems = paste(itemCat, collapse = ",  ")) %>% 
+  distinct(School.Name, .keep_all = TRUE) %>% 
+  ungroup() %>% 
+  select(allItems) 
+
+
+write.csv(totalBans, here::here("processed_data", "mba_allBans.csv"), row.names = FALSE, quote = FALSE)
+```
+
+## Perform Market Basket Analysis
+
+```{r}
+transactions <- read.transactions(here::here("processed_data", "mba_allBans.csv"), format = "basket", sep = ",")
+```
+
+Let's look at the "transactions":
+
+```{r}
+transactions
+summary(transactions)
+```
+
+Now to generate rules using the APRIORI algorithm. 
+
+```{r}
+associationRules <- apriori(transactions, parameter = list(supp = 0.05, conf = 0.8, maxlen = 5))
+```
+```{r}
+inspect(associationRules[1:20])
+```
+
+```{r}
+bandanaRules <- apriori(transactions, parameter = list(supp = 0.01, conf = 0.8), appearance = list(default="lhs", rhs="headwear--bandanas"))
+```
+
+```{r}
+inspect(bandanaRules[1:20])
+```
+
+```{r}
+bandanaSub <- head(bandanaRules, n = 20, by = "confidence")
+plot(bandanaSub, method = "graph", engine = "htmlwidget")
+```
+
+Let's look at a subset of all of the rules. 
+```{r}
+sub <- head(associationRules, n = 50, by = "confidence")
+```
+
+```{r}
+plot(sub, method = "graph", engine = "htmlwidget")
+```
+
+```{r}
+sub2 <- head(associationRules, n = 50, by = "confidence")
+plot(sub2, method="graph", engine = "htmlwidget")
+```
+
+
+Let's take a look at spaghetti strap shirts
+
+```{r}
+cropRules <- apriori(transactions, parameter = list(supp = 0.001, conf = 0.5, maxlen = 3), appearance = list(default="rhs", lhs="rationale--respect/disrespect"))
+```
+```{r}
+cropSub <- head(cropRules, n = 20, by = "lift")
+plot(cropSub, method = "graph", engine = "htmlwidget")
+```
+
+### For Alvin
+
+Alvin asked for two numbers: 
+
+- The % of schools that explicitly ban one of the 7 most popular body parts
+- The % of schools that use `appropriate/inappropriate`, `disruption/distraction` or `interfere with learning` in their rationale. 
+
+```{r}
+bodyParts <- c("midsection midriff", "cleavage", "breasts chest", "back", "buttocks", "shoulders", "breasts")
+
+bodyPartPer <- cleanBans %>% 
+  filter(type == "body") %>% 
+  filter(item %in% bodyParts) %>% 
+  distinct(School.Name)
+
+nrow(bodyPartPer) / nrow(responses)
+```
+
+```{r}
+rat <- c("disruption/distraction", "appropriate/inappropriate", "interfere with learning")
+
+ratPer <- cleanBans %>% 
+  filter(type == "rationale") %>% 
+  filter(item %in% rat) %>% 
+  distinct(School.Name)
+
+nrow(ratPer) / nrow(responses)
+```
+
+Let's generate a spreadsheet with links and the actual writing of the dress codes
+```{r}
+links <- responses %>% 
+  select(2:6) 
+
+write.csv(links, here::here("processed_data", "links.csv"), row.names = FALSE)
+```
+
+```{r}
+body <- allBans %>% 
+  filter(type == "body") %>% 
+  distinct(School.Name)
+
+nrow(body)/nrow(responses)
+
+bodyPer <- cleanBans %>% 
+  filter(School.Name %in% body$School.Name) %>% 
+  filter(type == "body") %>% 
+  count(item, sort = TRUE) %>% 
+  mutate(per = n/nrow(responses))
+
+ggplot(head(bodyPer, n = 15), aes(x = reorder(item, n), y = n)) + geom_bar(stat = "identity")
+```
+
+```{r}
+items <- cleanBans %>% 
+  filter(type != "promotion",
+         type != "rationale", 
+         type != "body",
+         type != "footwear",
+         type != "headwear", 
+         type != "grooming",
+         type != "accessories") %>% 
+  group_by(type, item) %>% 
+  count(., sort = TRUE) %>% 
+  filter(n >= (0.02 * nrow(responses))) %>% 
+  mutate(per = n / nrow(responses))
+
+write.csv(items, here::here("processed_data", "items.csv"), row.names = FALSE)
+
+googledrive::drive_download("items", path = here::here("raw_data", "collected", "manualItems.csv"), type = "csv", overwrite = TRUE)
+  
+  manualItems<- read.csv(here::here("raw_data", "collected", "manualItems.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " "))
+  
+manualCounts <- manualItems %>% 
+  filter(!is.na(market)) %>% 
+  group_by(market, cover) %>% 
+  count(., sort = TRUE)
+
+
+```
+
+
+```{r}
+respect <- responses %>% 
+  filter(str_detect(Copy.Dress.Code.Justification.Here, "established to teach grooming and hygiene, prevent disruption")) %>% 
+  select(c(School.Name, School.State.Abbreviation, Copy.Dress.Code.Justification.Here))
+```
+
