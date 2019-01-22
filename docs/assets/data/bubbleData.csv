@@ -1,0 +1,228 @@
+"type","item","n","gender","race"
+"promotion","alcohol",286,n,n
+"length","short shorts",277,"f",n
+"promotion","drugs",256,n,n
+"body","midsection midriff",245,"f",n
+"length","short skirts",241,"f",n
+"promotion","tobacco",241,n,n
+"headwear","hats",230,"m","c"
+"promotion","gangs",206,"m","c"
+"promotion","vulgarity/profanity",198,n,n
+"footwear","bare feet",196,n,n
+"undergarment","visible",182,n,n
+"pants","sagging rest below waist",156,"m","c"
+"accessories","sunglasses",152,n,n
+"promotion","violence",152,n,n
+"headwear","bandanas",151,"m","c"
+"promotion","obscene",151,n,n
+"clothing","see through sheer",149,"f",n
+"length","short dresses",144,"f",n
+"shirt","tube strapless",142,"f",n
+"promotion","discriminatory",139,n,n
+"shirt","spaghetti string straps",135,"f",n
+"accessories","chains",134,"m","c"
+"clothing","low necklines",132,"f",n
+"shirt","halter tops",130,"f",n
+"headwear","head coverings",127,"m","c"
+"promotion","sex",123,n,n
+"headwear","hoods",122,"m","c"
+"clothing","pajamas",121,n,n
+"footwear","slippers soft sole shoes",118,n,n
+"headwear","caps",109,"m","c"
+"shirt","muscle shirts open sides",100,"m",n
+"shirt","tank tops",96,n,n
+"clothing","too tight",91,"f",n
+"accessories","spiked studded accessories",90,n,n
+"promotion","offensive",84,n,n
+"pants","leggings yoga pants  without cover",82,"f",n
+"body","cleavage",76,"f",n
+"clothing","too loose",73,"m","c"
+"clothing","revealing",68,"f",n
+"accessories","unsafe accessories",64,n,n
+"shirt","crop top",62,"f",n
+"grooming","piercings other than ear lobes",57,"f",n
+"shirt","backless",57,"f",n
+"clothing","fishnet mesh attire",56,"f",n
+"accessories","jackets",55,n,n
+"undergarment","visible  specifically including bras and or bra straps",55,"f",n
+"accessories","wallet chains",53,"m",n
+"body","breasts chest",51,"f",n
+"body","back",50,"f",n
+"promotion","double meanings",50,n,n
+"headwear","scarves",47,"f","c"
+"promotion","weapons",47,n,n
+"pants","with holes above mid thigh",45,n,n
+"shirt","sleeveless",45,"m",n
+"accessories","trench coats",43,"m",n
+"grooming","disruptive  hair color",43,"f",n
+"shorts","bike shorts",41,"f",n
+"accessories","blankets",40,n,n
+"clothing","extremely brief short",40,"f",n
+"clothing","frayed cut torn with holes",40,n,n
+"promotion","suggestive",38,n,n
+"body","buttocks",37,n,n
+"footwear","roller blades shoes with wheels",35,n,n
+"grooming","disruptive hairstyles",35,n,"c"
+"shorts","cutoffs un hemmed",34,"f",n
+"skirt.dress","backless",34,"f",n
+"clothing","sexually provocative suggestive",33,"f",n
+"clothing","spandex",31,"f",n
+"headwear","sweat bands",31,"m","c"
+"clothing","immodest",29,"f",n
+"body","shoulders",26,n,n
+"grooming","hairstyles that obstruct vision",26,n,"c"
+"headwear","do rags",26,"m","c"
+"headwear","headbands",26,"m","c"
+"grooming","dirty hair",25,n,n
+"undergarment","none",25,"f",n
+"body","torso",24,n,n
+"clothing","dirty",24,n,n
+"footwear","cleats",24,n,n
+"headwear","beanie skull cap",24,"m","c"
+"footwear","unsafe",23,n,n
+"grooming","long hair",22,n,n
+"pants","un hemmed",22,n,n
+"shirt","off the shoulder",21,"f",n
+"shirt","undershirts",21,"m",n
+"accessories","collars",20,n,n
+"grooming","untidy hair",20,n,n
+"pants","with holes above knee",20,n,n
+"clothing","low backlines",19,"f",n
+"promotion","illegal for minors",19,n,n
+"grooming","designs cut in hair",18,"m","c"
+"grooming","earrings",18,n,n
+"grooming","visible tattoos",18,n,n
+"headwear","hair nets",18,"m","c"
+"headwear","visors",18,n,n
+"shirt","unfastened",18,n,n
+"accessories","ear gauges",17,n,n
+"shirt","excessively long",17,"m","c"
+"undergarment","undergarments as outergarments",17,n,n
+"accessories","backpacks",16,n,n
+"clothing","beachwear swim suit sun suit",16,n,n
+"pants","with holes",16,n,n
+"shirt","too short to touch top of pants",16,"f",n
+"skirt.dress","strapless dresses",16,"f",n
+"grooming","combs picks worn in hair",15,"m","c"
+"grooming","ungroomed hair",15,n,n
+"shorts","athletic gym shorts",15,"m",n
+"accessories","gloves",14,n,n
+"accessories","masks",14,n,n
+"grooming","facial hair",14,"m",n
+"grooming","mohawks",14,"m",n
+"length","short skorts",14,n,n
+"skirt.dress","un hemmed",14,"f",n
+"clothing","damaging to school property",13,n,n
+"footwear","flip flops",13,n,n
+"grooming","face paint",13,n,n
+"shirt","racer t back",13,"f",n
+"footwear","steel toe boots",12,n,n
+"promotion","nudity",12,n,n
+"shirt","one shoulder",12,"f",n
+"grooming","dirty body",11,n,n
+"accessories","sharp accessories",10,n,n
+"body","inappropriate amounts of skin",10,"f",n
+"clothing","excessively torn",10,n,n
+"grooming","inappropriate tattoos",10,n,n
+"grooming","razor cut in eyebrows",10,"m","c"
+"pants","leggings yoga pants  with cover",10,"f",n
+"promotion","death",10,n,n
+"promotion","Satanic",10,n,n
+"accessories","grill teeth",9,"m","c"
+"clothing","costumes",9,n,n
+"clothing","in bad repair",9,n,n
+"grooming","costume contact lenses",9,n,n
+"headwear","stocking caps",9,"m","c"
+"pants","low cut pants",9,n,n
+"pants","unfastened overalls",9,n,n
+"shirt","athletic jerseys",9,n,n
+"shirt","too short to tuck in",9,"f",n
+"footwear","damaging to school property",8,n,n
+"grooming","hair rollers",8,"f",n
+"grooming","ponytails",8,n,n
+"promotion","cults",8,n,n
+"accessories","belt chains",7,"m",n
+"accessories","unfastened belts",7,n,n
+"footwear","stocking feet",7,n,n
+"grooming","writing on body",7,n,n
+"length","short pants",7,n,n
+"pants","dangerously long pants",7,n,n
+"promotion","suicide",7,n,n
+"shirt","un-hemmed",7,n,n
+"accessories","headphones",6,n,n
+"body","sides",6,n,n
+"clothing","clothing not worn in the intended manner",6,n,n
+"clothing","untidy",6,n,n
+"footwear","tap shoes",6,n,n
+"grooming","make-up",6,"f",n
+"promotion","controversial",6,n,n
+"promotion","illegal activities",6,n,n
+"promotion","immoral",6,n,n
+"shirt","absence of shirt",6,"m",n
+"accessories","damaging to property",5,n,n
+"accessories","dangling belts",5,n,n
+"accessories","dog chains",5,n,n
+"accessories","pillows",5,n,n
+"accessories","pocket chains",5,"m",n
+"accessories","purses",5,"f",n
+"accessories","spiked studded belt",5,n,n
+"grooming","untidy",5,n,n
+"headwear","handkerchiefs",5,n,n
+"promotion","anti-social behavior",5,n,n
+"promotion","confederate flag",5,n,"w"
+"promotion","illegal substances",5,n,n
+"promotion","inappropriate",5,n,n
+"promotion","occult",5,n,n
+"promotion","skulls",5,n,n
+"skirt.dress","spaghetti strap dresses",5,"f",n
+"accessories","athletic bags",4,n,n
+"accessories","earmuffs",4,n,n
+"accessories","hanging belts",4,n,n
+"accessories","rings joining 2 or more fingers",4,n,n
+"accessories","safety pins",4,n,n
+"body","genitals",4,n,n
+"body","skin above mid-thigh",4,"f",n
+"clothing","clothing that calls undue attention",4,"f",n
+"clothing","inside out",4,n,n
+"grooming","excessive fragrance/cologne",4,n,n
+"grooming","excessive make-up",4,"f",n
+"grooming","rat-tails",4,n,n
+"length","short jumpers",4,"f",n
+"pants","rolled up pant leg",4,"m","c"
+"pants","sweat pants",4,n,n
+"promotion","pornography",4,n,n
+"promotion","swastikas",4,n,"w"
+"promotion","threatening",4,n,n
+"undergarment","braless",4,"f",n
+"accessories","arm bands",3,n,n
+"accessories","bike chains",3,n,n
+"accessories","long chains",3,"m","c"
+"accessories","stuffed animals",3,n,n
+"accessories","towels",3,"m","c"
+"body","hips",3,n,n
+"body","underarms",3,n,n
+"clothing","full body camouflage",3,n,n
+"clothing","hides face",3,n,n
+"clothing","holes in inappropriate areas",3,n,n
+"clothing","not fully clothed",3,n,n
+"clothing","scoop back",3,"f",n
+"clothing","scoop neck",3,"f",n
+"footwear","high heels stilettos",3,"f",n
+"footwear","shoes with spikes",3,n,n
+"grooming","bad hygiene",3,n,n
+"grooming","braids",3,n,"c"
+"grooming","faux hawks",3,n,n
+"grooming","nail polish",3,"f",n
+"grooming","tails",3,n,n
+"grooming","untidy facial hair",3,n,n
+"pants","excessively torn",3,n,n
+"pants","transparent leggings",3,"f",n
+"pants","with holes in inappropriate areas",3,n,n
+"pants","words printed across the rear",3,"f",n
+"promotion","fighting words",3,n,n
+"shirt","bandeau",3,"f",n
+"shirt","too short to cover midriff",3,"f",n
+"shorts","boxer shorts",3,n,n
+"shorts","pocket lining visible",3,"f",n
+"skirt.dress","halter dresses",3,"f",n
+"skirt.dress","off the shoulder",3,"f",n
