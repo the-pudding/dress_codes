@@ -1,0 +1,14 @@
+<section class='more'>
+  <h3>{{{doc.moreTitle}}}</h3>
+  {{#each doc.more}}
+    <p class='prose'>{{{value}}}</p>
+  {{/each}}
+
+  {{#each doc.more-list}}
+    <div class='more__source'>
+      <p class='more__title'><a href="{{{link}}}" target="_blank">{{{title}}}</a></p>
+      <p class='more__attr'>{{{author}}} &bull; <span class='more__year'>{{{year}}}</span></p>
+      <p class='more__desc'>{{{text}}}</p>
+    </div>
+  {{/each}}
+</section>
