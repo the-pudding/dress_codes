@@ -1,61 +1,61 @@
-"type","item","n"
-"length","short shorts",251
-"length","short skirts",217
-"undergarment","visible",195
-"pants","sagging rest below waist",165
-"clothing","see through sheer",158
-"shirt","tube strapless",149
-"clothing","low necklines",143
-"shirt","spaghetti string straps",140
-"shirt","halter tops",139
-"length","short dresses",127
-"clothing","pajamas",124
-"shirt","muscle shirts open sides",105
-"shirt","tank tops",98
-"shirt","narrow straps",92
-"pants","leggings yoga pants  without cover",86
-"clothing","too tight",84
-"clothing","too loose",77
-"clothing","revealing",71
-"shirt","crop top",64
-"clothing","fishnet mesh attire",61
-"shirt","backless",60
-"undergarment","visible  specifically including bras and or bra straps",56
-"shirt","sleeveless",49
-"pants","with holes above mid thigh",45
-"clothing","frayed cut torn with holes",42
-"shorts","bike shorts",42
-"clothing","extremely brief short",40
-"shorts","cutoffs un hemmed",37
-"clothing","sexually provocative suggestive",34
-"skirt.dress","backless",34
-"clothing","spandex",33
-"clothing","immodest",32
-"undergarment","none",27
-"clothing","dirty",25
-"pants","un hemmed",23
-"shirt","undershirts",23
-"shirt","off the shoulder",22
-"pants","with holes above knee",21
-"clothing","low backlines",19
-"clothing","beachwear swim suit sun suit",18
-"pants","with holes",17
-"shirt","excessively long",17
-"shirt","too short to touch top of pants",17
-"shorts","athletic gym shorts",17
-"undergarment","undergarments as outergarments",17
-"skirt.dress","strapless dresses",16
-"shirt","unfastened",15
-"skirt.dress","un hemmed",15
-"shirt","racer t back",14
-"length","short skorts",13
-"shirt","one shoulder",12
-"clothing","damaging to school property",11
-"clothing","costumes",10
-"clothing","excessively torn",10
-"pants","leggings yoga pants  with cover",10
-"clothing","in bad repair",9
-"pants","low cut pants",9
-"pants","unfastened overalls",9
-"shirt","athletic jerseys",9
-"shirt","too short to tuck in",9
+"type","item","n","per"
+"length","short shorts",275,0.705128205128205
+"length","short skirts",238,0.61025641025641
+"undergarment","visible",210,0.538461538461538
+"pants","sagging rest below waist",177,0.453846153846154
+"clothing","see through sheer",167,0.428205128205128
+"shirt","tube strapless",160,0.41025641025641
+"shirt","spaghetti string straps",152,0.38974358974359
+"shirt","halter tops",151,0.387179487179487
+"clothing","low necklines",147,0.376923076923077
+"length","short dresses",140,0.358974358974359
+"clothing","pajamas",131,0.335897435897436
+"shirt","muscle shirts open sides",110,0.282051282051282
+"shirt","tank tops",106,0.271794871794872
+"shirt","narrow straps",98,0.251282051282051
+"clothing","too tight",89,0.228205128205128
+"pants","leggings yoga pants  without cover",89,0.228205128205128
+"clothing","too loose",77,0.197435897435897
+"clothing","revealing",75,0.192307692307692
+"shirt","crop top",70,0.179487179487179
+"shirt","backless",68,0.174358974358974
+"clothing","fishnet mesh attire",64,0.164102564102564
+"undergarment","visible  specifically including bras and or bra straps",59,0.151282051282051
+"pants","with holes above mid thigh",52,0.133333333333333
+"shirt","sleeveless",51,0.130769230769231
+"clothing","frayed cut torn with holes",48,0.123076923076923
+"clothing","extremely brief short",46,0.117948717948718
+"shorts","bike shorts",45,0.115384615384615
+"shorts","cutoffs un hemmed",40,0.102564102564103
+"clothing","sexually provocative suggestive",38,0.0974358974358974
+"skirt.dress","backless",36,0.0923076923076923
+"clothing","spandex",34,0.0871794871794872
+"clothing","immodest",32,0.0820512820512821
+"shirt","off the shoulder",27,0.0692307692307692
+"undergarment","none",27,0.0692307692307692
+"clothing","dirty",25,0.0641025641025641
+"shirt","undershirts",24,0.0615384615384615
+"pants","un hemmed",23,0.058974358974359
+"pants","with holes above knee",21,0.0538461538461538
+"clothing","low backlines",20,0.0512820512820513
+"pants","with holes",19,0.0487179487179487
+"shorts","athletic gym shorts",19,0.0487179487179487
+"clothing","beachwear swim suit sun suit",18,0.0461538461538462
+"shirt","excessively long",17,0.0435897435897436
+"shirt","too short to touch top of pants",17,0.0435897435897436
+"undergarment","undergarments as outergarments",17,0.0435897435897436
+"skirt.dress","strapless dresses",16,0.041025641025641
+"shirt","unfastened",15,0.0384615384615385
+"skirt.dress","un hemmed",15,0.0384615384615385
+"shirt","racer t back",14,0.0358974358974359
+"length","short skorts",13,0.0333333333333333
+"shirt","one shoulder",12,0.0307692307692308
+"clothing","damaging to school property",11,0.0282051282051282
+"pants","leggings yoga pants  with cover",11,0.0282051282051282
+"clothing","costumes",10,0.0256410256410256
+"clothing","excessively torn",10,0.0256410256410256
+"shirt","athletic jerseys",10,0.0256410256410256
+"clothing","in bad repair",9,0.0230769230769231
+"pants","low cut pants",9,0.0230769230769231
+"pants","unfastened overalls",9,0.0230769230769231
+"shirt","too short to tuck in",9,0.0230769230769231

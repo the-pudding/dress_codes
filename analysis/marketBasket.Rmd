@@ -267,6 +267,12 @@ manualCounts <- manualItems %>%
   group_by(market, cover) %>% 
   count(., sort = TRUE)
 
+rat <- cleanBans %>% 
+  filter(type == "rationale") %>% 
+  group_by(item) %>% 
+  count(., sort = TRUE) %>% 
+  mutate(per = n / nrow(responses))
+
 
 ```
 
