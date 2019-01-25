@@ -2,3 +2,56 @@
   img
     max-width 871px
     margin 0 auto
+    display none
+
+  .container__clothes
+    display flex
+    flex-direction column
+    justify-content: center;
+    .clothes__all
+      margin 0 auto
+      display flex
+      flex-direction row-reverse
+      align-items: flex-end;
+
+      .clothes__group
+        margin 0 0.25rem
+        display flex
+        flex-direction column
+        align-items center
+        width 120px
+
+      .clothes__items
+        margin 0
+        font-family $national
+        set-type-size('small', true)
+
+      .items__market-f
+        color $primary
+
+      .items__market-m
+        color darken($secondary, 10)
+
+    .axis__group
+      display flex
+      flex-direction column
+      justify-content: center;
+      width 120px
+      margin 0.5rem 0.25rem
+      border-top 1px solid lighten($gray-light, 5)
+
+      .axis__text
+        text-align: center
+        font-family $national
+        font-weight 600
+        color $gray
+        margin-bottom 0
+        margin-top 0.25rem
+
+        &-sub
+          font-family $national
+          text-align: center;
+          set-type-size('small', true)
+          color $gray
+          margin-top 0
+          line-height 1

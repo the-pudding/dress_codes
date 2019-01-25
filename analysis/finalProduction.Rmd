@@ -1,0 +1,191 @@
+---
+title: "Final Production"
+author: "Amber Thomas"
+date: "1/24/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Every cell in this markdown file can be run to update the data in the web version of the dress codes story. 
+
+```{r packages}
+library(tidyverse)
+library(here)
+```
+
+## Importing Data
+
+```{r}
+source(here::here("r_scripts", "download_data.R"))
+source(here::here("r_scripts", "other_limits.R"))
+source(here::here("r_scripts", "length_limits.R"))
+```
+
+## Downloading the data
+
+By running the `download_data.R` file, we automatically downloaded our data and created the dataframe `responses` which is filled with all of our manually-entered dress code data.
+
+## Cleaning Data
+
+First, we need to make our very wide data, long. 
+
+```{r}
+bannedBySchool <- findBanned(responses) %>% 
+  select(c(School.Name, School.State.Abbreviation, item, type))
+```
+
+The above data frame does not include things like length restrictions on pants/shorts/skirts, strap width restrictions, and promotion of various types of products/things on shirts. Let's analyze those here: 
+
+### Length Restrictions
+
+```{r}
+length <- findLength(responses)
+lengthBySchool <- length %>% 
+  mutate(type = "length",
+         limits = paste0("short ", limits)) %>% 
+  rename(item = limits) %>% 
+  select(-length)
+```
+
+### Strap Restrictions
+
+```{r}
+straps <- responses %>% 
+  select(c("School.Name", "School.State.Abbreviation"), contains("shirt.straps")) %>% 
+    rename(limits = !!names(.[3])) %>% 
+    filter(limits != "") %>% 
+    # Separate comma delimited list of items
+    separate(limits, into = c("limits", "inches"), sep = ",") %>% 
+    mutate(limits = trimws(limits)) %>% 
+    mutate(item = "narrow straps",
+             type = "shirt") %>% 
+  select(c("School.Name", "School.State.Abbreviation", "item", "type"))
+```
+
+### Promotions
+
+```{r}
+promotion <- responses %>% 
+    select(c("School.Name", "School.State.Abbreviation"), contains("promotion")) %>% 
+    rename(item = !!names(.[3])) %>% 
+    separate_rows(item, sep = ", ") %>% 
+    mutate(item = trimws(item)) %>% 
+    mutate(type = "promotion")
+```
+
+### Rationale
+
+```{r}
+rationale <- responses %>% 
+  select(c(1:6), "Check.any.of.the.following.words.phrases.that.appear.in.the.dress.code.") %>% 
+  separate_rows(7, sep = ",") %>% 
+  rename(words = Check.any.of.the.following.words.phrases.that.appear.in.the.dress.code.) %>% 
+  mutate(words = trimws(words)) %>% 
+  rename(item = words) %>% 
+  mutate(type = "rationale") %>% 
+  select(c("School.Name", "School.State.Abbreviation", "item", "type"))
+```
+
+
+### Combine All
+
+```{r}
+allBans <- bannedBySchool %>% 
+  bind_rows(promotion, straps, lengthBySchool, rationale)
+
+googledrive::drive_download("manualCorrections", path = here::here("raw_data", "collected", "manualCorrections.csv"), type = "csv", overwrite = TRUE)
+  
+  manualCorrect <- read.csv(here::here("raw_data", "collected", "manualCorrections.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " "))
+  
+cleanBans <- allBans %>% 
+    ungroup() %>% 
+    mutate(item = trimws(item)) %>% 
+    left_join(manualCorrect) %>% 
+    mutate(item = ifelse(!is.na(itemCorrect), itemCorrect, item),
+           type = ifelse(!is.na(catCorrect), catCorrect, type)) %>% 
+    select(c(School.Name, School.State.Abbreviation, item, type)) %>% 
+    distinct(School.Name, type, item, .keep_all = TRUE)
+
+write.csv(cleanBans, here::here("processed_data", "cleaned_bans.csv"), row.names = FALSE)
+```
+
+## Outputting Data
+
+Now we need to output some specific types of data for the front-end version of this story. 
+
+First, body part bans. 
+
+### Body Parts
+
+```{r}
+body <- allBans %>% 
+  filter(type == "body") %>% 
+  distinct(School.Name)
+
+# Percentage of schools that ban some body part
+nrow(body)/nrow(responses)
+
+# Percentage of schools that ban specific body parts
+bodyPer <- cleanBans %>% 
+  filter(School.Name %in% body$School.Name) %>% 
+  filter(type == "body") %>% 
+  count(item, sort = TRUE) %>% 
+  mutate(per = n/nrow(responses) * 100) %>% 
+  mutate(per = round(per, 0)) %>% 
+  filter(per >= 3)
+
+write.csv(bodyPer, "../src/assets/data/bodyPer.csv", row.names = FALSE)
+```
+
+### Clothes
+
+```{r}
+items <- cleanBans %>% 
+  filter(type != "promotion",
+         type != "rationale", 
+         type != "body",
+         type != "footwear",
+         type != "headwear", 
+         type != "grooming",
+         type != "accessories") %>% 
+  mutate(item = case_when(
+    grepl("leggings", item) ~ "leggings",
+    TRUE ~ item
+  )) %>% 
+  group_by(type, item) %>% 
+  count(., sort = TRUE) %>% 
+  filter(n >= (0.02 * nrow(responses))) %>% 
+  mutate(per = round(n / nrow(responses) * 100, 0)) %>% 
+  filter(per >= 4)
+
+googledrive::drive_download("clothes", path = here::here("raw_data", "collected", "clothesDetails.csv"), type = "csv", overwrite = TRUE)
+  
+manualDetails<- read.csv(here::here("raw_data", "collected", "clothesDetails.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " "))
+
+detailedItems <- items %>% 
+  left_join(manualDetails) %>% 
+  filter(!is.na(market)) %>% 
+  ungroup() %>% 
+  dplyr::select(c(slug, market, reveal_body, n, per)) %>% 
+  mutate(group = per - (per %% 10))
+
+write.csv(items, "../src/assets/data/clothes.csv", row.names = FALSE)
+```
+
+
+### Words
+
+```{r}
+words <- cleanBans %>% 
+  filter(type == "rationale") %>% 
+  group_by(item) %>% 
+  count(., sort = TRUE) %>% 
+  mutate(per = round(n / nrow(responses) * 100, 0)) %>% 
+  filter(per >= 5)
+```
+
