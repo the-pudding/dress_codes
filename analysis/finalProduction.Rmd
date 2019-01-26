@@ -145,6 +145,10 @@ write.csv(bodyPer, "../src/assets/data/bodyPer.csv", row.names = FALSE)
 ### Clothes
 
 ```{r}
+remove <- c("sexually provocative suggestive", "revealing", "dirty", "immodest")
+
+'%notin%' <- Negate('%in%')
+
 items <- cleanBans %>% 
   filter(type != "promotion",
          type != "rationale", 
@@ -152,29 +156,54 @@ items <- cleanBans %>%
          type != "footwear",
          type != "headwear", 
          type != "grooming",
-         type != "accessories") %>% 
+         type != "accessories",
+         item %notin% remove) %>% 
   mutate(item = case_when(
     grepl("leggings", item) ~ "leggings",
     TRUE ~ item
   )) %>% 
   group_by(type, item) %>% 
-  count(., sort = TRUE) %>% 
-  filter(n >= (0.02 * nrow(responses))) %>% 
-  mutate(per = round(n / nrow(responses) * 100, 0)) %>% 
-  filter(per >= 4)
+  count(., sort = TRUE)
+
+# visible bra straps were used as an alternative to counting visible undergarments.
+# so visible undergarment counts should include both
+braStraps <- items %>% 
+  filter(grepl("bra straps", item))
+
+## Make a list of schools where we accidentally checked off visible undergarments and bra straps
+bonus <- cleanBans %>% 
+  filter(grepl("visible", item) & type == "undergarment") %>% 
+  group_by(School.State.Abbreviation, School.Name) %>% 
+  count(.) %>% 
+  filter(n > 1)
+
+
 
 googledrive::drive_download("clothes", path = here::here("raw_data", "collected", "clothesDetails.csv"), type = "csv", overwrite = TRUE)
   
 manualDetails<- read.csv(here::here("raw_data", "collected", "clothesDetails.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " "))
 
 detailedItems <- items %>% 
-  left_join(manualDetails) %>% 
+  left_join(manualDetails) %>%
+  mutate(n = case_when(
+    item == "visible" ~ n + braStraps$n - nrow(bonus),
+    TRUE ~ n
+  )) %>% 
   filter(!is.na(market)) %>% 
   ungroup() %>% 
+  mutate(per = round(n / nrow(responses) * 100, 0)) %>% 
+  filter(per >= 5) %>% 
   dplyr::select(c(slug, market, reveal_body, n, per)) %>% 
-  mutate(group = per - (per %% 10))
+  mutate(group = per - (per %% 10)) 
 
-write.csv(items, "../src/assets/data/clothes.csv", row.names = FALSE)
+write.csv(detailedItems, "../src/assets/data/clothes.csv", row.names = FALSE)
+```
+
+```{r}
+lengthCounts <- length %>% 
+  group_by(length) %>% 
+  count(., sort = TRUE) %>% 
+  mutate(per = round(n / nrow(responses) * 100, 0))
 ```
 
 
@@ -188,4 +217,19 @@ words <- cleanBans %>%
   mutate(per = round(n / nrow(responses) * 100, 0)) %>% 
   filter(per >= 5)
 ```
+
+```{r}
+links <- responses %>% 
+  select(2:6) 
+```
+
+```{r}
+ex <- rationale %>% 
+  filter(grepl("distraction", item))
+
+distraction <- ex %>% 
+  left_join(links) %>% 
+  mutate(extract = str_extract(Copy.Entire.Dress.Code.Here, "(?:[^ ]+ ){5}distract(?: [^ ]+){5}"))
+```
+
 
