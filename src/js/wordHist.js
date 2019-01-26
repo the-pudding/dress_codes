@@ -33,41 +33,25 @@ function setup(){
     .append('div')
     .attr('class', d => `clothes__group clothes__group-${d.key}`)
 
-  groups
-    .selectAll('.clothes__items')
+  const $onlyClothes = groups.append('div.clothes__only')
+
+  $onlyClothes
+    .selectAll('.clothes__item')
     .data(d => d.values)
     .enter()
-    .append('p')
+    .append('span')
     .text(d => d.slug)
-    .attr('class', d => `clothes__items items__reveal-${d.reveal_body} items__market-${d.market}`)
+    .attr('class', d => `clothes__item items__reveal-${d.reveal_body} items__market-${d.market}`)
 
   const axisGroup = groups.append('div.axis__group')
 
   axisGroup
     .append('div.axis__text')
-    .text(d => `${d.key} - ${+d.key + 10}%`)
+    .text(d => +d.key === 0 ? `5 - 10%` : `${d.key} - ${+d.key + 10}%`)
 
   axisGroup
-    .append('div.axis__text-sub')
+    .append('span.axis__text-sub')
     .text('of schools')
-  // 
-  // const $subAxis = $container.append('div.axis')
-  //
-  // const axisLabels = $subAxis
-  //   .selectAll('.axis__label')
-  //   .data(nested)
-  //   .enter()
-  //   .append('div.axis__label')
-  //
-  // axisLabels
-  //   .append('p.axis__text')
-  //   .text(d => `${d.key} - ${+d.key + 10}%`)
-  //
-  // axisLabels
-  //   .append('p.axis__text-sub')
-  //   .text('of schools')
-
-
 
 }
 

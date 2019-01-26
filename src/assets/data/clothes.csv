@@ -16,7 +16,6 @@
 "narrow straps","f","y",100,25,20
 "tight clothing","f","y",92,23,20
 "loose clothing","n","n",79,20,20
-"revealing clothing","f","y",78,19,10
 "backless shirt","f","y",71,18,10
 "crop top","f","y",71,18,10
 "fishnet clothing","f","y",65,16,10
@@ -27,22 +26,13 @@
 "short* clothing","f","y",46,11,10
 "bike shorts","n","y",46,11,10
 "unhemmed shorts","f","y",42,10,10
-"provocative clothing","f","y",39,10,10
 "backless dress","f","y",36,9,0
 "spandex clothing","n","y",35,9,0
-"immodest clothing","f","y",32,8,0
 "off shoulder shirt","f","y",27,7,0
 "no underwear","n","y",27,7,0
-"dirty clothing","n","n",25,6,0
 "undershirt","n","y",24,6,0
 "unhemmed pants","n","n",23,6,0
 "holes above knee","n","y",21,5,0
 "low backline","f","y",20,5,0
 "pants with holes","n","y",19,5,0
 "gym shorts","n","n",19,5,0
-"swimwear","n","y",18,4,0
-"very long shirt","n","n",17,4,0
-"short* shirt","f","y",17,4,0
-"strapless dress","f","y",16,4,0
-"unfastened shirt","n","y",15,4,0
-"unhemmed skirt","f","y",15,4,0

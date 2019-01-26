@@ -8,23 +8,51 @@
     display flex
     flex-direction column
     justify-content: center;
+
     .clothes__all
       margin 0 auto
       display flex
-      flex-direction row-reverse
-      align-items: flex-end;
+      flex-direction column-reverse
+      align-items flex-start;
+      +mq('bp-6')
+        flex-direction row-reverse
+        align-items: flex-end;
 
       .clothes__group
-        margin 0 0.25rem
+        margin 0 0.5rem
         display flex
-        flex-direction column
-        align-items center
-        width 120px
+        flex-direction row-reverse
+        min-height 5rem
+        +mq('bp-6')
+          flex-direction column
+          align-items center
+          width 115px
+          height auto
+          margin 0 0.25rem
 
-      .clothes__items
+      .clothes__only
+        display flex
+        flex-direction row
+        flex-wrap wrap
+        padding 1rem 0
+        align-items center
+        +mq('bp-6')
+          padding 0
+          justify-content: center
+
+      .clothes__item
         margin 0
         font-family $national
         set-type-size('small', true)
+        width 100px
+        margin 0 0.25rem
+        line-height 1
+        +mq('bp-6')
+          width auto
+          margin 0
+          line-height 1.5
+          margin 0 0.5rem
+          text-align: center
 
       .items__market-f
         color $primary
@@ -36,9 +64,14 @@
       display flex
       flex-direction column
       justify-content: center;
-      width 120px
-      margin 0.5rem 0.25rem
-      border-top 1px solid lighten($gray-light, 5)
+      margin 0 0 0.5rem 0
+      min-width 75px
+      border-right 1px solid lighten($gray-light, 5)
+      +mq('bp-6')
+        min-width 100px
+        margin 0.5rem 0
+        border-top 1px solid lighten($gray-light, 5)
+        border-right none
 
       .axis__text
         text-align: center
