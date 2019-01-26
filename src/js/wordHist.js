@@ -17,18 +17,28 @@ function cleanData(arr){
 
 function setup(){
   nested = d3.nest()
-    .key(d => d.group)
+    .key(d => +d.group)
     .sortValues((a, b) => d3.ascending(a.market, b.market))
     //.sortValues((a, b) => d3.ascending(a.reveal_body, b.reveal_body))
     .entries(data)
 
-    console.log({nested})
+  // fill in any missing groups
+  let maxGroup = +d3.max(nested, d => d.key) + 10
+
+  let allNested = d3.range(0, maxGroup, 10).map(i => {
+    const preVal = nested.filter(d => +d.key === i)
+    const len = preVal.length
+    console.log({preVal, len})
+    return len === 0 ? {key: i.toString(), values: []} : preVal[0]
+  })
+
+  console.log({allNested, nested})
 
   const $subClothes = $container.append('div.clothes__all')
 
   const groups = $subClothes
     .selectAll('.clothes__group')
-    .data(nested)
+    .data(allNested)
     .enter()
     .append('div')
     .attr('class', d => `clothes__group clothes__group-${d.key}`)

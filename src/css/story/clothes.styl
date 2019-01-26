@@ -15,13 +15,14 @@
       flex-direction column-reverse
       align-items flex-start;
       +mq('bp-6')
-        flex-direction row-reverse
+        flex-direction row
         align-items: flex-end;
 
       .clothes__group
         margin 0 0.5rem
         display flex
         flex-direction row-reverse
+        align-items: flex-end;
         min-height 5rem
         +mq('bp-6')
           flex-direction column
@@ -29,6 +30,7 @@
           width 115px
           height auto
           margin 0 0.25rem
+          justify-content: flex-end;
 
       .clothes__only
         display flex
