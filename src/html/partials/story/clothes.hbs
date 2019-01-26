@@ -4,8 +4,20 @@
     <p class='prose'>{{{value}}}</p>
   {{/each}}
 
-  <figure class='container__clothes'></figure>
-  
+  <figure class='container__clothes'>
+    <div class='container__clothes-title'>
+      <h4 class='graphic__hed'>{{{doc.clothesGraphTitle}}}</h4>
+      <p class='graphic__legend'>{{{doc.clothesGraphLegend}}}</p>
+    </div>
+
+    <div class='graphic__notes'>
+      <p class='graphic__notes-title'>{{{doc.clothesNotesTitle}}}</p>
+    {{#each doc.clothingNotesText}}
+      <p class='graphic__notes-text'>{{{value}}}</p>
+    {{/each}}
+    </div>
+  </figure>
+
   <img class='clothes__img-items' src='assets/images/placeholder_clothes.png'>
   {{#each doc.clothesOutro}}
     <p class='prose'>{{{value}}}</p>
