@@ -1,6 +1,7 @@
 /* global d3 */
 import debounce from 'lodash.debounce';
 import isMobile from './utils/is-mobile';
+import bodyBar from './bodyBar'
 import wordHist from './wordHist';
 import item from './item'
 
@@ -13,7 +14,8 @@ function resize() {
 	const width = $body.node().offsetWidth;
 	if (previousWidth !== width) {
 		previousWidth = width;
-		create.resize();
+		wordHist.resize();
+		bodyBar.resize()
 	}
 }
 
@@ -38,6 +40,7 @@ function init() {
 	// setup sticky header menu
 	setupStickyHeader();
 	// kick off graphic code
+	bodyBar.init()
 	wordHist.init();
 	// item.init()
 }

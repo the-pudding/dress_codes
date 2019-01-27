@@ -28,11 +28,8 @@ function setup(){
   let allNested = d3.range(0, maxGroup, 10).map(i => {
     const preVal = nested.filter(d => +d.key === i)
     const len = preVal.length
-    console.log({preVal, len})
     return len === 0 ? {key: i.toString(), values: []} : preVal[0]
   })
-
-  console.log({allNested, nested})
 
   const $subClothes = $container.append('div.clothes__all')
 
@@ -73,12 +70,8 @@ function init(){
   return new Promise((resolve) => {
 		d3.loadData('assets/data/clothes.csv', (err, response) => {
 			data = cleanData(response[0])
-      console.log({data})
       setup()
-			// setupItems()
-			// setupCompleteButton()
-			// $container.each(setupChart)
-			// resolve()
+			resolve()
 		})
 	})
 }
