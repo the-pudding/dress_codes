@@ -1,13 +1,33 @@
 <section class='body'>
-  <h3 class='title__section'>{{doc.bodyTitle}}</h3>
+  <h3 class='section__title'>{{doc.bodyTitle}}</h3>
   {{#each doc.bodyIntro}}
     <p class='prose'>{{{value}}}</p>
   {{/each}}
-  <img class='body__img-bodies' src='assets/images/placeholder_bodies.png'>
 
-  {{#each doc.bodyMid}}
-    <p class='prose'>{{{value}}}</p>
-  {{/each}}
+  <div class='body__example'>
+    <img class='body__img-animation' src='assets/images/placeholder_animation.png'>
+    <div class='lockscreen'>
+      <div class='top'>
+        <p class='top__title'>{{{doc.lockScreenTitle}}}</p>
+        <p class='top__time'>{{{doc.lockScreenTime}}}</p>
+      </div>
+      <div class='bottom'>
+        <p class='bottom__school'>{{{doc.bodyExampleSource}}}</p>
+        <p class='bottom__text'>{{{doc.bodyExample}}}</p>
+      </div>
+    </div>
+  </div>
+
+  <p class='prose'>{{{doc.bodyPostExample}}}</p>
+
+  <div class='body__multiples'>
+    <h3 class='chart__title'>{{{doc.bodyPartTitle}}}</h3>
+    <p class='chart__subtitle'>{{{doc.bodyPartSub}}}</p>
+    <img class='body__img-bodies' src='assets/images/placeholder_bodies.png'>
+    <button class='body__load'>{{{doc.bodyPartButton}}}</button>
+  </div>
+
+  <p class='prose'>{{{doc.bodyPostMultiple}}}</p>
 
   <figure class='container__bodyBar'>
     <div class='container__clothes-title'>
@@ -16,6 +36,7 @@
     </div>
     <svg></svg>
   </figure>
+
   {{#each doc.bodyOutro}}
     <p class='prose'>{{{value}}}</p>
   {{/each}}

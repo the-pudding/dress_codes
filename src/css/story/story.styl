@@ -3,9 +3,12 @@
   max-width $column-width
   margin 1rem auto
   padding 0 1rem
+  font-size 30px
+  font-family $national
+  font-weight bold
 
 section
-  margin-top 2rem
+  margin-top 3.75rem
 
 .prose__instructions
   max-width $column-width
@@ -14,14 +17,58 @@ section
   font-weight 600
   color $primary
 
-.chart-title
+.chart__title
   font-weight 600
   margin-bottom 0.25rem
+  font-family $national
+  font-size 20px
 
-.chart-subtitle
-  set-type-size('small', true)
-  color $gray
-  margin-top 0.25rem
+.chart__subtitle
+  max-width $column-width
+  margin 0 auto
+  padding 0 1rem
+  font-family $national
+  font-size 12px
+  text-transform uppercase
+
+.lockscreen
+  width 285px
+  font-family $national
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.12);
+  border-radius 10px
+  margin 2rem
+  .top
+    display flex
+    flex-direction row
+    justify-content: space-between;
+    background-color: $gray-extraLight
+    padding 8px 15px
+    border-radius: 10px 10px 0px 0px;
+    &__title
+      margin 0
+      font-size 11px
+      letter-spacing: 0.05em
+      text-transform uppercase
+      color $gray-dark
+    &__time
+      margin 0
+      font-size 11px
+      text-transform lowercase
+      color $gray-dark
+  .bottom
+    padding 13px 15px
+    background-color: white
+    border-radius: 0px 0px 10px 10px;
+    &__school
+      margin 0
+      font-weight bold
+      text-transform capitalize
+      font-size 14px
+    &__text
+      margin 0
+      font-size 13px
+
+
 
 .bubble
   .chart
