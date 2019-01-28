@@ -1,7 +1,51 @@
 <section class='intro'>
-	
-	{{#each doc.intro}}
+	<p class='prose'>{{{doc.introQuestion}}}</p>
+
+	<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Ladies, when was the first time you were made to feel embarrassed and sexualized for what you wore? I was in 5th grade, shorts too short.</p>&mdash; Dana Schwartz (@DanaSchwartzzz) <a href="https://twitter.com/DanaSchwartzzz/status/846065368997212161?ref_src=twsrc%5Etfw">March 26, 2017</a></blockquote>
+	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+	{{#each doc.introMemory}}
 		<p class='prose'>{{{value}}}</p>
 	{{/each}}
+
+	<div class='intro__conversation'>
+		<p class='convo__timestamp'>{{{doc.convo1Time}}}</p>
+
+		<div class='convo__received'>
+			<p class='convo__sender'>{{{doc.convo1ReceivedName}}}</p>
+			<p class='convo__text convo__text-received'>{{{doc.convo1ReceivedText}}}</p>
+		</div>
+
+		<div class='convo__sent'>
+			<p class='convo__sender'>{{{doc.convo1SentName}}}</p>
+			<p class='convo__text convo__text-sent'>{{{doc.convo1SentText}}}</p>
+		</div>
+
+	</div>
+
+		{{#each doc.introMessage}}
+			<p class='prose'>{{{value}}}</p>
+		{{/each}}
+
+		<div class='intro__conversation'>
+			<p class='convo__timestamp'>{{{doc.convo2Time}}}</p>
+
+			<div class='convo__received'>
+				<p class='convo__sender'>{{{doc.convo2ReceivedName}}}</p>
+				<p class='convo__text-wrapper'><span class='convo__text convo__text-received'>{{{doc.convo2ReceivedText1}}}</span></p>
+				<p class='convo__text-wrapper'><span class='convo__text convo__text-received'>{{{doc.convo2ReceivedText2}}}</span></p>
+			</div>
+
+			<div class='convo__sent'>
+				<p class='convo__sender'>{{{doc.convo2SentName}}}</p>
+				<p class='convo__text convo__text-sent'>{{{doc.convo2SentText}}}</p>
+			</div>
+
+		</div>
+
+		{{#each doc.introLede}}
+			<p class='prose'>{{{value}}}</p>
+		{{/each}}
 
 </section>
