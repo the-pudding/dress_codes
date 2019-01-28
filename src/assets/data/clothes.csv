@@ -1,38 +1,38 @@
 "slug","market","reveal_body","n","per","group"
-"short* shorts","f","y",282,70,70
-"short* skirt","f","y",246,61,60
-"visible underwear","n","y",272,67,60
-"sagging pants","m","y",181,45,40
-"sheer clothing","f","y",173,43,40
-"strapless top","f","y",164,41,40
-"halter top","f","y",157,39,30
-"spaghetti strap","f","y",156,39,30
-"low neckline","f","y",148,37,30
-"short* dresses","f","y",147,36,30
-"pajamas","n","n",136,34,30
-"tank top","n","y",112,28,20
-"muscle shirt","m","y",111,28,20
-"leggings","f","y",109,27,20
-"narrow straps","f","y",100,25,20
-"tight clothing","f","y",92,23,20
-"loose clothing","n","n",79,20,20
-"backless shirt","f","y",71,18,10
-"crop top","f","y",71,18,10
-"fishnet clothing","f","y",65,16,10
-"visible bra straps","f","y",60,15,10
-"holes above thigh","n","y",56,14,10
-"sleeveless shirt","n","y",52,13,10
-"frayed clothing","n","y",50,12,10
-"short* clothing","f","y",46,11,10
-"bike shorts","n","y",46,11,10
-"unhemmed shorts","f","y",42,10,10
+"short* shorts","f","y",290,69,60
+"short* skirt","f","y",253,60,60
+"visible underwear","n","y",282,67,60
+"sagging pants","m","y",189,45,40
+"sheer clothing","f","y",178,42,40
+"strapless top","f","y",167,40,40
+"halter top","f","y",161,38,30
+"spaghetti strap","f","y",160,38,30
+"short* dresses","f","y",150,36,30
+"low neckline","f","y",149,35,30
+"pajamas","n","n",142,34,30
+"tank top","n","y",117,28,20
+"muscle shirt","m","y",115,27,20
+"leggings","f","y",113,27,20
+"narrow straps","f","y",106,25,20
+"tight clothing","f","y",97,23,20
+"loose clothing","n","n",80,19,10
+"crop top","f","y",77,18,10
+"backless shirt","f","y",73,17,10
+"fishnet clothing","f","y",66,16,10
+"visible bra straps","f","y",62,15,10
+"holes above thigh","n","y",59,14,10
+"sleeveless shirt","n","y",57,14,10
+"frayed clothing","n","y",51,12,10
+"short* clothing","f","y",47,11,10
+"bike shorts","n","y",47,11,10
+"unhemmed shorts","f","y",44,10,10
+"spandex clothing","n","y",36,9,0
 "backless dress","f","y",36,9,0
-"spandex clothing","n","y",35,9,0
-"off shoulder shirt","f","y",27,7,0
-"no underwear","n","y",27,7,0
-"undershirt","n","y",24,6,0
-"unhemmed pants","n","n",23,6,0
+"off shoulder shirt","f","y",27,6,0
+"no underwear","n","y",27,6,0
+"undershirt","n","y",26,6,0
+"unhemmed pants","n","n",24,6,0
 "holes above knee","n","y",21,5,0
 "low backline","f","y",20,5,0
-"pants with holes","n","y",19,5,0
-"gym shorts","n","n",19,5,0
+"pants with holes","n","y",20,5,0
+"gym shorts","n","n",20,5,0
