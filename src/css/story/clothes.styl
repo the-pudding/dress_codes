@@ -27,9 +27,9 @@
         +mq('bp-6')
           flex-direction column
           align-items center
-          width 115px
+          width 120px
           height auto
-          margin 0 0.25rem
+          margin 0 0.15rem
           justify-content: flex-end;
 
       .clothes__only
@@ -43,24 +43,31 @@
           justify-content: center
 
       .clothes__item
-        margin 0
         font-family $national
         set-type-size('small', true)
         width 100px
         margin 0 0.25rem
         line-height 1
+        padding 0.1rem 0.2rem
+        border-radius 10px
         +mq('bp-6')
           width auto
           margin 0
           line-height 1.5
-          margin 0 0.5rem
+          margin 1px 0.5rem
           text-align: center
 
       .items__market-f
-        color $primary
+        background-color: $primary
+        color white
+
 
       .items__market-m
-        color darken($secondary, 10)
+        background-color $secondary
+        color white
+
+      .items__market-n
+        background-color white
 
     .axis__group
       display flex
@@ -78,15 +85,16 @@
       .axis__text
         text-align: center
         font-family $national
-        font-weight 600
+        font-weight bold
         color $gray
         margin-bottom 0
         margin-top 0.25rem
+        font-size 14px
 
         &-sub
           font-family $national
           text-align: center;
-          set-type-size('small', true)
+          font-size 12px
           color $gray
           margin-top 0
           line-height 1
@@ -94,18 +102,26 @@
     &-title
       min-width 60rem
       margin 0 auto
-      .graphic__sub
+      .chart__subtitle-fullWidth
+        padding 0 1rem
         font-family $national
-        set-type-size('medium')
-        margin-top 0.15rem
+        font-size 14px
+        text-transform uppercase
+        margin 0 0 2rem 0
 
         span
           margin 0 0.25rem
-          font-weight 600
+          line-height 1
+          padding 0.1rem 0.4rem
+          border-radius 10px
         .boys
-          color darken($secondary, 10)
+          background-color: $secondary
+          color white
         .girls
-          color $primary
+          background-color $primary
+          color white
+        .both
+          background-color white
 
     .graphic__notes
       order 3
@@ -113,14 +129,16 @@
       padding 1rem 1.5rem
       margin 2rem auto
       font-family $national
-      background-color lighten($primary, 42)
+      background-color $off-gray
+      border-top 1px solid $gray
+      border-bottom 1px solid $gray
       &-title
         font-weight 700
         set-type-size('small')
         margin 0
-        color darken($primary, 30)
+        color $gray
       &-text
         set-type-size('small', true)
         line-height: 1.25
         margin 0.75rem 0
-        color darken($primary, 30)
+        color $gray

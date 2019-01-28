@@ -1,0 +1,14 @@
+<div class='lockscreen__examples'>
+  {{#each doc.word-examples}}
+    <div class='lockscreen'>
+      <div class='top'>
+        <p class='top__title'>{{{@root.doc.lockScreenTitle}}}</p>
+        <p class='top__time'>{{{@root.doc.lockScreenTime}}}</p>
+      </div>
+      <div class='bottom'>
+        <p class='bottom__school'>{{{source}}}</p>
+        <p class='bottom__text'>{{{text}}}</p>
+      </div>
+    </div>
+  {{/each}}
+</div>
