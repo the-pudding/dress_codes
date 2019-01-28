@@ -27,9 +27,45 @@
     color $gray
 
   .container__bodyBar
-    width $column-width
-    margin 0 auto
+    max-width $column-width
+    //margin 0 auto
     padding 0 1rem
+
+    .right
+      display flex
+      flex-direction column
+      .bar__group
+        display flex
+        flex-direction row
+        height 24px
+        margin-bottom 0.25rem
+        .bar__label
+          background-color $gray-extraDark
+          &-text
+            color white
+            font-family $national
+            text-transform lowercase;
+            margin 0
+            font-size 14px
+            padding 0 0.5rem
+        &:first-of-type
+          .bar__label
+            border-radius 12px 0 0 0
+        &:last-of-type
+          .bar__label
+            border-radius 0 0 0 12px
+        .bar__bar
+          background-color $primary
+          border-radius 0 12px 12px 0
+          &-text
+            color white
+            font-family $national
+            text-transform lowercase;
+            margin 0
+            font-size 14px
+            padding 0 0.5rem
+            text-align right
+            font-weight bold
 
     .bar
       fill $primary

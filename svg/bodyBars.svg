@@ -1,0 +1,35 @@
+<svg width="539" height="221" viewBox="0 0 539 221" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 6">
+<path id="Vector 3" d="M129 14V39" stroke="#C4C4C4" stroke-dasharray="4 4"/>
+<path id="Vector 3.2" d="M249 14V221" stroke="#C4C4C4" stroke-dasharray="4 4"/>
+<path id="Vector 3.4" d="M369 14V221" stroke="#C4C4C4" stroke-dasharray="4 4"/>
+<path id="Vector 3.6" d="M490 14V221" stroke="#C4C4C4" stroke-dasharray="4 4"/>
+<path id="bar1" d="M527 52C533.627 52 539 46.6274 539 40V40C539 33.3726 533.627 28 527 28L129 28V52L527 52Z" fill="#2893F6"/>
+<path id="bar2" d="M239.964 80C246.591 80 251.964 74.6274 251.964 68C251.964 61.3726 246.591 56 239.964 56H129V80H239.964Z" fill="#2893F6"/>
+<path id="bar3" d="M200.48 109C206.842 109 212 103.842 212 97.48C212 90.5875 206.413 85 199.52 85H129V109H200.48Z" fill="#2893F6"/>
+<path id="bar4" d="M195 137C201.627 137 207 131.627 207 125C207 118.373 201.627 113 195 113H129V137H195Z" fill="#2893F6"/>
+<path id="bar5" d="M178 165C184.627 165 190 159.627 190 153C190 146.373 184.627 141 178 141H129V165H178Z" fill="#2893F6"/>
+<path id="bar6" d="M158 193C164.627 193 170 187.627 170 181C170 174.373 164.627 169 158 169H129V193H158Z" fill="#2893F6"/>
+<path id="bar7" d="M158 221C164.627 221 170 215.627 170 209C170 202.373 164.627 197 158 197H129V221H158Z" fill="#2893F6"/>
+<text id="0" fill="#8A8A8A" xml:space="preserve" style="white-space: pre" font-family="National 2 Narrow" font-size="12" letter-spacing="0em"><tspan x="125" y="11.796">0</tspan></text>
+<text id="20" fill="#8A8A8A" xml:space="preserve" style="white-space: pre" font-family="National 2 Narrow" font-size="12" letter-spacing="0em"><tspan x="243" y="11.796">20</tspan></text>
+<text id="40" fill="#8A8A8A" xml:space="preserve" style="white-space: pre" font-family="National 2 Narrow" font-size="12" letter-spacing="0em"><tspan x="361" y="11.796">40</tspan></text>
+<text id="60%" fill="#8A8A8A" xml:space="preserve" style="white-space: pre" font-family="National 2 Narrow" font-size="12" letter-spacing="0em"><tspan x="482" y="11.796">60%</tspan></text>
+<path id="bg1" d="M49 40C49 33.3726 54.3726 28 61 28H129V52H49V40Z" fill="#333333"/>
+<path id="bg2" d="M49 56H129V80H49V56Z" fill="#333333"/>
+<text id="label1" fill="white" xml:space="preserve" style="white-space: pre" font-family="National 2 Narrow" font-size="14" letter-spacing="0em"><tspan x="58" y="44.762">midriff</tspan></text>
+<text id="label2" fill="white" xml:space="preserve" style="white-space: pre" font-family="National 2 Narrow" font-size="14" letter-spacing="0em"><tspan x="58" y="72.762">cleavage</tspan></text>
+<path id="bg3" d="M49 85H129V109H49V85Z" fill="#333333"/>
+<text id="label3" fill="white" xml:space="preserve" style="white-space: pre" font-family="National 2 Narrow" font-size="14" letter-spacing="0em"><tspan x="58" y="101.762">chest</tspan></text>
+<path id="bg4" d="M49 113H129V137H49V113Z" fill="#333333"/>
+<text id="label4" fill="white" xml:space="preserve" style="white-space: pre" font-family="National 2 Narrow" font-size="14" letter-spacing="0em"><tspan x="58" y="129.762">back</tspan></text>
+<path id="bg5" d="M49 141H129V165H49V141Z" fill="#333333"/>
+<text id="label5" fill="white" xml:space="preserve" style="white-space: pre" font-family="National 2 Narrow" font-size="14" letter-spacing="0em"><tspan x="58" y="157.762">buttocks</tspan></text>
+<path id="bg6" d="M49 169H129V193H49V169Z" fill="#333333"/>
+<text id="label6" fill="white" xml:space="preserve" style="white-space: pre" font-family="National 2 Narrow" font-size="14" letter-spacing="0em"><tspan x="58" y="185.762">buttocks</tspan></text>
+<path id="bg7" d="M49 197H129V221H61C54.3726 221 49 215.627 49 209V197Z" fill="#333333"/>
+<text id="label7" fill="white" xml:space="preserve" style="white-space: pre" font-family="National 2 Narrow" font-size="14" letter-spacing="0em"><tspan x="58" y="213.762">shoulders</tspan></text>
+<circle id="Ellipse 2" cx="17.5" cy="202.5" r="17.5" fill="#333333"/>
+<text id="&#240;&#159;&#147;&#150;" fill="black" xml:space="preserve" style="white-space: pre" font-family="Copyright Klim Type Foundry" font-size="24" letter-spacing="0em"><tspan x="5" y="213.296">&#x1f4d6;</tspan></text>
+</g>
+</svg>

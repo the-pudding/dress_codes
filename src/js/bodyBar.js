@@ -1,9 +1,15 @@
 // selections
 const $container = d3.select('.container__bodyBar')
 const $svg = $container.select('svg')
+const $containerBars = $container.select('.container__bars')
+let $right = null
+let $left = null
+
 let $g = null
 let $axis = null
 let barGroup = null
+
+let labelWidth = 80
 
 // data
 let data = []
@@ -12,8 +18,8 @@ let data = []
 let margin = {
   top: 30,
   bottom: 0,
-  left: 0,
-  right: 75
+  left: 80,
+  right: 0
 }
 
 const scaleX = d3.scaleLinear()
@@ -36,6 +42,32 @@ function cleanData(arr){
       per: +d.per,
 		}
 	})
+}
+
+function setupDiv(){
+  $left = $containerBars.append('div.left')
+  $right = $containerBars.append('div.right')
+
+  const barGroups = $right.selectAll('bar__group')
+    .data(data)
+    .enter()
+    .append('div.bar__group')
+
+  const label = barGroups
+    .append('div.bar__label')
+
+  label
+    .append('p.bar__label-text')
+    .text(d => d.item)
+
+  const bar = barGroups
+    .append('div.bar__bar')
+
+  bar
+    .append('p.bar__bar-text')
+    .text(d => `${d.per}%`)
+
+  resize()
 }
 
 function setup(){
@@ -86,6 +118,8 @@ function render(){
     .attr('width', d => scaleX(d.per))
     .attr('height', barHeight)
     .attr('transform', `translate(5, 0)`)
+    .attr('rx', 12)
+    .attr('ry', 12)
 
   const labels = barGroup
     .selectAll('.g-label')
@@ -128,16 +162,23 @@ function render(){
     .attr('transform', (d, i) => `translate(0, ${i * (barHeight + paddingHeight)})`)
 }
 
+function editAttr(attr, num){
+  let sel = $svg.select(`#${attr}${num}`).select('tspan')
+    .text(`${data[num - 1].item}`)
+}
+
 function resize(){
   // defaults to grabbing dimensions from container element
   width = $container.node().offsetWidth - margin.left - margin.right;
   height = (barHeight * data.length) + (paddingHeight * (data.length - 1))
-  const len = data.length
-
-	$svg.at({
-		width: width + margin.left + margin.right,
-		height: height + margin.top + margin.bottom
-	});
+  // const len = data.length
+  //
+	// $svg.at({
+	// 	width: width,
+	// 	height: height
+	// });
+  //
+  // console.log(width)
 
   const max = d3.max(data, d => d.per)
 
@@ -145,15 +186,31 @@ function resize(){
     .domain([0, max])
     .range([0, width - margin.right - margin.left])
 
+  // let blocks = d3.range(1, 8)
+  //
+  // blocks.map(d => editAttr('label', d))
+
+  //editAttr('label', 1)
+
   // $g.at('transform', `translate(${marginLeft}, ${marginTop})`);
-  render()
+  //render()
+  update()
+}
+
+function update(){
+  $right.selectAll('.bar__bar')
+    .st('width', d => scaleX(d.per))
+
+  $right.selectAll('.bar__label')
+    .st('width', d => labelWidth)
 }
 
 function init(){
   return new Promise((resolve) => {
 		d3.loadData('assets/data/bodyPer.csv', (err, response) => {
 			data = cleanData(response[0])
-      setup()
+      console.log({data})
+      setupDiv()
 			resolve()
 		})
 	})
