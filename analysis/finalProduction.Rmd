@@ -137,7 +137,7 @@ bodyPer <- cleanBans %>%
   count(item, sort = TRUE) %>% 
   mutate(per = n/nrow(responses) * 100) %>% 
   mutate(per = round(per, 0)) %>% 
-  filter(per >= 3)
+  filter(per >= 5)
 
 write.csv(bodyPer, "../src/assets/data/bodyPer.csv", row.names = FALSE)
 ```
@@ -197,6 +197,12 @@ detailedItems <- items %>%
   mutate(group = per - (per %% 10)) 
 
 write.csv(detailedItems, "../src/assets/data/clothes.csv", row.names = FALSE)
+```
+
+```{r}
+ruleCounts <- cleanBans %>% 
+  group_by(School.State.Abbreviation, School.Name) %>% 
+  count(.)
 ```
 
 ```{r}
