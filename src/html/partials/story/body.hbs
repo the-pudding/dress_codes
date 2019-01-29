@@ -4,30 +4,26 @@
     <p class='prose'>{{{value}}}</p>
   {{/each}}
 
-  <div class='body__example'>
-    <img class='body__img-animation' src='assets/images/placeholder_animation.png'>
-    <div class='lockscreen'>
-      <div class='top'>
-        <p class='top__title'>{{{doc.lockScreenTitle}}}</p>
-        <p class='top__time'>{{{doc.lockScreenTime}}}</p>
+  <div class='lockscreen__examples-body'>
+    {{#each doc.body-examples}}
+      <div class='lockscreen__container'>
+        <div class='lockscreen'>
+          <div class='top'>
+            <p class='top__title'>{{{@root.doc.lockScreenTitle}}}</p>
+            <p class='top__time'>{{{@root.doc.lockScreenTime}}}</p>
+          </div>
+          <div class='bottom'>
+            <p class='bottom__school'>{{{source}}}</p>
+            <p class='bottom__text'>{{{text}}}</p>
+          </div>
+        </div>
       </div>
-      <div class='bottom'>
-        <p class='bottom__school'>{{{doc.bodyExampleSource}}}</p>
-        <p class='bottom__text'>{{{doc.bodyExample}}}</p>
-      </div>
-    </div>
+    {{/each}}
   </div>
 
-  <p class='prose'>{{{doc.bodyPostExample}}}</p>
-
-  <figure class='body__multiples'>
-    <h4 class='chart__title'>{{{doc.bodyPartTitle}}}</h4>
-    <p class='chart__subtitle'>{{{doc.bodyPartSub}}}</p>
-    <img class='body__img-bodies' src='assets/images/placeholder_bodies.png'>
-    <button class='body__load'>{{{doc.bodyPartButton}}}</button>
-  </figure>
-
-  <p class='prose'>{{{doc.bodyPostMultiple}}}</p>
+  {{#each doc.bodyPostExample}}
+    <p class='prose'>{{{value}}}</p>
+  {{/each}}
 
   <figure class='container__bodyBar'>
     <div class='container__clothes-title'>
@@ -38,6 +34,13 @@
     <!-- @@include('bodyBars.svg') -->
     <!-- <svg src='assets/images/bodyBars.svg'></svg> -->
   </figure>
+<!--
+  <figure class='body__multiples'>
+    <h4 class='chart__title'>{{{doc.bodyPartTitle}}}</h4>
+    <p class='chart__subtitle'>{{{doc.bodyPartSub}}}</p>
+    <img class='body__img-bodies' src='assets/images/placeholder_bodies.png'>
+    <button class='body__load'>{{{doc.bodyPartButton}}}</button>
+  </figure> -->
 
   {{#each doc.bodyOutro}}
     <p class='prose'>{{{value}}}</p>

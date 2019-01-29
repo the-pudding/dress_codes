@@ -10,26 +10,22 @@
 		<p class='prose'>{{{value}}}</p>
 	{{/each}}
 
-	<div class='intro__conversation'>
-		<p class='convo__timestamp'>{{{doc.convo1Time}}}</p>
-
-		<div class='convo__received'>
-			<p class='convo__sender'>{{{doc.convo1ReceivedName}}}</p>
-			<p class='convo__text convo__text-received'>{{{doc.convo1ReceivedText}}}</p>
+	<div class='lockscreen'>
+		<div class='top'>
+			<p class='top__title'>{{{doc.lockScreenTitle}}}</p>
+			<p class='top__time'>{{{doc.lockScreenTime}}}</p>
 		</div>
-
-		<div class='convo__sent'>
-			<p class='convo__sender'>{{{doc.convo1SentName}}}</p>
-			<p class='convo__text convo__text-sent'>{{{doc.convo1SentText}}}</p>
+		<div class='bottom'>
+			<p class='bottom__school'>{{{doc.convo1ReceivedName}}}</p>
+			<p class='bottom__text'>{{{doc.convo1ReceivedText}}}</p>
 		</div>
-
 	</div>
 
 		{{#each doc.introMessage}}
 			<p class='prose'>{{{value}}}</p>
 		{{/each}}
 
-		<div class='intro__conversation'>
+		<!-- <div class='intro__conversation'>
 			<p class='convo__timestamp'>{{{doc.convo2Time}}}</p>
 
 			<div class='convo__received'>
@@ -47,6 +43,6 @@
 
 		{{#each doc.introLede}}
 			<p class='prose'>{{{value}}}</p>
-		{{/each}}
+		{{/each}} -->
 
 </section>
