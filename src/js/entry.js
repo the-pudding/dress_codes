@@ -4,6 +4,7 @@ import isMobile from './utils/is-mobile';
 import bodyBar from './bodyBar'
 import wordHist from './wordHist';
 import item from './item'
+import EnterView from 'enter-view'
 
 const $body = d3.select('body');
 let previousWidth = 0;
@@ -17,6 +18,19 @@ function resize() {
 		wordHist.resize();
 		bodyBar.resize()
 	}
+}
+
+function setupEnterView(){
+
+	EnterView({
+		selector:'.lockscreen',
+	  enter: function(el){
+			el.classList.add('entered')
+		},
+	  offset: 0.25,
+	  once: true
+	})
+
 }
 
 function setupStickyHeader() {
@@ -42,6 +56,7 @@ function init() {
 	// kick off graphic code
 	bodyBar.init()
 	wordHist.init();
+	setupEnterView()
 	// item.init()
 }
 

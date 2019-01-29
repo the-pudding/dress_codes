@@ -279,7 +279,7 @@ rat <- cleanBans %>%
 
 ```{r}
 respect <- responses %>% 
-  filter(str_detect(Copy.Dress.Code.Justification.Here, "established to teach grooming and hygiene, prevent disruption")) %>% 
-  select(c(School.Name, School.State.Abbreviation, Copy.Dress.Code.Justification.Here))
+  filter(str_detect(Copy.Entire.Dress.Code.Here, "low neck")) %>% 
+  select(c(School.Name, School.State.Abbreviation, Copy.Entire.Dress.Code.Here))
 ```
 

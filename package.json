@@ -8,6 +8,7 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
+    "enter-view": "^1.0.0",
     "fontfaceobserver": "^2.1.0",
     "lodash.debounce": "^4.0.8",
     "nouislider": "^12.1.0",

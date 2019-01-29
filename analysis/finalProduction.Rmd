@@ -238,4 +238,17 @@ distraction <- ex %>%
   mutate(extract = str_extract(Copy.Entire.Dress.Code.Here, "(?:[^ ]+ ){5}distract(?: [^ ]+){5}"))
 ```
 
+### Subjective
+
+```{r}
+subj <- responses %>% 
+  select(!!c(2, 3, 151, 152)) %>% 
+  rename(present = 3,
+         example = 4) %>% 
+  filter(!is.na(present),
+         present != "no")
+
+nrows(subj)/nrows(responses)
+```
+
 
