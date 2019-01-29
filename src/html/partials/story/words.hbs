@@ -16,5 +16,29 @@
     <img class='words__img-examples' src='assets/images/placeholder_words.png'>
   </figure>
 
+  {{#each doc.wordsPostExplore}}
+    <p class='prose'>{{{value}}}</p>
+  {{/each}}
+
+  <div class='lockscreen__examples-subjective'>
+    {{#each doc.body-examples}}
+      <div class='lockscreen__container'>
+        <div class='lockscreen'>
+          <div class='top'>
+            <p class='top__title'>{{{@root.doc.lockScreenTitle}}}</p>
+            <p class='top__time'>{{{@root.doc.lockScreenTime}}}</p>
+          </div>
+          <div class='bottom'>
+            <p class='bottom__school'>{{{source}}}</p>
+            <p class='bottom__text'>{{{text}}}</p>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+  {{#each doc.wordsOutro}}
+    <p class='prose'>{{{value}}}</p>
+  {{/each}}
 
 </section>
