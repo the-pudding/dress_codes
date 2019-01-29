@@ -38,6 +38,9 @@
     .chart__container
       display flex
       flex-direction row
+      font-family $national
+      max-height 936px
+      overflow-y: hidden
 
       &-words
         min-width 270px
@@ -49,14 +52,40 @@
           padding 25px 20px
           background-color white
           border-bottom 1px solid $gray-light
+          justify-content: space-between;
+          align-items: center
 
           .left
             .word-title
-              font-family $national
               font-weight bold
               font-size 18px
               margin 0
             .word-count
-              font-family $national
+              font-size 14px
+              margin 0
+      &-examples
+        .g-example
+          display flex
+          flex-direction column
+          padding 20px 15px
+          background-color lighten($primary, 35)
+          .top
+            display flex
+            flex-direction row
+            justify-content space-between
+
+            .school-name
+              font-size 18px
+              font-weight bold
+              margin 0
+
+            .school-state
+              font-size 14px
+              color $gray-dark
+              margin 0
+
+          .bottom
+            margin-top 0.5rem
+            .school-example
               font-size 14px
               margin 0
