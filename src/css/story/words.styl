@@ -34,3 +34,29 @@
   &__explore
     max-width $column-width
     padding 0 1rem
+
+    .chart__container
+      display flex
+      flex-direction row
+
+      &-words
+        min-width 270px
+
+
+        .g-word
+          display flex
+          flex-direction row
+          padding 25px 20px
+          background-color white
+          border-bottom 1px solid $gray-light
+
+          .left
+            .word-title
+              font-family $national
+              font-weight bold
+              font-size 18px
+              margin 0
+            .word-count
+              font-family $national
+              font-size 14px
+              margin 0
