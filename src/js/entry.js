@@ -4,6 +4,7 @@ import isMobile from './utils/is-mobile';
 import bodyBar from './bodyBar'
 import wordHist from './wordHist';
 import item from './item'
+import rationale from './rationale'
 import EnterView from 'enter-view'
 
 const $body = d3.select('body');
@@ -56,6 +57,7 @@ function init() {
 	// kick off graphic code
 	bodyBar.init()
 	wordHist.init();
+	rationale.init()
 	setupEnterView()
 	// item.init()
 }
