@@ -16,6 +16,8 @@ Every cell in this markdown file can be run to update the data in the web versio
 ```{r packages}
 library(tidyverse)
 library(here)
+library(tools)
+library(glue)
 ```
 
 ## Importing Data
@@ -221,7 +223,21 @@ words <- cleanBans %>%
   group_by(item) %>% 
   count(., sort = TRUE) %>% 
   mutate(per = round(n / nrow(responses) * 100, 0)) %>% 
-  filter(per >= 5)
+  filter(per >= 10) %>% 
+  mutate(display = case_when(
+    item == "disruption/distraction" ~ "Distract or Disrupt",
+    item == "appropriate/inappropriate" ~ "Appropriate",
+    item == "safe/safety" ~ "Safe",
+    item == "health" ~ "Health",
+    item == "interfere with learning" ~ "Interfere with Learning",
+    item == "clean" ~ "Clean",
+    item == "modest/modesty" ~ "Modest",
+    item == "neat" ~ "Neat",
+    item == "respect/disrespect" ~ "Respect",
+    TRUE ~ item
+  )) 
+
+write.csv(words, "../src/assets/data/words.csv", row.names = FALSE)
 ```
 
 ```{r}
@@ -231,12 +247,38 @@ links <- responses %>%
 
 ```{r}
 ex <- rationale %>% 
-  filter(grepl("distraction", item))
-
-distraction <- ex %>% 
   left_join(links) %>% 
-  mutate(extract = str_extract(Copy.Entire.Dress.Code.Here, "(?:[^ ]+ ){5}distract(?: [^ ]+){5}"))
+  mutate(allText = str_replace_all(Copy.Entire.Dress.Code.Here, "[\r\n\t]" , " "))
 ```
+
+```{r}
+extractWords <- function(word){
+  regex <- glue("[^.]*({word})[^.]*\\.")
+  
+  extractions <- ex %>% 
+    filter(grepl(word, item)) %>% 
+    mutate(extract = str_extract_all(allText, regex))
+}
+
+wordsToExtract <- c("distract", "disrupt", "appropriate", "safe", "health", "interfere", "clean", "modest", "neat", "respect")
+
+testEx <- extractWords("distract")
+
+extracted <- purrr::map_dfr(wordsToExtract, extractWords)
+
+unlistExtracted <- extracted %>% 
+  unnest(extract) %>% 
+  select(c(1, 2, 3, 5, 9)) %>% 
+  mutate(schoolName = gsub("[[:space:]]h s|[[:space:]]hs", " High School", tolower(School.Name)),
+         schoolName = toTitleCase(schoolName)) %>% 
+  rename(link = "Link.to.Dress.Code", state = "School.State.Abbreviation") %>% 
+  select(schoolName, state, link, item, extract)
+
+shuffled <- unlistExtracted[sample(nrow(unlistExtracted)),]
+
+write.csv(shuffled, "../src/assets/data/extract.csv", row.names = FALSE)
+```
+
 
 ### Subjective
 
@@ -248,7 +290,42 @@ subj <- responses %>%
   filter(!is.na(present),
          present != "no")
 
-nrows(subj)/nrows(responses)
+nrow(subj)/nrow(responses)
 ```
+
+### States
+
+```{r}
+states <- responses %>% 
+  select(School.State.Abbreviation) %>% 
+  mutate(stateAbb = toupper(School.State.Abbreviation)) %>% 
+  count(stateAbb, sort = TRUE)
+```
+
+Compare to all high schools per state in NCES system
+
+```{r}
+schoolData <- read.csv(here::here("raw_data", "schools", "elsi.csv"), skip = 6, header = TRUE, na.strings = c("†", "-"), stringsAsFactors = FALSE)
+
+columns <- c("schoolName", "state", "website", "stateAbb", "schoolType", "charterSchool", "magnetSchool", "locale", "totalStudents", "lowestGrade", "highestGrade", "totalRace", "raceNative", "raceAsian", "raceHispanic", "raceBlack", "raceWhite", "raceHawaiian", "raceMultiple", "studentTeacherRatio", "teacherCount")
+
+colnames(schoolData) <- columns
+
+mappedNames <- setNames(state.abb, state.name)
+
+schoolDataCounts <- schoolData %>% 
+  filter(schoolType == "1-Regular school",
+         magnetSchool == "2-No",
+         charterSchool == "2-No") %>% 
+  count(stateAbb, sort = TRUE) %>% 
+  mutate(stateAbb = trimws(stateAbb))
+```
+
+```{r}
+collected <- states %>% 
+  left_join(schoolDataCounts, by = "stateAbb") %>% 
+  mutate(per = round((n.x / n.y) * 100, 0))
+```
+
 
 

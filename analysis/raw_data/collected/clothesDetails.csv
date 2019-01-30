@@ -26,7 +26,7 @@ shirt,sleeveless,n,y,sleeveless shirt
 clothing,frayed cut torn with holes,n,y,frayed clothing
 clothing,extremely brief short,f,y,short* clothing
 shorts,bike shorts,n,y,bike shorts
-shorts,cutoffs un hemmed,f,y,unhemmed shorts
+shorts,cutoffs un hemmed,f,y,cutoff shorts
 clothing,sexually provocative suggestive,f,y,provocative clothing
 skirt.dress,backless,f,y,backless dress
 clothing,spandex,n,y,spandex clothing
@@ -35,7 +35,7 @@ shirt,off the shoulder,f,y,off shoulder shirt
 undergarment,none,n,y,no underwear
 clothing,dirty,n,n,dirty clothing
 shirt,undershirts,n,y,undershirt
-pants,un hemmed,n,n,unhemmed pants
+pants,un hemmed,n,n,cutoff pants
 pants,with holes above knee,n,y,holes above knee
 clothing,low backlines,f,y,low backline
 pants,with holes,n,y,pants with holes
@@ -46,4 +46,4 @@ shirt,too short to touch top of pants,f,y,short* shirt
 undergarment,undergarments as outergarments,,,
 skirt.dress,strapless dresses,f,y,strapless dress
 shirt,unfastened,n,y,unfastened shirt
-skirt.dress,un hemmed,f,y,unhemmed skirt
+skirt.dress,un hemmed,f,y,cutoff skirt
