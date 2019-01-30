@@ -139,10 +139,19 @@ function setupMobileWords(){
 		$simpleContainer.at('data-simplebar', true)
 
 	let $mobileExample = $simpleContainer.append('div.example')
+
+	// automatically have the first one expanded
+	let $defaultSel = $mobile.select('.g-word')
+	$defaultSel.classed('is-active', true)
+	const $defaultEx = $defaultSel.select('.example')
+	$defaultEx.classed('is-expanded', true)
+	$defaultSel.select('.symbol').html(svgMinus)
+	updateMobileExample(selectedWords, $defaultSel)
 }
 
 function handleClickMobile(){
 	let $button = d3.select(this)
+	console.log({$button})
 	const example = $button.select('.example')
 	const symbol = $button.select('.symbol')
 	if ($button.classed('is-active') == true){
@@ -193,8 +202,6 @@ function updateMobileExample(word, sel){
 
 function setupMobile(){
 	setupMobileWords()
-	updateMobileExample(selectedWords)
-	console.log("setup mobile running")
 }
 
 function resize(){
