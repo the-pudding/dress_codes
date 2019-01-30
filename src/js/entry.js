@@ -21,6 +21,7 @@ function resize() {
 		previousWidth = width;
 		wordHist.resize();
 		bodyBar.resize()
+		rationale.resize()
 	}
 }
 
