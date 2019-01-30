@@ -32,7 +32,7 @@ function cleanWords(arr){
 }
 
 function handleClick(){
-  d3.selectAll('.g-word').classed('is-active', false)
+  $words.selectAll('.g-word').classed('is-active', false)
 
   let $button = d3.select(this)
 
@@ -115,11 +115,11 @@ function setupMobileWords(){
     .enter()
     .append('div.g-word')
     .attr('data-word', d => d.item)
+		.on('click', handleClickMobile)
 
 	let $word = $wordCounts.append('div.word')
 	let $wordLeft = $word.append('div.word-left')
 	let $wordRight = $word.append('div.word-right')
-	let $example = $wordCounts.append('div.example')
 
 	$wordLeft
 		.append('p.word-title')
@@ -132,11 +132,68 @@ function setupMobileWords(){
 	$wordRight
 		.append('div.symbol')
 		.html(svgPlus)
-    //.on('click', handleClickMobile)
+
+	let $simpleContainer = $wordCounts
+		.append('div.simplebar__container-mobile')
+
+		$simpleContainer.at('data-simplebar', true)
+
+	let $mobileExample = $simpleContainer.append('div.example')
+}
+
+function handleClickMobile(){
+	let $button = d3.select(this)
+	const example = $button.select('.example')
+	const symbol = $button.select('.symbol')
+	if ($button.classed('is-active') == true){
+		$button.classed('is-active', false)
+		example.classed('is-expanded', false)
+		symbol.html(svgPlus)
+	} else {
+		console.log("running")
+		$button.classed('is-active', true)
+		example.classed('is-expanded', true)
+		symbol.html(svgMinus)
+	  let word = $button.at('data-word')
+	  updateMobileExample(word, $button)
+	}
+
+
+}
+
+function updateMobileExample(word, sel){
+		let $mobileExampleContainer = sel.select('.example')//$mobile.selectAll('.g-word')
+		console.log({$mobileExampleContainer})
+
+		const relevantData = nestedExample.filter(d => d.key === word)[0].values.slice(0, 30)
+
+		//console.log({$mobileWordCounts})
+
+		const $schoolExample = $mobileExampleContainer
+	    .selectAll('.g-example')
+	    .data(relevantData)
+	    .enter()
+	    .append('div.g-example')
+
+		let $top = $schoolExample.append('div.top')
+	  let $bottom = $schoolExample.append('div.bottom')
+
+	  $top
+	    .append('p.school-name')
+	    .text(d => d.schoolName)
+
+	  $top
+	    .append('p.school-state')
+	    .text(d => d.state)
+
+	  $bottom
+	    .append('p.school-example')
+	    .text(d => d.extract)
 }
 
 function setupMobile(){
 	setupMobileWords()
+	updateMobileExample(selectedWords)
 	console.log("setup mobile running")
 }
 

@@ -147,3 +147,40 @@
             .word-count
               font-size 14px
               margin 0
+
+          .simplebar__container-mobile
+            .example
+              height 0px
+              overflow-y scroll
+              transition height 300ms ease-in-out
+              &.is-expanded
+                height 350px
+                transition height 300ms ease-in-out
+              .g-example
+                display flex
+                flex-direction column
+                padding 20px 30px 20px 20px
+                background-color lighten($primary, 35)
+                .top
+                  display flex
+                  flex-direction row
+                  justify-content space-between
+
+                  .school-name
+                    font-size 18px
+                    font-weight bold
+                    margin 0
+
+                  .school-state
+                    font-size 14px
+                    color $gray-dark
+                    margin 0
+
+                .bottom
+                  margin-top 0.5rem
+                  .school-example
+                    font-size 14px
+                    margin 0
+          .simplebar-scrollbar
+            &::before
+              background red !important
