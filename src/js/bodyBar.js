@@ -209,7 +209,6 @@ function init(){
   return new Promise((resolve) => {
 		d3.loadData('assets/data/bodyPer.csv', (err, response) => {
 			data = cleanData(response[0])
-      console.log({data})
       setupDiv()
 			resolve()
 		})

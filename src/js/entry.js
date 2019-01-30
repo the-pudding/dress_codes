@@ -2,6 +2,7 @@
 import debounce from 'lodash.debounce';
 import isMobile from './utils/is-mobile';
 import bodyBar from './bodyBar'
+import bodyGrid from './bodyGrid'
 import wordHist from './wordHist';
 import item from './item'
 import rationale from './rationale'
@@ -60,6 +61,7 @@ function init() {
 	setupStickyHeader();
 	// kick off graphic code
 	bodyBar.init()
+	bodyGrid.init()
 	wordHist.init();
 	rationale.init()
 	setupEnterView()

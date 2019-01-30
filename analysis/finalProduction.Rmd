@@ -144,6 +144,57 @@ bodyPer <- cleanBans %>%
 write.csv(bodyPer, "../src/assets/data/bodyPer.csv", row.names = FALSE)
 ```
 
+
+```{r}
+bodyButtons <- c("midsection midriff", "cleavage", "back", "breasts chest", "buttocks", "stomach", "torso")
+
+
+## Importing NCES data
+schoolData <- read.csv(here::here("raw_data", "schools", "elsi.csv"), skip = 6, header = TRUE, na.strings = c("†", "-"), stringsAsFactors = FALSE)
+
+columns <- c("schoolName", "state", "website", "stateAbb", "schoolType", "charterSchool", "magnetSchool", "locale", "totalStudents", "lowestGrade", "highestGrade", "totalRace", "raceNative", "raceAsian", "raceHispanic", "raceBlack", "raceWhite", "raceHawaiian", "raceMultiple", "studentTeacherRatio", "teacherCount")
+
+colnames(schoolData) <- columns
+
+googledrive::drive_download("shuffledHandbooks", path = here::here("raw_data", "collected", "completedHandbooks.csv"), type = "csv", overwrite = TRUE)
+
+completedHandbooks <- read.csv(here::here("raw_data", "collected", "completedHandbooks.csv"), stringsAsFactors = FALSE, header = TRUE)
+
+completedHandbooksClean <- completedHandbooks %>% 
+  filter(entered != "",
+         !grepl("skip", entered)) %>% 
+  select(c(schoolName, stateAbb, locale, totalStudents))
+
+schoolBody <- cleanBans %>% 
+  filter(School.Name %in% body$School.Name) %>% 
+  filter(type == "body",
+         item %in% bodyButtons) %>% 
+  spread("item", "type", fill = NA) %>% 
+  rename("schoolName" = "School.Name", "state" = "School.State.Abbreviation") %>% 
+  right_join(completedHandbooksClean) %>% 
+  mutate(totalStudents = as.numeric(totalStudents)) %>% 
+  mutate(countGroup = case_when(
+    totalStudents < 200 ~ "< 200",
+    between(totalStudents, 200, 499) ~ "200-499",
+    between(totalStudents, 500, 999) ~ "500-999",
+    between(totalStudents, 1000, 1500) ~ "1000-1500",
+    totalStudents >= 1500 ~ "1500+",
+    TRUE ~ NA_character_
+  )) %>% 
+  mutate(localeGroup = case_when(
+    grepl("Rural", locale) ~ "rural",
+    grepl("City", locale) ~ "city", 
+    grepl("Suburb", locale) ~ "suburb",
+    grepl("Town", locale) ~ "town",
+    TRUE ~ NA_character_
+  )) %>% 
+  select(-c("locale", "totalStudents")) %>% 
+  mutate(schoolName = gsub("[[:space:]]h s|[[:space:]]hs", " High School", tolower(schoolName)),
+         schoolName = toTitleCase(schoolName))
+
+write.csv(schoolBody, "../src/assets/data/bodyPerSchool.csv", row.names = FALSE, na = "")
+```
+
 ### Clothes
 
 ```{r}
