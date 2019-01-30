@@ -22,6 +22,18 @@ function cleanWords(arr){
 	})
 }
 
+function handleClick(){
+  d3.selectAll('.g-word').classed('is-active', false)
+  
+  let $button = d3.select(this)
+
+  $button.classed('is-active', true)
+
+  let word = $button.at('data-word')
+
+  updateExample(word)
+}
+
 function setupExample(){
   nestedExample = d3.nest()
     .key(d => d.item)
@@ -36,6 +48,8 @@ function setupWords(){
     .data(wordData)
     .enter()
     .append('div.g-word')
+    .attr('data-word', d => d.item)
+    .on('click', handleClick)
 
   const $left = $wordCounts.append('div.left')
   const $right = $wordCounts.append('div.right')
@@ -54,10 +68,10 @@ function setupWords(){
 }
 
 function updateExample(word){
+  $examples.selectAll('.g-example').remove()
 
   const relevantData = nestedExample.filter(d => d.key === word)[0].values
 
-  console.log({relevantData, $examples})
   const $schoolExample = $examples
     .selectAll('.g-example')
     .data(relevantData)
@@ -78,7 +92,6 @@ function updateExample(word){
   $bottom
     .append('p.school-example')
     .text(d => d.extract)
-
 
 }
 
