@@ -40,7 +40,8 @@
       flex-direction row
       font-family $national
       max-height 936px
-      overflow-y: hidden
+      min-width $column-width
+      overflow: hidden;
 
       &-words
         min-width 270px
@@ -79,11 +80,15 @@
             svg
               stroke $primary
               transition 100ms ease-in-out
+      .simplebar__container
+        max-width 370px
+        padding 0
       &-examples
+        min-width 370px
         .g-example
           display flex
           flex-direction column
-          padding 20px 15px
+          padding 20px 30px 20px 20px
           background-color lighten($primary, 35)
           .top
             display flex
@@ -105,3 +110,6 @@
             .school-example
               font-size 14px
               margin 0
+      .simplebar-scrollbar
+        &::before
+          background white !important

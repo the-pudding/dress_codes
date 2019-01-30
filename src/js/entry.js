@@ -6,6 +6,9 @@ import wordHist from './wordHist';
 import item from './item'
 import rationale from './rationale'
 import EnterView from 'enter-view'
+import SimpleBar from 'SimpleBar';
+
+// new SimpleBar(document.getElementById('info-container'));
 
 const $body = d3.select('body');
 let previousWidth = 0;
