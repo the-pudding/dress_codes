@@ -63,6 +63,13 @@
             .word-count
               font-size 14px
               margin 0
+          &:hover
+            background-color lighten($primary, 20)
+            transition 100ms ease-in-out
+
+            svg
+              stroke $primary
+              transition 100ms ease-in-out
       &-examples
         .g-example
           display flex
