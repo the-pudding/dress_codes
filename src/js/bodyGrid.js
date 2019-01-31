@@ -9,6 +9,11 @@ const $buttonCont = d3.select('.buttons')
 
 let data = null
 
+// user selections
+let selectedState = 'All schools'
+let selectedSize = 'All school sizes'
+let selectedLocale = 'All locales'
+
 let svgBook = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>'
 
 function cleanData(arr){
@@ -25,7 +30,7 @@ function setup(){
     .selectAll('.grid__blocks')
     .data(data)
     .enter()
-    .append('div.grid__blocks')
+    .append('div.grid__blocks.is-visible')
     .html(svgBook)
 
   setupDropdowns($state, 'state', 'states')
@@ -36,7 +41,7 @@ function setup(){
 
 function setupDropdowns(selection, options, filter){
 
-  console.log({selection, options, filter})
+  console.log({selection, options, filter, data})
 
   selection
     .selectAll('option')
@@ -56,7 +61,37 @@ function setupDropdowns(selection, options, filter){
     .attr('value', d => d)
     .text(d => d)
 
-    //selection.on('change', updateSelection)
+    selection.on('change', updateSelection)
+}
+
+function updateSelection(){
+  const dropdown = d3.select(this).at('data-dropdown')
+  const selection = this.value
+
+  if (dropdown == 'state') selectedState = selection
+  if (dropdown == 'size') selectedSize = selection
+  if (dropdown == 'locale') selectedLocale = selection
+
+  console.log({dropdown, selection, selectedLocale})
+
+  const $blocks = $container.selectAll('.grid__blocks')
+
+  $blocks
+    .classed('is-visible', d => {
+      if ((d.state == selectedState || selectedState == 'All states') &&
+      (d.countGroup == selectedSize || selectedSize == 'All school sizes') &&
+      (d.localeGroup == selectedLocale || selectedLocale == 'All locales')) {return true}
+      else return false
+    })
+    // .classed('is-visible', d => {
+    //   if ((d.state == selectedState || selectedState == 'All schools') &&
+    //     (d.countGroup == selectedSize || selectedSize == 'All styles') &&
+    //     (d.Locale == selectedLocale || selectedLocale == 'All prices')){
+		// 		return true}
+    //   else return false
+    // })
+
+
 }
 
 function resize(){

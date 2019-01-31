@@ -106,13 +106,15 @@
         background-color $gray-light
         margin 2px
         border-radius 5px
-        display flex
-        align-items: center
-        justify-content: center
+        display none
         svg
           transform scale(0.9)
           stroke-width 1px
           stroke $gray-darkest
+        &.is-visible
+          display flex
+          align-items: center
+          justify-content: center
     .filters
       display flex
       flex-direction: row;
