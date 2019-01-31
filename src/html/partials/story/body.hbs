@@ -11,18 +11,20 @@
 
   <div class='lockscreen__examples-body'>
     {{#each doc.body-examples}}
-      <div class='lockscreen__container'>
-        <div class='lockscreen'>
-          <div class='top'>
-            <p class='top__title'>{{{@root.doc.lockScreenTitle}}}</p>
-            <p class='top__time'>{{{@root.doc.lockScreenTime}}}</p>
-          </div>
-          <div class='bottom'>
-            <p class='bottom__school'>{{{source}}}</p>
-            <p class='bottom__text'>{{{text}}}</p>
+    <a href='{{{link}}}' target='_blank'>
+        <div class='lockscreen__container'>
+          <div class='lockscreen'>
+            <div class='top'>
+              <p class='top__title'>{{{@root.doc.lockScreenTitle}}}</p>
+              <p class='top__time'>{{{@root.doc.lockScreenTime}}}</p>
+            </div>
+            <div class='bottom'>
+              <p class='bottom__school'>{{{source}}}</p>
+              <p class='bottom__text'>{{{text}}}</p>
+            </div>
           </div>
         </div>
-      </div>
+      </a>
     {{/each}}
   </div>
 
