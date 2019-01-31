@@ -25,19 +25,28 @@
     <p class='prose'>{{{value}}}</p>
   {{/each}}
 
-  <figure class='container__clothes'>
-    <div class='container__clothes-title'>
-      <h4 class='chart__title'>{{{doc.clothesGraphTitle}}}</h4>
-      <p class='chart__subtitle-fullWidth'>{{{doc.clothesGraphLegend}}}</p>
+  <div class='scroll'>
+
+    <figure class='container__clothes'>
+      <div class='container__clothes-title'>
+        <h4 class='chart__title'>{{{doc.clothesGraphTitle}}}</h4>
+        <p class='chart__subtitle-fullWidth'>{{{doc.clothesGraphLegend}}}</p>
+      </div>
+    </figure>
+
+    <div class='scroll-text'>
+      {{#each doc.clothesSteps}}
+        <div class='step' data-step='{{{step}}}' id='step-{{{step}}}'>
+          <p class='step-prose'>{{{text}}}</p>
+        </div>
+      {{/each}}
     </div>
 
-    <div class='graphic__notes'>
-      <p class='graphic__notes-title'>{{{doc.clothesNotesTitle}}}</p>
-    {{#each doc.clothingNotesText}}
-      <p class='graphic__notes-text'>{{{value}}}</p>
-    {{/each}}
-    </div>
-  </figure>
+  </div>
+
+  <div class='graphic__notes'>
+    <p class='graphic__notes-text'>{{{doc.clothingNotesText}}}</p>
+  </div>
 
   <img class='clothes__img-items' src='assets/images/placeholder_clothes.png'>
   {{#each doc.clothesOutro}}

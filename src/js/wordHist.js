@@ -1,8 +1,26 @@
+import scrollama from 'scrollama'
+
 let data = []
 let nested = []
 
+// scrollama setup
+const scroller = scrollama()
+
 // selections
-const $container = d3.select('.container__clothes')
+const $scroll = d3.select('.scroll')
+const $container = $scroll.select('.container__clothes')
+const $text = $scroll.select('.scroll-text')
+const $step = $text.selectAll('.step')
+const $legend = $scroll.select('.chart__subtitle-fullWidth')
+
+// colors
+const white = '#FFFFFF'
+const primary = '#2893F6'
+const secondary = '#1CBB48'
+const offBlack = '#282828'
+
+let $histCol = null
+let $clothes = null
 
 function cleanData(arr){
 	return arr.map((d, i) => {
@@ -13,6 +31,101 @@ function cleanData(arr){
       per: +d.per,
 		}
 	})
+}
+
+function startScroll(){
+	$histCol.classed('is-dimmed', false)
+	$clothes.classed('is-dimmed', false)
+		.st('backgroundColor', white)
+		.st('color', offBlack)
+
+	$legend.classed('is-visible', false)
+}
+
+function highlightTop(){
+	$histCol.classed('is-dimmed', true)
+
+	$container.select('.clothes__group-60').classed('is-dimmed', false)
+
+	$clothes
+		.classed('is-dimmed', false)
+		.st('backgroundColor', white)
+		.st('color', offBlack)
+
+	$legend.classed('is-visible', false)
+}
+
+function highlightBottom(){
+	$clothes.st('backgroundColor', white)
+
+	$histCol.classed('is-dimmed', true)
+
+	$container.select('.clothes__group-0').classed('is-dimmed', false)
+
+	$clothes
+		.classed('is-dimmed', false)
+		.st('color', offBlack)
+
+	$legend.classed('is-visible', false)
+}
+
+function highlightNonSexual(){
+	$clothes.st('backgroundColor', white)
+
+	$histCol.classed('is-dimmed', false)
+
+	$clothes
+		.classed('is-dimmed', true)
+		.transition()
+		.duration(300)
+		.st('color', offBlack)
+
+	$container.selectAll('.items__reveal-n').classed('is-dimmed', false)
+	$legend.classed('is-visible', false)
+}
+
+function addColor(){
+
+	$histCol.classed('is-dimmed', false)
+	$clothes.classed('is-dimmed', false)
+
+	$clothes
+		.transition()
+		.duration(300)
+		.st('backgroundColor', d => {
+			if (d.market == 'f') return primary
+			else if (d.market == 'm') return secondary
+			else return white
+		})
+		.st('color', d => {
+			if (d.market == 'f' || d.market == 'm') return white
+			else return offBlack
+		})
+
+		$legend.classed('is-visible', true)
+}
+
+function handleStepEnter(response){
+	const index = response.index
+	console.log({index})
+
+	if (index === 0) startScroll()
+	if (index === 1) highlightTop()
+	if (index === 2) highlightBottom()
+	if (index === 3) highlightNonSexual()
+	if (index === 4) addColor()
+}
+
+function setupScroll(){
+	scroller.setup({
+		container: '.scroll',
+		graphic: '.container__clothes',
+		text: '.scroll-text',
+		step: '.step',
+		debug: false,
+		offset: 0.85
+	})
+	.onStepEnter(handleStepEnter)
 }
 
 function setup(){
@@ -40,6 +153,8 @@ function setup(){
     .append('div')
     .attr('class', d => `clothes__group clothes__group-${d.key}`)
 
+	$histCol = $container.selectAll('.clothes__group')
+
   const $onlyClothes = groups.append('div.clothes__only')
 
   $onlyClothes
@@ -49,6 +164,9 @@ function setup(){
     .append('span')
     .text(d => d.slug)
     .attr('class', d => `clothes__item items__reveal-${d.reveal_body} items__market-${d.market}`)
+		.st('backgroundColor', white)
+
+		$clothes = $container.selectAll('.clothes__item')
 
   const axisGroup = groups.append('div.axis__group')
 
@@ -60,10 +178,17 @@ function setup(){
     .append('span.axis__text-sub')
     .text('of schools')
 
+	setupScroll()
 }
 
 function resize(){
+	const stepHeight = Math.floor(window.innerHeight)
+	console.log({$text, $step})
 
+	$step
+		.st('height', `${stepHeight}px`)
+
+	scroller.resize()
 }
 
 function init(){
@@ -71,6 +196,7 @@ function init(){
 		d3.loadData('assets/data/clothes.csv', (err, response) => {
 			data = cleanData(response[0])
       setup()
+			resize()
 			resolve()
 		})
 	})

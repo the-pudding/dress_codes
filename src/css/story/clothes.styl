@@ -15,10 +15,42 @@
       max-height auto
       margin 1rem 0.5rem
 
+
+  .scroll
+    position relative
+
+    &-text
+      position relative
+      max-width 30rem
+      margin 0 auto
+      padding 1rem
+      .step-prose
+        background-color rgba(white, 0.9)
+        border 1px solid $gray
+        border-radius 10px
+        padding 1rem
+        .girls, .boys
+          padding 4px 6px
+          border-radius 10px
+
+        .girls
+          background-color: $primary
+          color white
+        .boys
+          background-color $secondary
+          color white
+        .any
+          background-color rgba(white, 1) !important
+
   .container__clothes
     display flex
     flex-direction column
     justify-content: center;
+    position -webkit-sticky
+    position sticky
+    top 25%
+    bottom auto
+    transform translate3d(0, 0, 0)
 
     .clothes__all
       margin 0 auto
@@ -36,6 +68,8 @@
         align-items: flex-start;
         justify-content:flex-start;
         min-height 2rem
+        opacity 1
+        transition 300ms ease-in-out
         +mq('bp-6')
           flex-direction column
           align-items center
@@ -43,6 +77,9 @@
           height auto
           margin 0 0.15rem
           justify-content: flex-end;
+        &.is-dimmed
+          opacity 0.3
+          transition 300ms ease-in-out
 
       .clothes__only
         display flex
@@ -62,24 +99,29 @@
         line-height 1
         padding 0.1rem 0.5rem
         border-radius 10px
+        opacity 1
+        transition 300ms ease-in-out
         +mq('bp-6')
           width auto
           margin 0
           line-height 1.5
           margin 1px 0.5rem
           text-align: left
+        &.is-dimmed
+          opacity 0.3
+          transition 300ms ease-in-out
 
-      .items__market-f
-        background-color: $primary
-        color white
-
-
-      .items__market-m
-        background-color $secondary
-        color white
-
-      .items__market-n
-        background-color white
+      // .items__market-f
+      //   background-color: $primary
+      //   color white
+      //
+      //
+      // .items__market-m
+      //   background-color $secondary
+      //   color white
+      //
+      // .items__market-n
+      //   background-color white
 
     .axis__group
       display flex
@@ -124,6 +166,11 @@
         font-size 14px
         text-transform uppercase
         margin 0.5rem 0 2rem 0
+        opacity 0
+        transition 300ms ease-in-out;
+        &.is-visible
+          opacity 1
+          transition 300ms ease-in-out
 
         span
           margin 0 0.25rem
