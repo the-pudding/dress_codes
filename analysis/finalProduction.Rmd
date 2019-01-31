@@ -18,6 +18,7 @@ library(tidyverse)
 library(here)
 library(tools)
 library(glue)
+library(jsonlite)
 ```
 
 ## Importing Data
@@ -169,7 +170,13 @@ schoolBody <- cleanBans %>%
   filter(School.Name %in% body$School.Name) %>% 
   filter(type == "body",
          item %in% bodyButtons) %>% 
-  spread("item", "type", fill = NA) %>% 
+  mutate(item = case_when(
+    item == "midsection midriff" ~ "midriff",
+    item == "breasts chest" ~ "chest",
+    TRUE ~ item 
+  ),
+  fill = "y") %>% 
+  #spread("item", "fill", fill = NA) %>% 
   rename("schoolName" = "School.Name", "state" = "School.State.Abbreviation") %>% 
   right_join(completedHandbooksClean) %>% 
   mutate(totalStudents = as.numeric(totalStudents)) %>% 
@@ -188,11 +195,18 @@ schoolBody <- cleanBans %>%
     grepl("Town", locale) ~ "town",
     TRUE ~ NA_character_
   )) %>% 
-  select(-c("locale", "totalStudents")) %>% 
+  mutate(state = trimws(stateAbb)) %>% 
+  select(-c("locale", "totalStudents", "stateAbb", "type")) %>%
   mutate(schoolName = gsub("[[:space:]]h s|[[:space:]]hs", " High School", tolower(schoolName)),
-         schoolName = toTitleCase(schoolName))
+         schoolName = toTitleCase(schoolName)) %>% 
+  ungroup() %>% 
+  group_by(state, schoolName) %>% 
+  mutate(bodyParts = list(item)) %>% 
+  select(-c("item", "fill"))
 
-write.csv(schoolBody, "../src/assets/data/bodyPerSchool.csv", row.names = FALSE, na = "")
+bodyJSON <- jsonlite::toJSON(schoolBody, pretty = TRUE, flatten = TRUE)
+
+write(bodyJSON, "../src/assets/data/bodyPerSchool.json")
 ```
 
 ### Clothes
