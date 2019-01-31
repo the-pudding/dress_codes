@@ -24,9 +24,13 @@ section
     background-color white
     border-radius: 40px
     text-align: center
-    transform translate(0, -2rem)
     display inline-block
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.12)
+    opacity 0
+    &.entered
+      opacity 1
+      transform translate(0, -2rem)
+      transition 200ms ease-in-out
 
 
 

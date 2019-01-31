@@ -27,8 +27,7 @@ function resize() {
 	}
 }
 
-function setupEnterView(){
-
+function setupLockscreenEnter(){
 	EnterView({
 		selector:'.lockscreen',
 	  enter: function(el){
@@ -37,7 +36,15 @@ function setupEnterView(){
 	  offset: 0.25,
 	  once: true
 	})
+}
 
+function setupSectionEnter(){
+	EnterView({
+		selector: '.section__title-text',
+		enter: el => el.classList.add('entered'),
+		offset: 0.25,
+		once: true
+	})
 }
 
 function setupStickyHeader() {
@@ -65,7 +72,8 @@ function init() {
 	bodyGrid.init()
 	wordHist.init();
 	rationale.init()
-	setupEnterView()
+	setupLockscreenEnter()
+	setupSectionEnter()
 	// item.init()
 }
 
