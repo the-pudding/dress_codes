@@ -42,7 +42,7 @@
     <button class='body__load'>{{{doc.bodyPartButton}}}</button>
   </figure> -->
 
-  {{#each doc.bodyOutro}}
+  {{#each doc.bodyPreExplore}}
     <p class='prose'>{{{value}}}</p>
   {{/each}}
 
@@ -77,4 +77,8 @@
     </div>
     <div class='toggle-table'><button class='btn'>Show All</button></div>
   </figure>
+
+  {{#each doc.bodyOutro}}
+    <p class='prose'>{{{value}}}</p>
+  {{/each}}
 </section>
