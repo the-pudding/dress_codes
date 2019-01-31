@@ -1,11 +1,14 @@
 import lookupStateName from './utils/lookup-state-name'
 
-const $container = d3.select('.container__grid')
+const $figureCont = d3.select('.container__figure')
+const $container = $figureCont.select('.container__grid')
 const $filterCont = d3.select('.filters')
 const $state = $filterCont.select('.select__state')
 const $size = $filterCont.select('.select__size')
 const $locale = $filterCont.select('.select__locale')
 const $buttonCont = d3.selectAll('.buttons button')
+const $expandButton = d3.select('.toggle-table button')
+
 
 let data = null
 
@@ -28,6 +31,23 @@ function cleanData(arr){
 	})
 }
 
+function setupExpand(){
+  $expandButton.on('click', () => {
+		const truncated = $container.classed('is-truncated');
+		const text = truncated ? 'Show Fewer' : 'Show All';
+		$expandButton.text(text);
+		$container.classed('is-truncated', !truncated);
+
+		if (!truncated) {
+			const y = +$expandButton.at('data-y');
+			window.scrollTo(0, y);
+		}
+
+		$expandButton.at('data-y', window.scrollY);
+		$figureCont.select('.show-more').classed('is-visible', !truncated);
+	});
+}
+
 function setup(){
   const blocks = $container
     .selectAll('.grid__blocks')
@@ -38,12 +58,11 @@ function setup(){
 
   $blocks = $container.selectAll('.grid__blocks')
 
-  console.log({data})
-
   setupDropdowns($state, 'state', 'states')
   setupDropdowns($size, 'countGroup', 'school sizes')
   setupDropdowns($locale, 'localeGroup', 'locales')
   setupButtons()
+  setupExpand()
 }
 
 

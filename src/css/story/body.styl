@@ -94,7 +94,8 @@
       set-type-size('medium')
       stroke white
       stroke-width 2px
-
+  .container__figure
+    position relative
   .container__bodyGrid
     max-width: $column-width
     position relative
@@ -102,6 +103,9 @@
     .container__grid
       display flex
       flex-wrap wrap
+      &.is-truncated
+        max-height 26rem
+        overflow hidden
       .grid__blocks
         width 30px
         height 30px
@@ -187,3 +191,35 @@
   &.is-active
     opacity 1
     transition 300ms
+
+.show-more
+  position absolute
+  width 100%
+  height 5rem
+  background linear-gradient(rgba($bg, 0), $bg)
+  bottom 0
+  visibility hidden
+  pointer-events none
+  z-index 200
+  &.is-visible
+  	visibility visible
+.toggle-table
+    text-align center
+    margin-top 1rem
+    .btn
+      background-color transparent
+      color $gray-dark
+      border 1px solid $gray-dark
+      padding 0.25em 0.5em
+      width 9rem
+      text-transform uppercase
+      font-weight 600
+      transition background-color 250ms
+      pointer-events all
+      &:hover
+      	background-color rgba($primary, 0.2)
+      &.is-disabled
+        background-color transparent
+        color $gray-light
+        border 1px solid $gray
+        pointer-events none
