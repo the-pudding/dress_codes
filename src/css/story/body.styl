@@ -97,6 +97,8 @@
 
   .container__bodyGrid
     max-width: $column-width
+    position relative
+    padding 0 0.5rem
     .container__grid
       display flex
       flex-wrap wrap
@@ -112,6 +114,7 @@
           transform scale(0.9)
           stroke-width 1px
           stroke $gray-darkest
+          z-index 10
         &.is-visible
           display flex
           align-items: center
@@ -119,6 +122,7 @@
         &.is-highlighted
           background-color $primary
           transition 200ms ease-in-out
+
     .filters
       display flex
       flex-direction: row;
@@ -158,3 +162,28 @@
         border-radius: 5px
         &.is-active
           background-color $primary
+
+.ui-warning
+  font-family $national
+  position absolute
+  top 60%
+  left 50%
+  max-width 25rem
+  background-color white
+  border 1px solid $gray
+  padding 0.25rem 1rem
+  margin 0 auto
+  transform translate(-50%, 0)
+  box-shadow 0 0 3px rgba(40,40,40,.25)
+  z-index 200
+  opacity 0
+  transition 300ms
+  pointer-events: none
+  &-text
+    set-type-size('small', true)
+    color $dark-denim
+    text-align center
+
+  &.is-active
+    opacity 1
+    transition 300ms

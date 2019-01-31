@@ -91,6 +91,16 @@ function updateSelection(){
       (d.localeGroup == selectedLocale || selectedLocale == 'All locales')) {return true}
       else return false
     })
+
+
+  const visible = d3.selectAll('.grid__blocks.is-visible')
+  const $warning = d3.select('.ui-warning')
+
+  const size = visible.size()
+  console.log({size})
+
+  if (visible.size() < 1) $warning.classed('is-active', true)
+  if (visible.size() > 1) $warning.classed('is-active', false)
 }
 
 function containsPart(arr, part) {
