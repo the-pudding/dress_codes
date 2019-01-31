@@ -8,6 +8,7 @@ const $size = $filterCont.select('.select__size')
 const $locale = $filterCont.select('.select__locale')
 const $buttonCont = d3.selectAll('.buttons button')
 const $expandButton = d3.select('.toggle-table button')
+const $tooltip = $figureCont.select('.tooltip')
 
 
 let data = null
@@ -18,6 +19,8 @@ let minBlocks = null
 let truncHeight = 416
 let blockWidth = 30
 let margin = 2
+let tooltipWidth = 275
+let halfTooltip = tooltipWidth / 2
 
 let $blocks = null
 
@@ -33,6 +36,7 @@ function cleanData(arr){
 	return arr.map((d, i) => {
 		return {
 			...d,
+      stateAbb: d.state,
       state: lookupStateName(d.state),
 		}
 	})
@@ -55,6 +59,42 @@ function setupExpand(){
 	});
 }
 
+function handleTooltip(){
+  const $sel = d3.select(this)
+  const block = $sel.data()[0]
+
+  const $name = $tooltip.select('.school__name')
+    .text(block.schoolName)
+
+  const $state = $tooltip.select('.school__state')
+    .text(block.stateAbb)
+
+  const $size = $tooltip.select('.school__size')
+    .text(`${block.countGroup} students`)
+
+  const blockLeft = $sel.node().offsetLeft
+  const blockTop = $sel.node().offsetTop
+
+  $tooltip
+    .st('top', `${blockTop - blockWidth * 2}px`)
+    .classed('is-visible', true)
+
+  if (blockLeft < halfTooltip){
+    $tooltip
+      .st('left', `${blockLeft + blockWidth}px`)
+  } else if (blockLeft + halfTooltip > width && blockLeft - tooltipWidth > 0){
+    $tooltip
+      .st('left', `${blockLeft - tooltipWidth}px`)
+  } else if (blockLeft + halfTooltip > width && blockLeft - tooltipWidth < 0){
+    $tooltip
+      .st('left', `${blockLeft - tooltipWidth * 3 / 4}px`)
+  } else {
+    $tooltip
+      .st('left', `${blockLeft - halfTooltip}px`)
+  }
+
+}
+
 function setup(){
   const blocks = $container
     .selectAll('.grid__blocks')
@@ -62,6 +102,8 @@ function setup(){
     .enter()
     .append('div.grid__blocks.is-visible')
     .html(svgBook)
+    .on('mouseover', handleTooltip)
+    .on('click', handleTooltip)
 
   $blocks = $container.selectAll('.grid__blocks')
 
@@ -70,6 +112,12 @@ function setup(){
   setupDropdowns($locale, 'localeGroup', 'locales')
   setupButtons()
   setupExpand()
+
+  // on mouseout make tooltip invisible
+  $container
+    .on('mouseleave', d => {
+      $tooltip.classed('is-visible', false)
+    })
 }
 
 
@@ -180,6 +228,8 @@ function handleShowMore(){
       .classed('is-disabled', false)
   }
 }
+
+
 
 function resize(){
   width = $container.node().offsetWidth

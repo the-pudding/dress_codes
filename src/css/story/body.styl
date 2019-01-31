@@ -127,6 +127,10 @@
         &.is-highlighted
           background-color $primary
           transition 200ms ease-in-out
+          &:hover
+            background-color lighten($primary, 30)
+        &:hover
+          background-color $gray-extraLight
 
     .filters
       display flex
@@ -224,3 +228,35 @@
         color $gray-light
         border 1px solid $gray-light
         pointer-events none
+
+.tooltip
+  font-family $national
+  width 250px
+  height auto
+  background-color white
+  border-radius 10px
+  border 1px solid $gray
+  position absolute
+  padding 5px 10px
+  z-index 200
+  opacity 0
+  transition 300ms ease-in-out
+  pointer-events: none
+  +mq('bp-4')
+    width 275px
+  p
+    margin 0
+  .top
+    display flex
+    flex-direction row
+    justify-content: space-between;
+    .school__name
+      font-weight bold
+    .school__state
+      color $gray
+  .school__size
+    font-size 14px
+
+&.is-visible
+  opacity 1
+  transition 300ms ease-in-out
