@@ -42,7 +42,7 @@ function setupSectionEnter(){
 	EnterView({
 		selector: '.section__title-text',
 		enter: el => el.classList.add('entered'),
-		offset: 0.25,
+		offset: 0.1,
 		once: true
 	})
 }
