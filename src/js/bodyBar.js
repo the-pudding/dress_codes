@@ -18,7 +18,7 @@ let data = []
 let margin = {
   top: 30,
   bottom: 0,
-  left: 80,
+  left: 0,
   right: 0
 }
 
