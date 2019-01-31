@@ -72,6 +72,10 @@ function setupWords(){
   $right
     .append('div.arrow')
     .html(svgArrow)
+
+	// automatically highlight default
+	const $default = d3.select('.g-word')
+	$default.classed('is-active', true)
 }
 
 function updateExample(word){
