@@ -1,6 +1,10 @@
 <section class='next'>
-
-  <h3 class='title__section'>{{doc.whatToDoTitle}}</h3>
+  <div class='section__title'>
+    <div class='section__title-gif'>
+      <img src='assets/images/nowWhat.gif'>
+    </div>
+    <h3 class='section__title-text'>{{doc.whatToDoTitle}}</h3>
+  </div>
 
   {{#each doc.whatToDo}}
     <p class='prose'>{{{value}}}</p>

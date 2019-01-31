@@ -1,5 +1,10 @@
 <section class='clothes'>
-  <h3 class='title__section'>{{doc.clothesTitle}}</h3>
+  <div class='section__title'>
+    <div class='section__title-gif'>
+      <img src='assets/images/clothes.gif'>
+    </div>
+    <h3 class='section__title-text'>{{doc.clothesTitle}}</h3>
+  </div>
   {{#each doc.clothesIntro}}
     <p class='prose'>{{{value}}}</p>
   {{/each}}
@@ -48,7 +53,6 @@
     <p class='graphic__notes-text'>{{{doc.clothingNotesText}}}</p>
   </div>
 
-  <img class='clothes__img-items' src='assets/images/placeholder_clothes.png'>
   {{#each doc.clothesOutro}}
     <p class='prose'>{{{value}}}</p>
   {{/each}}

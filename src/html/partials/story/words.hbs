@@ -1,5 +1,10 @@
 <section class='words'>
-  <h3 class='title__section'>{{doc.wordsTitle}}</h3>
+  <div class='section__title'>
+    <div class='section__title-gif'>
+      <img src='assets/images/words.gif'>
+    </div>
+    <h3 class='section__title-text'>{{doc.wordsTitle}}</h3>
+  </div>
   {{#each doc.wordsIntro}}
     <p class='prose'>{{{value}}}</p>
   {{/each}}
