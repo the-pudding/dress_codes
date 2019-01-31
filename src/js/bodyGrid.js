@@ -11,6 +11,13 @@ const $expandButton = d3.select('.toggle-table button')
 
 
 let data = null
+let width = null
+let minBlocks = null
+
+// values set in css
+let truncHeight = 416
+let blockWidth = 30
+let margin = 2
 
 let $blocks = null
 
@@ -20,7 +27,7 @@ let selectedSize = 'All school sizes'
 let selectedLocale = 'All locales'
 let bodySel = {}
 
-let svgBook = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>'
+let svgBook = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>'
 
 function cleanData(arr){
 	return arr.map((d, i) => {
@@ -67,8 +74,6 @@ function setup(){
 
 
 function setupDropdowns(selection, options, filter){
-
-  console.log({selection, options, filter, data})
 
   selection
     .selectAll('option')
@@ -120,6 +125,8 @@ function updateSelection(){
 
   if (visible.size() < 1) $warning.classed('is-active', true)
   if (visible.size() > 1) $warning.classed('is-active', false)
+
+  handleShowMore()
 }
 
 function containsPart(arr, part) {
@@ -155,8 +162,32 @@ function setupButtons(){
   $buttonCont.on('click', handleButtonClick)
 }
 
-function resize(){
+function handleShowMore(){
+  const $gradient = $figureCont.select('.show-more')//.classed('is-visible', !truncated);
+  const visible = $container.selectAll('.grid__blocks.is-visible').size()
 
+  console.log({visible, minBlocks})
+
+  if (visible < minBlocks){
+    $gradient.classed('is-visible', false)
+    $expandButton
+      .prop('disabled', true)
+      .classed('is-disabled', true)
+  } else {
+    $gradient.classed('is-visible', true)
+    $expandButton
+      .prop('disabled', false)
+      .classed('is-disabled', false)
+  }
+}
+
+function resize(){
+  width = $container.node().offsetWidth
+  const col = Math.floor(width / (blockWidth + (margin * 2)))
+  const row = Math.floor(truncHeight / (blockWidth + (margin * 2)))
+  // if fewer than minBlocks, then "Show More" should be disabled
+  minBlocks = col * row
+  handleShowMore()
 }
 
 function init(){
@@ -164,6 +195,7 @@ function init(){
 		d3.loadData('assets/data/bodyPerSchool.json', (err, response) => {
 			data = cleanData(response[0])
       setup()
+      resize()
 			resolve()
 		})
 	})

@@ -22,6 +22,7 @@ function resize() {
 		previousWidth = width;
 		wordHist.resize();
 		bodyBar.resize()
+		bodyGrid.resize()
 		rationale.resize()
 	}
 }
