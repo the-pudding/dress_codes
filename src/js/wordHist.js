@@ -1,4 +1,5 @@
 import scrollama from 'scrollama'
+import intersectionObserver from 'intersection-observer'
 
 let data = []
 let nested = []
