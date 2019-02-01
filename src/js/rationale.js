@@ -26,7 +26,16 @@ function cleanWords(arr){
 		return {
 			...d,
       n: +d.n,
-      per: +d.per,
+      per: +d.per
+		}
+	})
+}
+
+function styleExamples(arr){
+	return arr.map((d, i) => {
+		return {
+			...d,
+			styled: highlightWords(d.item, d.extract)
 		}
 	})
 }
@@ -101,8 +110,8 @@ function updateExample(word){
     .text(d => d.state)
 
   $bottom
-    .append('p.school-example')
-    .text(d => d.extract)
+    .append('text.school-example')
+		.html(d => d.styled)
 
 }
 
@@ -171,8 +180,48 @@ function handleClickMobile(){
 	  let word = $button.at('data-word')
 	  updateMobileExample(word, $button)
 	}
+}
 
+const searchCrosswalk = [{
+	item: 'disruption/distraction',
+	search: 'distract|disrupt'
+},{
+	item: 'appropriate/inappropriate',
+	search: 'appropriate|inappropriate'
+},{
+	item: 'safe/safety',
+	search: 'safe'
+},{
+	item: 'health',
+	search: 'health'
+},{
+	item: 'interfere with learning',
+	search: 'interfer'
+}, {
+	item: 'clean',
+	search: 'clean'
+}, {
+	item: 'modest/modesty',
+	search: 'modest|immodest'
+}, {
+	item: 'neat',
+	search: 'neat'
+}, {
+	item: 'respect/disrespect',
+	search: 'respect'
+}]
 
+const searchMap = d3.map(searchCrosswalk, d => d.item)
+
+function highlightWords(section, text){
+	const searchTerms = searchMap.get(section).search
+
+	const pattern = new RegExp(`((\\b)((${searchTerms}).*?)(\\b))`)//new RegExp('/(\b(' + searchTerms + ').*?\b)')
+	//const captured = pattern.exec()
+	const replaceWith = '<strong>$1</strong>'
+
+	const rep = text.replace(pattern, replaceWith)
+	return rep
 }
 
 function updateMobileExample(word, sel){
@@ -199,7 +248,11 @@ function updateMobileExample(word, sel){
 
 	  $bottom
 	    .append('p.school-example')
-	    .text(d => d.extract)
+	    .text(d => {
+				const newWords = highlightWords(d.extract)
+				console.log({highlightWords})
+				return newWords
+			})
 }
 
 function setupMobile(){
@@ -224,7 +277,7 @@ function init(){
   return new Promise((resolve) => {
 		d3.loadData('assets/data/words.csv', 'assets/data/extract.csv', (err, response) => {
 			wordData = cleanWords(response[0])
-      exampleData = response[1]
+      exampleData = styleExamples(response[1])
 			setupExample()
       resize()
 			if(width >= 640) setupDesktop()

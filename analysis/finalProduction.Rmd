@@ -202,7 +202,8 @@ schoolBody <- cleanBans %>%
   ungroup() %>% 
   group_by(state, schoolName) %>% 
   mutate(bodyParts = list(item)) %>% 
-  select(-c("item", "fill"))
+  select(-c("item", "fill")) %>% 
+  distinct(state, schoolName, .keep_all = TRUE)
 
 bodyJSON <- jsonlite::toJSON(schoolBody, pretty = TRUE, flatten = TRUE)
 
@@ -337,7 +338,15 @@ unlistExtracted <- extracted %>%
   mutate(schoolName = gsub("[[:space:]]h s|[[:space:]]hs", " High School", tolower(School.Name)),
          schoolName = toTitleCase(schoolName)) %>% 
   rename(link = "Link.to.Dress.Code", state = "School.State.Abbreviation") %>% 
-  select(schoolName, state, link, item, extract)
+  select(schoolName, state, link, item, extract) %>% 
+  mutate(item = case_when(
+    grepl("appropriate", item) ~ "appropriate/inappropriate",
+    grepl("clean", item) ~ "clean",
+    grepl("interfer", item) ~ "interfere with learning",
+    grepl("respect", item) ~ "respect/disrespect",
+    grepl("safe", item) ~ "safe/safety", 
+    TRUE ~ item
+  ))
 
 shuffled <- unlistExtracted[sample(nrow(unlistExtracted)),]
 
