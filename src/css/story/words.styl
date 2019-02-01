@@ -10,22 +10,26 @@
     flex-direction column
     flex-wrap wrap
     max-height auto
+    justify-content: space-between
+    padding 0 1rem
     +mq('bp-6')
       max-height 550px
 
     .lockscreen
-      margin 0.5rem
+      margin 0.5rem 0.2rem 1rem 0
 
   .lockscreen__examples-subjective
     display flex
     flex-direction row
     flex-wrap wrap
     margin 0 auto;
-    max-width 650px
+    max-width $column-width
+    justify-content: space-between;
+    padding 0 1rem
 
     .lockscreen
       max-height auto
-      margin 1rem 0.5rem
+      margin 1rem 0.2rem 1rem 0
 
   img
     max-width 601px

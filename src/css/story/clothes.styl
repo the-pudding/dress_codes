@@ -5,11 +5,13 @@
     flex-direction row
     flex-wrap wrap
     margin 0 auto;
-    max-width 650px
+    max-width $column-width
+    padding 0 1rem
+    justify-content: space-between;
 
     .lockscreen
       max-height auto
-      margin 1rem 0.5rem
+      margin 1rem 0.2rem 1rem 0
 
 
   .scroll
@@ -22,13 +24,15 @@
       padding 1rem
       z-index 200
       .step-prose
-        background-color rgba(white, 0.9)
+        background-color rgba(white, 0.95)
         border 1px solid $gray
         border-radius 10px
         padding 1rem
         .girls, .boys
-          padding 4px 6px
-          border-radius 10px
+          padding 2px 6px
+          border-radius 15px
+          font-family $national
+          text-transform uppercase
 
         .girls
           background-color: $primary
@@ -98,7 +102,7 @@
         margin 1px 0.25rem
         line-height 1
         padding 0.1rem 0.5rem
-        border-radius 10px
+        border-radius 15px
         opacity 1
         transition 300ms ease-in-out
         +mq('bp-6')
@@ -195,7 +199,7 @@
     .graphic__notes
       order 3
       max-width 60rem
-      padding 1rem 1.5rem
+      padding 1rem 1rem
       margin 2rem auto
       font-family $national
       background-color $off-gray

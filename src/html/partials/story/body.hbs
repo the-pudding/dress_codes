@@ -65,7 +65,7 @@
         <select class='select__locale' data-dropdown='locale'></select>
       </div>
       <div class='buttons'>
-        <p class='chart__subtitle'>Highlight schools that ban:</p>
+        <p class='chart__subtitle'>Highlight schools that ban</p>
         <button class='ui__button' data-button='back'>back</button>
         <button class='ui__button' data-button='buttocks'>buttocks</button>
         <button class='ui__button' data-button='chest'>chest</button>
@@ -92,7 +92,9 @@
     <div class='toggle-table'><button class='btn'>Show All</button></div>
   </figure>
   <div class='graphic__notes'>
-    <p class='graphic__notes-text'>{{{doc.bodyGridNote}}}</p>
+    <div class='graphic__notes-container'>
+      <p class='graphic__notes-text'>{{{doc.bodyGridNote}}}</p>
+    </div>
   </div>
 
   {{#each doc.bodyOutro}}

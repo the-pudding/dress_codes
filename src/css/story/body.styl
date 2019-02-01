@@ -5,11 +5,13 @@
     flex-direction row
     flex-wrap wrap
     margin 0 auto;
-    max-width 650px
+    max-width $column-width
+    padding 0 1rem
+    justify-content: space-between;
 
     .lockscreen
       max-height auto
-      margin 1rem 0.5rem
+      margin 1rem 0.2rem 1rem 0
 
   &__example
     max-width $column-width
@@ -100,7 +102,7 @@
   .container__bodyGrid
     max-width: $column-width
     position relative
-    padding 0 0.5rem
+    padding 0 1rem
     .container__grid
       display flex
       flex-wrap wrap
@@ -111,7 +113,7 @@
         width 30px
         height 30px
         background-color $gray-light
-        margin 2px
+        margin 2px 4px 2px 0
         border-radius 5px
         display none
         transition 200ms ease-in-out
@@ -221,6 +223,7 @@
       font-weight 600
       transition background-color 250ms
       pointer-events all
+      border-radius 5px
       &:hover
       	background-color white//rgba($primary, 0.2)
       &.is-disabled
@@ -263,7 +266,7 @@
 
 .graphic__notes
   max-width $column-width
-  padding 1rem 1.5rem
+  padding 1rem 1rem
   margin 2rem auto
   font-family $national
   background-color $off-gray

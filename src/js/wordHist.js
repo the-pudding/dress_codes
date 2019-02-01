@@ -16,8 +16,8 @@ const $legend = $scroll.select('.chart__subtitle-fullWidth')
 
 // colors
 const white = '#FFFFFF'
-const primary = '#2893F6'
-const secondary = '#1CBB48'
+const primary = '#0976DC'
+const secondary = '#158A36'
 const offBlack = '#282828'
 
 let $histCol = null
