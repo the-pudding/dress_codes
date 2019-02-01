@@ -7,7 +7,9 @@
     margin 0 auto;
     max-width $column-width
     padding 0 1rem
-    justify-content: space-between;
+    justify-content: center;
+    +mq('bp-6')
+      justify-content: space-between;
 
     .lockscreen
       max-height auto
@@ -106,6 +108,7 @@
     .container__grid
       display flex
       flex-wrap wrap
+      justify-content: space-around;
       &.is-truncated
         max-height 26rem
         overflow hidden
@@ -136,29 +139,36 @@
 
     .filters
       display flex
-      flex-direction: row;
+      flex-direction: column;
       align-items: baseline;
       justify-content: flex-start;
       margin-top 1rem
+      +mq('bp-6')
+        flex-direction row
       .chart__subtitle
         margin-right 0.5rem
         margin-left 0
       select
-        margin 0 0 20px 18px
+        margin 0 0 20px 5px
         pointer-events all
-        min-width 100px
+        max-width 100px
         height 1.5rem
         cursor pointer
         text-transform lowercase
         font-size 14px
+        +mq('bp-6')
+          max-width 200px
+          margin 0 0 20px 18px
 
     .buttons
       display flex
-      flex-direction row
+      flex-direction column
       flex-wrap wrap
       font-family $national
       align-items: baseline;
       justify-content: flex-start;
+      +mq('bp-6')
+        flex-direction row
       .chart__subtitle
         margin-right 0.5rem
         margin-left 0
@@ -168,9 +178,11 @@
         border 1px solid rgb(166, 166, 166)
         font-size 14px
         height 1.75rem
-        margin 0 0.25rem
+        margin 0.25rem
         color $gray-darkest
         border-radius: 5px
+        +mq('bp-6')
+          margin 0 0.25rem
         &.is-active
           background-color $primary
 

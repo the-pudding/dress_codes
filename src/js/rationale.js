@@ -119,9 +119,12 @@ function setupMobileWords(){
     .enter()
     .append('div.g-word')
     .attr('data-word', d => d.item)
-		.on('click', handleClickMobile)
+
 
 	let $word = $wordCounts.append('div.word')
+		.attr('data-word', d => d.item)
+		.on('click', handleClickMobile)
+
 	let $wordLeft = $word.append('div.word-left')
 	let $wordRight = $word.append('div.word-right')
 
@@ -145,9 +148,9 @@ function setupMobileWords(){
 	let $mobileExample = $simpleContainer.append('div.example')
 
 	// automatically have the first one expanded
-	let $defaultSel = $mobile.select('.g-word')
+	let $defaultSel = $mobile.select('.word')
 	$defaultSel.classed('is-active', true)
-	const $defaultEx = $defaultSel.select('.example')
+	const $defaultEx = d3.select($defaultSel.node().nextSibling).select('.example')
 	$defaultEx.classed('is-expanded', true)
 	$defaultSel.select('.symbol').html(svgMinus)
 	updateMobileExample(selectedWords, $defaultSel)
@@ -155,15 +158,13 @@ function setupMobileWords(){
 
 function handleClickMobile(){
 	let $button = d3.select(this)
-	console.log({$button})
-	const example = $button.select('.example')
+	const example = d3.select($button.node().nextSibling).select('.example')
 	const symbol = $button.select('.symbol')
 	if ($button.classed('is-active') == true){
 		$button.classed('is-active', false)
 		example.classed('is-expanded', false)
 		symbol.html(svgPlus)
 	} else {
-		console.log("running")
 		$button.classed('is-active', true)
 		example.classed('is-expanded', true)
 		symbol.html(svgMinus)
@@ -175,12 +176,9 @@ function handleClickMobile(){
 }
 
 function updateMobileExample(word, sel){
-		let $mobileExampleContainer = sel.select('.example')//$mobile.selectAll('.g-word')
-		console.log({$mobileExampleContainer})
+		let $mobileExampleContainer = d3.select(sel.node().nextSibling).select('.example')//.select('.example')//$mobile.selectAll('.g-word')
 
 		const relevantData = nestedExample.filter(d => d.key === word)[0].values.slice(0, 30)
-
-		//console.log({$mobileWordCounts})
 
 		const $schoolExample = $mobileExampleContainer
 	    .selectAll('.g-example')
@@ -214,7 +212,6 @@ function resize(){
 	let previousMobile = previousWidth >= 640 ? false : true
 	mobile = width >= 640 ? false : true
 	let shouldUpdate = !previousMobile == mobile
-	console.log({shouldUpdate, mobile, previousMobile})
 
 	if (shouldUpdate == true && mobile == true){
 		setupMobile()

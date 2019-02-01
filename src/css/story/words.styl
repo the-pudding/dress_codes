@@ -10,10 +10,11 @@
     flex-direction column
     flex-wrap wrap
     max-height auto
-    justify-content: space-between
+    align-items: center
     padding 0 1rem
     +mq('bp-6')
       max-height 550px
+      align-items: flex-start
 
     .lockscreen
       margin 0.5rem 0.2rem 1rem 0
@@ -24,8 +25,10 @@
     flex-wrap wrap
     margin 0 auto;
     max-width $column-width
-    justify-content: space-between;
+    justify-content: center;
     padding 0 1rem
+    +mq('bp-6')
+        justify-content: space-between;
 
     .lockscreen
       max-height auto
