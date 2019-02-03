@@ -39,7 +39,7 @@ pants,un hemmed,n,n,cutoff pants
 pants,with holes above knee,n,y,holes above knee
 clothing,low backlines,f,y,low backline
 pants,with holes,n,y,pants with holes
-shorts,athletic gym shorts,n,n,gym shorts
+shorts,athletic gym shorts,n,y,gym shorts
 clothing,beachwear swim suit sun suit,n,y,swimwear
 shirt,excessively long,n,n,very long shirt
 shirt,too short to touch top of pants,f,y,short* shirt

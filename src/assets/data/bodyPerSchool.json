@@ -2849,6 +2849,447 @@
     "bodyParts": ["back", "midriff"]
   },
   {
+    "schoolName": "Sequoyah High School",
+    "state": "OK",
+    "countGroup": "200-499",
+    "localeGroup": "rural",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Brave Center Academy",
+    "state": "ND",
+    "countGroup": "< 200",
+    "localeGroup": "suburb",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "New Prague Senior High",
+    "state": "MN",
+    "countGroup": "1000-1500",
+    "localeGroup": "town",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Menomonie High",
+    "state": "WI",
+    "countGroup": "500-999",
+    "localeGroup": "rural",
+    "bodyParts": ["cleavage", "midriff", "torso"]
+  },
+  {
+    "schoolName": "Hardin-Jefferson High School",
+    "state": "TX",
+    "countGroup": "500-999",
+    "localeGroup": "rural",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Marlin High School",
+    "state": "TX",
+    "countGroup": "200-499",
+    "localeGroup": "town",
+    "bodyParts": ["cleavage", "midriff"]
+  },
+  {
+    "schoolName": "Lookeba-Sickles High School",
+    "state": "OK",
+    "countGroup": "< 200",
+    "localeGroup": "rural",
+    "bodyParts": ["cleavage", "midriff", "torso"]
+  },
+  {
+    "schoolName": "Knoxville High School",
+    "state": "IA",
+    "countGroup": "500-999",
+    "localeGroup": "town",
+    "bodyParts": ["cleavage", "midriff"]
+  },
+  {
+    "schoolName": "Van Horn High",
+    "state": "MO",
+    "countGroup": "500-999",
+    "localeGroup": "suburb",
+    "bodyParts": ["back", "chest", "buttocks", "midriff"]
+  },
+  {
+    "schoolName": "Hudson's Bay High School",
+    "state": "WA",
+    "countGroup": "1000-1500",
+    "localeGroup": "city",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Shelby High School",
+    "state": "MT",
+    "countGroup": "< 200",
+    "localeGroup": "town",
+    "bodyParts": ["back", "chest", "buttocks", "midriff"]
+  },
+  {
+    "schoolName": "West Seneca West Senior High School",
+    "state": "NY",
+    "countGroup": "1000-1500",
+    "localeGroup": "suburb",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Peabody Veterans Memorial High",
+    "state": "MA",
+    "countGroup": "1500+",
+    "localeGroup": "suburb",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Red Hook Senior High School",
+    "state": "NY",
+    "countGroup": "500-999",
+    "localeGroup": "town",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Henderson High School",
+    "state": "TX",
+    "countGroup": "500-999",
+    "localeGroup": "town",
+    "bodyParts": ["cleavage", "midriff"]
+  },
+  {
+    "schoolName": "Nathan Hale High",
+    "state": "WI",
+    "countGroup": "1500+",
+    "localeGroup": "city",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "University City High",
+    "state": "CA",
+    "countGroup": "1500+",
+    "localeGroup": "city",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Siuslaw High School",
+    "state": "OR",
+    "countGroup": "200-499",
+    "localeGroup": "town",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Plevna High School",
+    "state": "MT",
+    "countGroup": "< 200",
+    "localeGroup": "rural",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "North Eugene High School",
+    "state": "OR",
+    "countGroup": "500-999",
+    "localeGroup": "city",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Littleton High School",
+    "state": "MA",
+    "countGroup": "200-499",
+    "localeGroup": "suburb",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "West Springfield High",
+    "state": "MA",
+    "countGroup": "1000-1500",
+    "localeGroup": "suburb",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Alta Loma High",
+    "state": "CA",
+    "countGroup": "1500+",
+    "localeGroup": "suburb",
+    "bodyParts": ["buttocks", "midriff"]
+  },
+  {
+    "schoolName": "Pine Island Secondary",
+    "state": "MN",
+    "countGroup": "200-499",
+    "localeGroup": "town",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Winneconne High",
+    "state": "WI",
+    "countGroup": "200-499",
+    "localeGroup": "town",
+    "bodyParts": ["cleavage", "midriff"]
+  },
+  {
+    "schoolName": "Beaver Dam High",
+    "state": "WI",
+    "countGroup": "1000-1500",
+    "localeGroup": "town",
+    "bodyParts": ["cleavage", "midriff"]
+  },
+  {
+    "schoolName": "Mariner High School",
+    "state": "FL",
+    "countGroup": "1500+",
+    "localeGroup": "city",
+    "bodyParts": ["back", "midriff"]
+  },
+  {
+    "schoolName": "Milwaukie High School",
+    "state": "OR",
+    "countGroup": "1000-1500",
+    "localeGroup": "suburb",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Holcomb High",
+    "state": "KS",
+    "countGroup": "200-499",
+    "localeGroup": "rural",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Conval Regional High School",
+    "state": "NH",
+    "countGroup": "500-999",
+    "localeGroup": "rural",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Geneva High Sch",
+    "state": "AL",
+    "countGroup": "200-499",
+    "localeGroup": "town",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Salina High School",
+    "state": "OK",
+    "countGroup": "200-499",
+    "localeGroup": "rural",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Gilmer High School",
+    "state": "GA",
+    "countGroup": "1000-1500",
+    "localeGroup": "town",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Sauk Rapids-Rice Senior High",
+    "state": "MN",
+    "countGroup": "1000-1500",
+    "localeGroup": "rural",
+    "bodyParts": ["cleavage", "midriff"]
+  },
+  {
+    "schoolName": "Bradford Area High School",
+    "state": "PA",
+    "countGroup": "500-999",
+    "localeGroup": "town",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Northland Pines High",
+    "state": "WI",
+    "countGroup": "200-499",
+    "localeGroup": "rural",
+    "bodyParts": ["chest"]
+  },
+  {
+    "schoolName": "Mahopac High School",
+    "state": "NY",
+    "countGroup": "1500+",
+    "localeGroup": "suburb",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Anacortes High School",
+    "state": "WA",
+    "countGroup": "500-999",
+    "localeGroup": "town",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Lapine Senior High School",
+    "state": "OR",
+    "countGroup": "200-499",
+    "localeGroup": "rural",
+    "bodyParts": ["buttocks", "midriff"]
+  },
+  {
+    "schoolName": "Lynnfield High",
+    "state": "MA",
+    "countGroup": "500-999",
+    "localeGroup": "suburb",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Fairview High School",
+    "state": "PA",
+    "countGroup": "200-499",
+    "localeGroup": "rural",
+    "bodyParts": ["buttocks", "midriff", "torso"]
+  },
+  {
+    "schoolName": "Housatonic Valley Regional High School",
+    "state": "CT",
+    "countGroup": "200-499",
+    "localeGroup": "rural",
+    "bodyParts": ["chest", "midriff"]
+  },
+  {
+    "schoolName": "Daniel Hand High School",
+    "state": "CT",
+    "countGroup": "1000-1500",
+    "localeGroup": "suburb",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Croswell-Lexington High School",
+    "state": "MI",
+    "countGroup": "500-999",
+    "localeGroup": "rural",
+    "bodyParts": ["back", "midriff"]
+  },
+  {
+    "schoolName": "Hornell Senior High School",
+    "state": "NY",
+    "countGroup": "500-999",
+    "localeGroup": "town",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "North Fayette High School",
+    "state": "IA",
+    "countGroup": "200-499",
+    "localeGroup": "rural",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Thorp High",
+    "state": "WI",
+    "countGroup": "< 200",
+    "localeGroup": "rural",
+    "bodyParts": ["cleavage"]
+  },
+  {
+    "schoolName": "Centerville High School",
+    "state": "IA",
+    "countGroup": "200-499",
+    "localeGroup": "town",
+    "bodyParts": ["back", "midriff"]
+  },
+  {
+    "schoolName": "Creston High School",
+    "state": "IA",
+    "countGroup": "200-499",
+    "localeGroup": "town",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Brookfield High School",
+    "state": "CT",
+    "countGroup": "500-999",
+    "localeGroup": "suburb",
+    "bodyParts": ["chest", "midriff"]
+  },
+  {
+    "schoolName": "John Stark Regional High School",
+    "state": "NH",
+    "countGroup": "500-999",
+    "localeGroup": "rural",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Mount Union Area Shs",
+    "state": "PA",
+    "countGroup": "200-499",
+    "localeGroup": "town",
+    "bodyParts": ["midriff", "torso"]
+  },
+  {
+    "schoolName": "Prentice High",
+    "state": "WI",
+    "countGroup": "< 200",
+    "localeGroup": "rural",
+    "bodyParts": ["cleavage", "midriff", "torso"]
+  },
+  {
+    "schoolName": "Charleston High",
+    "state": "MO",
+    "countGroup": "200-499",
+    "localeGroup": "town",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Mountain Range High School",
+    "state": "CO",
+    "countGroup": "1500+",
+    "localeGroup": "suburb",
+    "bodyParts": ["buttocks", "cleavage", "midriff"]
+  },
+  {
+    "schoolName": "Jenks High School",
+    "state": "OK",
+    "countGroup": "1500+",
+    "localeGroup": "suburb",
+    "bodyParts": ["chest", "midriff", "torso"]
+  },
+  {
+    "schoolName": "Alberton High School",
+    "state": "MT",
+    "countGroup": "< 200",
+    "localeGroup": "rural",
+    "bodyParts": [null]
+  },
+  {
+    "schoolName": "Concord High",
+    "state": "NC",
+    "countGroup": "1000-1500",
+    "localeGroup": "city",
+    "bodyParts": ["back", "cleavage", "midriff"]
+  },
+  {
+    "schoolName": "Clinton High",
+    "state": "WI",
+    "countGroup": "200-499",
+    "localeGroup": "rural",
+    "bodyParts": ["cleavage", "midriff"]
+  },
+  {
+    "schoolName": "Bethel Park High School",
+    "state": "PA",
+    "countGroup": "1500+",
+    "localeGroup": "suburb",
+    "bodyParts": ["chest", "midriff"]
+  },
+  {
+    "schoolName": "Potosi High",
+    "state": "WI",
+    "countGroup": "< 200",
+    "localeGroup": "rural",
+    "bodyParts": ["back", "cleavage", "midriff"]
+  },
+  {
+    "schoolName": "Quincy High School",
+    "state": "WA",
+    "countGroup": "500-999",
+    "localeGroup": "town",
+    "bodyParts": ["midriff"]
+  },
+  {
+    "schoolName": "Strafford High",
+    "state": "MO",
+    "countGroup": "200-499",
+    "localeGroup": "suburb",
+    "bodyParts": ["midriff"]
+  },
+  {
     "schoolName": "Silver Valley High",
     "state": "CA",
     "countGroup": "200-499",
