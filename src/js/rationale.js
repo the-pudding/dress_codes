@@ -190,7 +190,7 @@ const searchCrosswalk = [{
 	search: 'appropriate|inappropriate'
 },{
 	item: 'safe/safety',
-	search: 'safe'
+	search: 'safe|unsafe'
 },{
 	item: 'health',
 	search: 'health'
@@ -209,6 +209,9 @@ const searchCrosswalk = [{
 }, {
 	item: 'respect/disrespect',
 	search: 'respect'
+}, {
+	item: 'good taste',
+	search: 'taste'
 }]
 
 const searchMap = d3.map(searchCrosswalk, d => d.item)
@@ -226,7 +229,7 @@ function highlightWords(section, text){
 
 function updateMobileExample(word, sel){
 		let $mobileExampleContainer = d3.select(sel.node().nextSibling).select('.example')//.select('.example')//$mobile.selectAll('.g-word')
-
+		console.log({word, nestedExample})
 		const relevantData = nestedExample.filter(d => d.key === word)[0].values.slice(0, 30)
 
 		const $schoolExample = $mobileExampleContainer
@@ -248,11 +251,7 @@ function updateMobileExample(word, sel){
 
 	  $bottom
 	    .append('p.school-example')
-	    .text(d => {
-				const newWords = highlightWords(d.extract)
-				console.log({highlightWords})
-				return newWords
-			})
+	    .html(d => d.styled)
 }
 
 function setupMobile(){
