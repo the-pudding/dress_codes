@@ -39,7 +39,14 @@ First, we need to make our very wide data, long.
 
 ```{r}
 bannedBySchool <- findBanned(responses) %>% 
-  select(c(School.Name, School.State.Abbreviation, item, type))
+  select(c(School.Name, School.State.Abbreviation, prohibited, item, type)) %>% 
+  filter(!grepl("exemptions", item)) %>%
+  separate_rows(prohibited, sep = ", ") %>% 
+  mutate(prohibited = trimws(prohibited), 
+         prohibited = ifelse(prohibited == "NA" | prohibited == "na" | prohibited == "Na" | prohibited == "NA side slit", "none", prohibited)) %>% 
+  filter(prohibited != "red and/or purple") %>% 
+  mutate(prohibited = ifelse(prohibited == "boys", "male", prohibited))
+
 ```
 
 The above data frame does not include things like length restrictions on pants/shorts/skirts, strap width restrictions, and promotion of various types of products/things on shirts. Let's analyze those here: 
@@ -52,22 +59,41 @@ lengthBySchool <- length %>%
   mutate(type = "length",
          limits = paste0("short ", limits)) %>% 
   rename(item = limits) %>% 
-  select(-length)
+  select(-length) %>% 
+  mutate(prohibited = NA_character_)
+
+## For data repo - need to manually clean
+
+write.csv(length, here::here("raw_data", "length_items.csv"), row.names = FALSE)
+
+googledrive::drive_download("length_items", path = here::here("processed_data", "forRepo", "length_restrictions.csv"), type = "csv", overwrite = TRUE)
+
 ```
 
 ### Strap Restrictions
 
 ```{r}
-straps <- responses %>% 
+strapLimits <- responses %>% 
   select(c("School.Name", "School.State.Abbreviation"), contains("shirt.straps")) %>% 
     rename(limits = !!names(.[3])) %>% 
     filter(limits != "") %>% 
     # Separate comma delimited list of items
     separate(limits, into = c("limits", "inches"), sep = ",") %>% 
-    mutate(limits = trimws(limits)) %>% 
+    mutate(limits = trimws(limits),
+           limits = gsub("(insert amount in other)", "", limits, fixed = TRUE),
+           number = gsub('inch|inches|fingers|\\"|wide', "", inches)) %>% 
+  select(-inches) 
+
+strapsForRepo <- strapLimits %>% 
+  rename(schoolName = School.Name, state = School.State.Abbreviation)
+
+write.csv(strapsForRepo, here::here("processed_data", "forRepo", "strap_restrictions.csv"), row.names = FALSE)
+
+straps <- strapLimits %>% 
     mutate(item = "narrow straps",
              type = "shirt") %>% 
-  select(c("School.Name", "School.State.Abbreviation", "item", "type"))
+  select(c("School.Name", "School.State.Abbreviation", "item", "type")) %>% 
+  mutate(prohibited = NA_character_)
 ```
 
 ### Promotions
@@ -78,7 +104,8 @@ promotion <- responses %>%
     rename(item = !!names(.[3])) %>% 
     separate_rows(item, sep = ", ") %>% 
     mutate(item = trimws(item)) %>% 
-    mutate(type = "promotion")
+    mutate(type = "promotion") %>% 
+    mutate(prohibited = NA_character_)
 ```
 
 ### Rationale
@@ -91,7 +118,16 @@ rationale <- responses %>%
   mutate(words = trimws(words)) %>% 
   rename(item = words) %>% 
   mutate(type = "rationale") %>% 
-  select(c("School.Name", "School.State.Abbreviation", "item", "type"))
+  select(c("School.Name", "School.State.Abbreviation", "item", "type")) %>% 
+  mutate(item = case_when(
+    grepl("appropriate", item) ~ "appropriate/inappropriate",
+    grepl("clean", item) ~ "clean",
+    grepl("interfer", item) ~ "interfere with learning",
+    grepl("respect", item) ~ "respect/disrespect",
+    grepl("safe", item) ~ "safe/safety", 
+    TRUE ~ item
+  )) %>% 
+  mutate(prohibited = NA_character_)
 ```
 
 
@@ -111,11 +147,27 @@ cleanBans <- allBans %>%
     left_join(manualCorrect) %>% 
     mutate(item = ifelse(!is.na(itemCorrect), itemCorrect, item),
            type = ifelse(!is.na(catCorrect), catCorrect, type)) %>% 
-    select(c(School.Name, School.State.Abbreviation, item, type)) %>% 
-    distinct(School.Name, type, item, .keep_all = TRUE)
+    select(c(School.Name, School.State.Abbreviation, item, type, prohibited))
 
-write.csv(cleanBans, here::here("processed_data", "cleaned_bans.csv"), row.names = FALSE)
+## If visible undergarments w/ bra was checked, visible undergarments (without bra)
+## often wasn't checked. It should have been. This is to correct that error. 
+visibleBra <- cleanBans %>% 
+  filter(grepl("bras and or bra straps", item)) %>% 
+  mutate(item = "visible")
+
+fullCleanBan <- cleanBans %>% 
+  rbind(visibleBra) %>% 
+  distinct(School.Name, type, item, .keep_all = TRUE)
+
+write.csv(fullCleanBan, here::here("processed_data", "cleaned_bans.csv"), row.names = FALSE)
 ```
+
+```{r}
+cleanByItem <- fullCleanBan %>% 
+  group_by(type, item) %>% 
+  count(., sort = TRUE)
+```
+
 
 ## Outputting Data
 
@@ -126,19 +178,22 @@ First, body part bans.
 ### Body Parts
 
 ```{r}
-body <- allBans %>% 
+body <- fullCleanBan %>% 
   filter(type == "body") %>% 
   distinct(School.Name)
 
+nSchools <- fullCleanBan %>% 
+  distinct(School.State.Abbreviation, School.Name)
+
 # Percentage of schools that ban some body part
-nrow(body)/nrow(responses)
+nrow(body)/nrow(nSchools)
 
 # Percentage of schools that ban specific body parts
-bodyPer <- cleanBans %>% 
+bodyPer <- fullCleanBan %>% 
   filter(School.Name %in% body$School.Name) %>% 
   filter(type == "body") %>% 
   count(item, sort = TRUE) %>% 
-  mutate(per = n/nrow(responses) * 100) %>% 
+  mutate(per = n/nrow(nSchools) * 100) %>% 
   mutate(per = round(per, 0)) %>% 
   filter(per >= 5)
 
@@ -166,7 +221,7 @@ completedHandbooksClean <- completedHandbooks %>%
          !grepl("skip", entered)) %>% 
   select(c(schoolName, stateAbb, locale, totalStudents))
 
-schoolBody <- cleanBans %>% 
+schoolBody <- fullCleanBan %>% 
   filter(School.Name %in% body$School.Name) %>% 
   filter(type == "body",
          item %in% bodyButtons) %>% 
@@ -217,7 +272,7 @@ remove <- c("sexually provocative suggestive", "revealing", "dirty", "immodest")
 
 '%notin%' <- Negate('%in%')
 
-items <- cleanBans %>% 
+items <- fullCleanBan %>% 
   filter(type != "promotion",
          type != "rationale", 
          type != "body",
@@ -228,23 +283,12 @@ items <- cleanBans %>%
          item %notin% remove) %>% 
   mutate(item = case_when(
     grepl("leggings", item) ~ "leggings",
+    grepl("bras and or bra straps", item) ~ "visible bra straps",
     TRUE ~ item
   )) %>% 
+  mutate(item = trimws(item)) %>% 
   group_by(type, item) %>% 
   count(., sort = TRUE)
-
-# visible bra straps were used as an alternative to counting visible undergarments.
-# so visible undergarment counts should include both
-braStraps <- items %>% 
-  filter(grepl("bra straps", item))
-
-## Make a list of schools where we accidentally checked off visible undergarments and bra straps
-bonus <- cleanBans %>% 
-  filter(grepl("visible", item) & type == "undergarment") %>% 
-  group_by(School.State.Abbreviation, School.Name) %>% 
-  count(.) %>% 
-  filter(n > 1)
-
 
 
 googledrive::drive_download("clothes", path = here::here("raw_data", "collected", "clothesDetails.csv"), type = "csv", overwrite = TRUE)
@@ -253,13 +297,9 @@ manualDetails<- read.csv(here::here("raw_data", "collected", "clothesDetails.csv
 
 detailedItems <- items %>% 
   left_join(manualDetails) %>%
-  mutate(n = case_when(
-    item == "visible" ~ n + braStraps$n - nrow(bonus),
-    TRUE ~ n
-  )) %>% 
   filter(!is.na(market)) %>% 
   ungroup() %>% 
-  mutate(per = round(n / nrow(responses) * 100, 0)) %>% 
+  mutate(per = round(n / nrow(nSchools) * 100, 0)) %>% 
   filter(per >= 5) %>% 
   dplyr::select(c(slug, market, reveal_body, n, per)) %>% 
   mutate(group = per - (per %% 10)) 
@@ -268,27 +308,28 @@ write.csv(detailedItems, "../src/assets/data/clothes.csv", row.names = FALSE)
 ```
 
 ```{r}
-ruleCounts <- cleanBans %>% 
+ruleCounts <- fullCleanBan %>% 
   group_by(School.State.Abbreviation, School.Name) %>% 
   count(.)
 ```
 
 ```{r}
 lengthCounts <- length %>% 
+  separate_rows(length, sep = ",") %>% 
   group_by(length) %>% 
   count(., sort = TRUE) %>% 
-  mutate(per = round(n / nrow(responses) * 100, 0))
+  mutate(per = round(n / nrow(nSchools) * 100, 0))
 ```
 
 
 ### Words
 
 ```{r}
-words <- cleanBans %>% 
+words <- fullCleanBan %>% 
   filter(type == "rationale") %>% 
   group_by(item) %>% 
   count(., sort = TRUE) %>% 
-  mutate(per = round(n / nrow(responses) * 100, 0)) %>% 
+  mutate(per = round(n / nrow(nSchools) * 100, 0)) %>% 
   filter(per >= 10) %>% 
   mutate(display = case_when(
     item == "disruption/distraction" ~ "Distract or Disrupt",
@@ -402,4 +443,167 @@ collected <- states %>%
 ```
 
 
+## For Repo
+
+```{r}
+allBansCleaned <- fullCleanBan %>% 
+  rename(schoolName = School.Name, state = School.State.Abbreviation)
+
+nSchools <- allBansCleaned %>% 
+  distinct(state, schoolName) %>% 
+  count(.)
+
+write.csv(allBansCleaned, here::here("processed_data", "forRepo", "banned_items.csv"), row.names = FALSE)
+```
+
+```{r}
+write.csv(completedHandbooksClean, here::here("processed_data", "forRepo", "school_metadata.csv"), row.names = FALSE)
+```
+
+Code for calculating `body_percentages.csv`
+
+```{r eval=FALSE, include=FALSE}
+## Check which schools ban body parts
+body <- allBansCleaned %>% 
+  filter(type == "body") %>% 
+  distinct(schoolName)
+
+# Percentage of schools that ban some body part
+nrow(body)/nrow(responses)
+
+# Percentage of schools that ban specific body parts
+bodyPercent <- allBansCleaned %>% 
+  filter(School.Name %in% body$School.Name) %>% 
+  filter(type == "body") %>% 
+  count(item, sort = TRUE) %>% 
+  mutate(per = n/nSchools$n * 100) %>% 
+  mutate(per = round(per, 0)) %>% 
+  filter(per >= 5)
+
+write.csv(bodyPercent, here::here("processed_data", "forRepo", "body_percentages.csv"))
+```
+
+Code for calculating `body_by_school.json`
+
+```{r eval=FALSE, include=FALSE}
+bodyButtons <- c("midsection midriff", "cleavage", "back", "breasts chest", "buttocks", "stomach", "torso")
+
+## Check which schools ban body parts
+body <- allBansCleaned %>% 
+  filter(type == "body") %>% 
+  distinct(schoolName)
+
+
+bodyBySchool <- allBansCleaned %>% 
+  filter(schoolName %in% body$schoolName) %>% 
+  filter(type == "body",
+         item %in% bodyButtons) %>% 
+  mutate(item = case_when(
+    item == "midsection midriff" ~ "midriff",
+    item == "breasts chest" ~ "chest",
+    TRUE ~ item 
+  ),
+  fill = "y") %>% 
+  right_join(completedHandbooksClean) %>% 
+  mutate(totalStudents = as.numeric(totalStudents)) %>% 
+  mutate(countGroup = case_when(
+    totalStudents < 200 ~ "< 200",
+    between(totalStudents, 200, 499) ~ "200-499",
+    between(totalStudents, 500, 999) ~ "500-999",
+    between(totalStudents, 1000, 1500) ~ "1000-1500",
+    totalStudents >= 1500 ~ "1500+",
+    TRUE ~ NA_character_
+  )) %>% 
+  mutate(localeGroup = case_when(
+    grepl("Rural", locale) ~ "rural",
+    grepl("City", locale) ~ "city", 
+    grepl("Suburb", locale) ~ "suburb",
+    grepl("Town", locale) ~ "town",
+    TRUE ~ NA_character_
+  )) %>% 
+  mutate(state = trimws(stateAbb)) %>% 
+  select(-c("locale", "totalStudents", "stateAbb", "type")) %>%
+  mutate(schoolName = gsub("[[:space:]]h s|[[:space:]]hs", " High School", tolower(schoolName)),
+         schoolName = toTitleCase(schoolName)) %>% 
+  ungroup() %>% 
+  group_by(state, schoolName) %>% 
+  mutate(bodyParts = list(item)) %>% 
+  select(-c("item", "fill")) %>% 
+  distinct(state, schoolName, .keep_all = TRUE)
+
+bodySchoolJSON <- jsonlite::toJSON(bodyBySchool, pretty = TRUE, flatten = TRUE)
+
+write(bodySchoolJSON, here::here("processed_data", "forRepo", "body_by_school.json"))
+```
+
+Code for calculating `clothes_percentages.csv`
+
+```{r eval=FALSE, include=FALSE}
+remove <- c("sexually provocative suggestive", "revealing", "dirty", "immodest")
+
+'%notin%' <- Negate('%in%')
+
+clothingItems <- allBansCleaned %>% 
+  filter(type != "promotion",
+         type != "rationale", 
+         type != "body",
+         type != "footwear",
+         type != "headwear", 
+         type != "grooming",
+         type != "accessories",
+         item %notin% remove) %>% 
+  mutate(item = case_when(
+    grepl("leggings", item) ~ "leggings",
+    grepl("bras and or bra straps", item) ~ "visible bra straps",
+    TRUE ~ item
+  )) %>% 
+  mutate(item = trimws(item)) %>% 
+  group_by(type, item) %>% 
+  count(., sort = TRUE)
+
+
+googledrive::drive_download("clothes", path = here::here("processed_data", "forRepo", "clothesDetails.csv"), type = "csv", overwrite = TRUE)
+  
+clothesDetails<- read.csv(here::here("processed_data", "forRepo", "clothesDetails.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " "))
+
+detailedClothingItems <- clothingItems %>% 
+  left_join(clothesDetails) %>%
+  filter(!is.na(market)) %>% 
+  ungroup() %>% 
+  mutate(per = round(n / nSchools$n * 100, 0)) %>% 
+  filter(per >= 5) %>% 
+  dplyr::select(c(slug, market, reveal_body, n, per)) %>% 
+  mutate(group = per - (per %% 10)) 
+
+write.csv(detailedClothingItems, here::here("processed_data", "forRepo", "clothes_percentages.csv"), row.names = FALSE)
+```
+
+Code for `words_percentages.csv`
+
+```{r eval=FALSE, include=FALSE}
+wordsPercentages <- allBansCleaned %>% 
+  filter(type == "rationale") %>% 
+  group_by(item) %>% 
+  count(., sort = TRUE) %>% 
+  mutate(percent = round(n / nSchools$n * 100, 0)) %>% 
+  filter(percent >= 10) %>% 
+  mutate(display = case_when(
+    item == "disruption/distraction" ~ "Distract or Disrupt",
+    item == "appropriate/inappropriate" ~ "Appropriate",
+    item == "safe/safety" ~ "Safe",
+    item == "health" ~ "Health",
+    item == "interfere with learning" ~ "Interfere with Learning",
+    item == "clean" ~ "Clean",
+    item == "modest/modesty" ~ "Modest",
+    item == "neat" ~ "Neat",
+    item == "respect/disrespect" ~ "Respect",
+    TRUE ~ item
+  )) 
+
+write.csv(wordsPercentages, here::here("processed_data", "forRepo", "words_percentages.csv"), row.names = FALSE)
+```
+
+```{r session_info, include=TRUE, echo=TRUE, results='markup'}
+devtools::session_info()
+```
 

@@ -1,0 +1,14 @@
+---
+title: "Session Info"
+author: "Amber Thomas"
+date: "2/3/2019"
+output: md_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r session_info, include=TRUE, echo=TRUE, results='markup'}
+devtools::session_info()
+```
