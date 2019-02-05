@@ -341,6 +341,7 @@ words <- fullCleanBan %>%
     item == "modest/modesty" ~ "Modest",
     item == "neat" ~ "Neat",
     item == "respect/disrespect" ~ "Respect",
+    item == "good taste" ~ "Good Taste",
     TRUE ~ item
   )) 
 
@@ -350,6 +351,12 @@ write.csv(words, "../src/assets/data/words.csv", row.names = FALSE)
 ```{r}
 links <- responses %>% 
   select(2:6) 
+
+linksForRepo <- links %>% 
+  rename(schoolName = School.Name, state = School.State.Abbreviation, link = Link.to.Dress.Code, text = Copy.Entire.Dress.Code.Here) %>% 
+  select(-Copy.Dress.Code.Justification.Here)
+
+write.csv(linksForRepo, here::here("processed_data", "forRepo", "full_text.csv"), row.names = FALSE)
 ```
 
 ```{r}
@@ -367,7 +374,7 @@ extractWords <- function(word){
     mutate(extract = str_extract_all(allText, regex))
 }
 
-wordsToExtract <- c("distract", "disrupt", "appropriate", "safe", "health", "interfere", "clean", "modest", "neat", "respect")
+wordsToExtract <- c("distract", "disrupt", "appropriate", "safe", "health", "interfere", "clean", "modest", "neat", "respect", "taste")
 
 testEx <- extractWords("distract")
 
@@ -386,8 +393,19 @@ unlistExtracted <- extracted %>%
     grepl("interfer", item) ~ "interfere with learning",
     grepl("respect", item) ~ "respect/disrespect",
     grepl("safe", item) ~ "safe/safety", 
+    grepl("taste", item) ~ "good taste",
     TRUE ~ item
-  ))
+  )) %>% 
+  distinct(link, item, extract, .keep_all = TRUE) %>%  
+  group_by(link, item) %>% 
+  arrange(link, item) 
+
+write.csv(unlistExtracted, here::here("processed_data", "extracted_examples.csv"), row.names = FALSE)
+
+## Manually selected one per school
+googledrive::drive_download("extracted_examples", path = here::here("processed_data", "extracted_examples_clean.csv"), type = "csv", overwrite = TRUE)
+  
+manuallyExtracted<- read.csv(here::here("processed_data", "extracted_examples_clean.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " "))
 
 shuffled <- unlistExtracted[sample(nrow(unlistExtracted)),]
 
@@ -605,5 +623,40 @@ write.csv(wordsPercentages, here::here("processed_data", "forRepo", "words_perce
 
 ```{r session_info, include=TRUE, echo=TRUE, results='markup'}
 devtools::session_info()
+```
+
+
+Exporting sanction data
+
+```{r}
+sanctions <- responses %>% 
+    select(c("School.Name", "School.State.Abbreviation"), contains("sanctions"))
+
+checkedSanctions <- sanctions %>% 
+  select(-contains("any.other")) %>% 
+  gather(key = sanction, value = offense, colnames(select(., contains("sanctions")))) %>% 
+  filter(!is.na(offense)) %>% 
+  separate_rows(offense, sep = ", ") %>% 
+  mutate(offense = gsub(" Offense", "", offense)) %>% 
+  mutate(sanction = str_replace(sanction, "(.*?\\.{2})", ""),
+           sanction = gsub("\\.", " ", sanction),
+           sanction = trimws(sanction),
+         sanction = gsub("item s", "items", sanction))
+
+manualSanctions <- sanctions %>% 
+  select(c("School.Name", "School.State.Abbreviation", contains("any.other"))) %>% 
+  rename(sanctions = 3) %>% 
+  filter(!is.na(sanctions)) %>% 
+  separate_rows("sanctions", sep = ", ") %>% 
+  separate(sanctions, into = c("sanction", "offense"), sep = ":") %>% 
+  mutate(offense = ifelse(offense == "NA" | is.na(offense), "Any", offense)) %>% 
+  mutate(offense = gsub(" offense", "", offense, ignore.case = TRUE))
+
+allSanctions <- checkedSanctions %>% 
+  rbind(manualSanctions) %>% 
+  rename(schoolName = School.Name, state = School.State.Abbreviation)
+
+write.csv(allSanctions, here::here("processed_data", "forRepo", "sanctions.csv"), row.names = FALSE)
+  
 ```
 

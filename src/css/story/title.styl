@@ -6,10 +6,10 @@
   &__hed
     max-width 21.7rem
     margin 0 auto
-    padding 5rem 1rem 0 1rem
+    padding 60px 1rem 0 1rem
     font-family $national
     +mq('bp-6')
-      max-width 26.5rem
+      max-width 29rem
 
     &-text
       margin 0
@@ -17,19 +17,30 @@
 
     &-small
       font-size 30px
-      font-weight 300
-      text-transform: uppercase;
       +mq('bp-6')
-        font-size 35px
-
-  		.small-2
-  			text-align right
+        font-size 36px
+      .highlight
+        //border-bottom 2px solid $primary
+        color $primary
+        font-weight bold
 
     &-large
       font-size 60px
-      font-weight 900
+      font-weight 700
+      text-transform: uppercase;
       +mq('bp-6')
-        font-size 75px
+        font-size 76px
+
+    &-part
+      font-size 20px
+      background-color: $primary
+      color white
+      text-transform: uppercase;
+      border-radius 20px
+      display inline-block
+      padding 0.1rem 0.75rem
+      margin-bottom 0.25rem
+      font-weight bold
 
 
 
@@ -37,11 +48,11 @@
 	display flex
 	flex-direction row
 	width 350px
-	margin 40px auto 0 auto
+	margin 36px auto 0 auto
 	justify-content: center;
 	align-items: center
 	border-top 1px solid $gray-light
-	padding 20px 0
+	padding 15px 0 30px 0
 
 	.title__img
     background-size cover
@@ -54,7 +65,7 @@
 	.title__text
 		display flex
 		flex-direction column
-		max-width 275px
+		width 275px
 		font-family $national
 
 		.top
