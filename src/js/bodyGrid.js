@@ -25,7 +25,7 @@ let halfTooltip = tooltipWidth / 2
 let $blocks = null
 
 // user selections
-let selectedState = 'All schools'
+let selectedState = 'All states'
 let selectedSize = 'All school sizes'
 let selectedLocale = 'All locales'
 let bodySel = {}
@@ -147,6 +147,7 @@ function setupDropdowns(selection, options, filter){
 function updateSelection(){
   const dropdown = d3.select(this).at('data-dropdown')
   const selection = this.value
+	console.log({dropdown, selection})
 
   if (dropdown == 'state') selectedState = selection
   if (dropdown == 'size') selectedSize = selection
