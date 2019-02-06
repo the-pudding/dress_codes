@@ -10,28 +10,28 @@
 "low neckline","f","y",177,37,30
 "short* dresses","f","y",172,36,30
 "pajamas","n","n",161,33,30
-"muscle shirt","m","y",133,28,20
+"muscle shirt","n","y",133,28,20
 "tank top","n","y",131,27,20
 "narrow straps","f","y",127,26,20
 "leggings","f","y",124,26,20
-"tight clothing","f","y",108,22,20
-"loose clothing","n","n",86,18,10
+"tight clothing","n","y",108,22,20
+"loose clothing","m","n",86,18,10
 "crop top","f","y",82,17,10
 "backless shirt","f","y",81,17,10
 "fishnet clothing","f","y",73,15,10
 "visible bra straps","f","y",71,15,10
 "sleeveless shirt","n","y",69,14,10
-"holes above thigh","n","y",65,14,10
+"holes above thigh","f","y",65,14,10
 "frayed clothing","n","y",58,12,10
 "bike shorts","n","y",54,11,10
 "short* clothing","f","y",50,10,10
-"cutoff shorts","f","y",49,10,10
+"cutoff shorts","n","y",49,10,10
 "spandex clothing","n","y",41,9,0
 "backless dress","f","y",40,8,0
 "short* shirt","f","y",37,8,0
 "no underwear","n","y",32,7,0
 "off shoulder shirt","f","y",31,6,0
-"undershirt","n","y",31,6,0
+"undershirt","m","y",31,6,0
 "holes above knee","n","y",26,5,0
 "swimwear","n","y",25,5,0
 "cutoff pants","n","n",24,5,0

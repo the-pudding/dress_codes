@@ -297,7 +297,8 @@ manualDetails<- read.csv(here::here("raw_data", "collected", "clothesDetails.csv
 
 detailedItems <- items %>% 
   left_join(manualDetails) %>%
-  filter(!is.na(market)) %>% 
+  filter(!is.na(market),
+         !is.na(slug)) %>% 
   ungroup() %>% 
   mutate(per = round(n / nrow(nSchools) * 100, 0)) %>% 
   filter(per >= 5) %>% 
@@ -407,7 +408,7 @@ googledrive::drive_download("extracted_examples", path = here::here("processed_d
   
 manuallyExtracted<- read.csv(here::here("processed_data", "extracted_examples_clean.csv"), stringsAsFactors = FALSE, header = TRUE, na.strings = c("", " "))
 
-shuffled <- unlistExtracted[sample(nrow(unlistExtracted)),]
+shuffled <- manuallyExtracted[sample(nrow(manuallyExtracted)),]
 
 write.csv(shuffled, "../src/assets/data/extract.csv", row.names = FALSE)
 ```

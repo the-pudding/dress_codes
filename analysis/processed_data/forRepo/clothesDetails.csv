@@ -1,49 +1,49 @@
-type,item,market,reveal_body,slug
-length,short shorts,f,y,short* shorts
-length,short skirts,f,y,short* skirt
-undergarment,visible,n,y,visible underwear
-pants,sagging rest below waist,m,y,sagging pants
-clothing,see through sheer,f,y,sheer clothing
-shirt,tube strapless,f,y,strapless top
-shirt,halter tops,f,y,halter top
-shirt,spaghetti string straps,f,y,spaghetti strap
-clothing,low necklines,f,y,low neckline
-length,short dresses,f,y,short* dresses
-clothing,pajamas,n,n,pajamas
-shirt,tank tops,n,y,tank top
-shirt,muscle shirts open sides,m,y,muscle shirt
-shirt,narrow straps,f,y,narrow straps
-clothing,too tight,f,y,tight clothing
-pants,leggings,f,y,leggings
-clothing,too loose,n,n,loose clothing
-clothing,revealing,f,y,revealing clothing
-shirt,backless,f,y,backless shirt
-shirt,crop top,f,y,crop top
-clothing,fishnet mesh attire,f,y,fishnet clothing
-undergarment,visible bra straps,f,y,visible bra straps
-pants,with holes above mid thigh,n,y,holes above thigh
-shirt,sleeveless,n,y,sleeveless shirt
-clothing,frayed cut torn with holes,n,y,frayed clothing
-clothing,extremely brief short,f,y,short* clothing
-shorts,bike shorts,n,y,bike shorts
-shorts,cutoffs un hemmed,f,y,cutoff shorts
-clothing,sexually provocative suggestive,f,y,provocative clothing
-skirt.dress,backless,f,y,backless dress
-clothing,spandex,n,y,spandex clothing
-clothing,immodest,f,y,immodest clothing
-shirt,off the shoulder,f,y,off shoulder shirt
-undergarment,none,n,y,no underwear
-clothing,dirty,n,n,dirty clothing
-shirt,undershirts,n,y,undershirt
-pants,un hemmed,n,n,cutoff pants
-pants,with holes above knee,n,y,holes above knee
-clothing,low backlines,f,y,low backline
-pants,with holes,n,y,pants with holes
-shorts,athletic gym shorts,n,y,gym shorts
-clothing,beachwear swim suit sun suit,n,y,swimwear
-shirt,excessively long,n,n,very long shirt
-shirt,short shirts,f,y,short* shirt
-undergarment,undergarments as outergarments,,,
-skirt.dress,strapless dresses,f,y,strapless dress
-shirt,unfastened,n,y,unfastened shirt
-skirt.dress,un hemmed,f,y,cutoff skirt
+type,item,market,reveal_body,slug,totalW,totalM,diff,,Nike - Womens,Nike - Mens,American Eagle - Womens,AE - Mens,Adidas - Womens,Adidas - Mens,Forever 21 - Womens,Forever 21 - Mens,Urban Outfitters - Womens,Urban Outfitters - Men
+length,short shorts,f,y,short* shorts,5,0,#DIV/0!,,0.9589041096,0.05633802817,0.8636363636,0,0.8651685393,0.01162790698,0.94,0,0.8333333333,0.03448275862
+length,short skirts,f,y,short* skirt,5,0,#DIV/0!,,0.8823529412,0,> 0,0,> 0,0,> 0,0,> 0,0
+undergarment,visible,n,y,visible underwear,,,#DIV/0!,,,,,,,,,,,
+pants,sagging rest below waist,n,y,sagging pants,,,#DIV/0!,,,,,,,,,,,
+clothing,see through sheer,f,y,sheer clothing,5,1,5,,> 0,0,> 0,0,> 0,0,> 0,> 0,> 0,0
+shirt,tube strapless,f,y,strapless top,3,0,#DIV/0!,,0,0,> 0,0,0,0,> 0,0,> 0,0
+shirt,halter tops,f,y,halter top,3,0,#DIV/0!,,0,0,> 0,0,0,0,> 0,0,> 0,0
+shirt,spaghetti string straps,f,y,spaghetti strap,4,0,#DIV/0!,,> 0,0,> 0,0,0,0,> 0,0,> 0,0
+clothing,low necklines,f,y,low neckline,4,0,#DIV/0!,,> 0,0,> 0,0,0,0,> 0,0,> 0,0
+length,short dresses,f,y,short* dresses,5,0,#DIV/0!,,> 0,0,> 0,0,> 0,0,> 0,0,> 0,0
+clothing,pajamas,n,n,pajamas,2,2,1,,0,0,> 0,> 0,0,0,,,> 0,> 0
+shirt,tank tops,n,y,tank top,5,5,1,,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0
+shirt,muscle shirts open sides,f,y,muscle shirt,5,2,2.5,,> 0,> 0,> 0,0,> 0,0,> 0,> 0,> 0,0
+shirt,narrow straps,f,y,narrow straps,5,5,1,,> 0,> 0,> 0,0,0,0,> 0,> 0,> 0,> 0
+clothing,too tight,n,y,tight clothing,,,#DIV/0!,,,,,,,,,,,
+pants,leggings,f,y,leggings,5,3,1.666666667,,> 0,> 0,> 0,> 0,> 0,> 0,> 0,0,> 0,0
+clothing,too loose,n,n,loose clothing,,,#DIV/0!,,,,,,,,,,,
+clothing,revealing,f,y,revealing clothing,,,#DIV/0!,,,,,,,,,,,
+shirt,backless,f,y,backless shirt,5,0,#DIV/0!,,> 0,0,> 0,0,> 0,0,> 0,0,> 0,0
+shirt,crop top,f,y,crop top,5,0,#DIV/0!,,> 0,0,> 0,0,> 0,0,> 0,0,> 0,0
+clothing,fishnet mesh attire,f,y,fishnet clothing,5,2,2.5,,> 0,0,> 0,0,> 0,0,> 0,> 0,> 0,> 0
+undergarment,visible bra straps,f,y,visible bra straps,5,0,#DIV/0!,,> 0,0,> 0,0,> 0,0,> 0,0,> 0,0
+pants,with holes above mid thigh,f,y,holes above thigh,3,1,3,,0,0,> 0,0,0,0,> 0,> 0,> 0,0
+shirt,sleeveless,n,y,sleeveless shirt,5,5,1,,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0
+clothing,frayed cut torn with holes,n,y,frayed clothing,3,3,1,,0,0,> 0,> 0,0,0,> 0,> 0,> 0,> 0
+clothing,extremely brief short,f,y,short* clothing,5,2,2.5,,> 0,> 0,> 0,0,> 0,> 0,> 0,0,> 0,0
+shorts,bike shorts,n,y,bike shorts,5,4,1.25,,> 0,> 0,> 0,> 0,> 0,> 0,> 0,0,> 0,> 0
+shorts,cutoffs un hemmed,n,y,cutoff shorts,3,2,1.5,,0,0,> 0,> 0,0,0,> 0,> 0,> 0,0
+clothing,sexually provocative suggestive,f,y,provocative clothing,,,#DIV/0!,,,,,,,,,,,
+skirt.dress,backless,f,y,backless dress,3,0,#DIV/0!,,0,0,> 0,0,0,0,> 0,0,> 0,0
+clothing,spandex,n,y,spandex clothing,5,3,1.666666667,,> 0,> 0,> 0,> 0,> 0,> 0,> 0,0,> 0,0
+clothing,immodest,f,y,immodest clothing,,,#DIV/0!,,,,,,,,,,,
+shirt,off the shoulder,f,y,off shoulder shirt,3,0,#DIV/0!,,0,0,> 0,0,0,0,> 0,0,> 0,0
+undergarment,none,n,y,no underwear,,,#DIV/0!,,,,,,,,,,,
+clothing,dirty,n,n,dirty clothing,,,#DIV/0!,,,,,,,,,,,
+shirt,undershirts,n,y,undershirt,,,#DIV/0!,,,,,,,,,,,
+pants,un hemmed,n,n,cutoff pants,2,3,0.6666666667,,0,0,0,> 0,0,0,> 0,> 0,> 0,> 0
+pants,with holes above knee,n,y,holes above knee,3,3,1,,0,0,> 0,> 0,0,0,> 0,> 0,> 0,> 0
+clothing,low backlines,f,y,low backline,3,0,#DIV/0!,,0,0,> 0,0,0,0,> 0,0,> 0,0
+pants,with holes,n,y,pants with holes,3,3,1,,0,0,> 0,> 0,0,0,> 0,> 0,> 0,> 0
+shorts,athletic gym shorts,n,y,gym shorts,5,5,1,,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0
+clothing,beachwear swim suit sun suit,n,y,swimwear,5,5,1,,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0,> 0
+shirt,excessively long,n,n,very long shirt,,,#DIV/0!,,,,,,,,,,,
+shirt,short shirts,f,y,short* shirt,5,0,#DIV/0!,,> 0,0,> 0,0,> 0,0,> 0,0,> 0,0
+undergarment,undergarments as outergarments,n,n,,,,#DIV/0!,,,,,,,,,,,
+skirt.dress,strapless dresses,f,y,strapless dress,4,0,#DIV/0!,,0,0,> 0,0,> 0,0,> 0,0,> 0,0
+shirt,unfastened,n,y,unfastened shirt,,,#DIV/0!,,,,,,,,,,,
+skirt.dress,un hemmed,f,y,cutoff skirt,2,0,#DIV/0!,,0,0,> 0,0,0,0,> 0,0,0,0
