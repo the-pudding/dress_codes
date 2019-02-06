@@ -90,6 +90,8 @@ function addColor(){
 	$histCol.classed('is-dimmed', false)
 	$clothes.classed('is-dimmed', false)
 
+	$container.selectAll('.items__reveal-n').classed('is-dimmed', true)
+
 	$clothes
 		.transition()
 		.duration(300)
