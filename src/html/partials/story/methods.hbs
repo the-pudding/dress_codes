@@ -18,4 +18,9 @@
       </div>
     {{/each}}
   </div>
+
+  <h3>{{{doc.thanksTitle}}}</h3>
+  {{#each doc.thanks}}
+    <p class='prose'>{{{value}}}</p>
+  {{/each}}
 </section>
