@@ -110,7 +110,6 @@ function addColor(){
 
 function handleStepEnter(response){
 	const index = response.index
-	console.log({index})
 
 	if (index === 0) startScroll()
 	if (index === 1) highlightTop()
@@ -186,7 +185,6 @@ function setup(){
 
 function resize(){
 	const stepHeight = Math.floor(window.innerHeight)
-	console.log({$text, $step})
 
 	$step
 		.st('height', `${stepHeight}px`)

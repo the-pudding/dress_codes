@@ -152,10 +152,6 @@ function updateSelection(){
   if (dropdown == 'size') selectedSize = selection
   if (dropdown == 'locale') selectedLocale = selection
 
-  console.log({dropdown, selection, selectedLocale})
-
-
-
   $blocks
     .classed('is-visible', d => {
       if ((d.state == selectedState || selectedState == 'All states') &&
@@ -169,7 +165,6 @@ function updateSelection(){
   const $warning = d3.select('.ui-warning')
 
   const size = visible.size()
-  console.log({size})
 
   if (visible.size() < 1) $warning.classed('is-active', true)
   if (visible.size() > 1) $warning.classed('is-active', false)
@@ -178,14 +173,12 @@ function updateSelection(){
 }
 
 function containsPart(arr, part) {
-  console.log({part})
 	if (!arr.length) return false;
 	if (!part) return false;
 	return !!part.find(i => arr.includes(i));
 }
 
 function handleButtonClick(){
-  console.log("clicked!")
   const $btn = d3.select(this)
   const value = $btn.at('data-button')
   const active = $btn.classed('is-active')
@@ -213,8 +206,6 @@ function setupButtons(){
 function handleShowMore(){
   const $gradient = $figureCont.select('.show-more')//.classed('is-visible', !truncated);
   const visible = $container.selectAll('.grid__blocks.is-visible').size()
-
-  console.log({visible, minBlocks})
 
   if (visible < minBlocks){
     $gradient.classed('is-visible', false)
